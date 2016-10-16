@@ -12,42 +12,22 @@ import core.content.SpriteContent;
 import core.content.TerminationContent;
 import core.game.BasicGame;
 import core.game.Game;
-import core.termination.MultiSpriteCounter;
-import core.termination.SpriteCounter;
-import core.termination.Termination;
-import core.termination.Timeout;
+import core.termination.*;
 import ontology.Types;
-import ontology.avatar.FlakAvatar;
-import ontology.avatar.HorizontalAvatar;
-import ontology.avatar.MovingAvatar;
-import ontology.avatar.oriented.MissileAvatar;
-import ontology.avatar.oriented.OngoingAvatar;
-import ontology.avatar.oriented.OrientedAvatar;
-import ontology.avatar.oriented.ShootAvatar;
+import ontology.avatar.*;
+import ontology.avatar.oriented.*;
 import ontology.effects.Effect;
 import ontology.effects.TimeEffect;
 import ontology.effects.binary.*;
 import ontology.effects.unary.*;
-import ontology.sprites.Conveyor;
-import ontology.sprites.Door;
-import ontology.sprites.Flicker;
-import ontology.sprites.Immovable;
-import ontology.sprites.OrientedFlicker;
-import ontology.sprites.Passive;
-import ontology.sprites.Resource;
-import ontology.sprites.ResourcePack;
-import ontology.sprites.Spreader;
+import ontology.sprites.*;
 import ontology.sprites.missile.ErraticMissile;
 import ontology.sprites.missile.Missile;
 import ontology.sprites.missile.RandomMissile;
 import ontology.sprites.missile.Walker;
 import ontology.sprites.missile.WalkerJumper;
 import ontology.sprites.npc.*;
-import ontology.sprites.producer.Bomber;
-import ontology.sprites.producer.Portal;
-import ontology.sprites.producer.RandomBomber;
-import ontology.sprites.producer.SpawnPoint;
-import ontology.sprites.producer.SpriteProducer;
+import ontology.sprites.producer.*;
 import tools.Vector2d;
 
 /**
@@ -69,8 +49,9 @@ public class VGDLFactory
              "ResourcePack", "Chaser", "PathChaser", "Fleeing", "RandomInertial",
              "RandomNPC", "AlternateChaser", "RandomAltChaser","PathAltChaser", "RandomPathAltChaser",
              "Bomber", "RandomBomber", "Portal", "SpawnPoint", "SpriteProducer", "Door",
-             "FlakAvatar", "HorizontalAvatar","MovingAvatar","MissileAvatar",
-             "OrientedAvatar","ShootAvatar", "OngoingAvatar"};
+             "FlakAvatar", "HorizontalAvatar", "VerticalAvatar", "MovingAvatar","MissileAvatar",
+             "OrientedAvatar","ShootAvatar", "OngoingAvatar", "OngoingTurningAvatar", "BomberRandomMissile",
+             "OngoingShootAvatar", "NullAvatar"};
 
 
     /**
@@ -82,20 +63,23 @@ public class VGDLFactory
              ResourcePack.class, Chaser.class, PathChaser.class, Fleeing.class, RandomInertial.class,
              RandomNPC.class, AlternateChaser.class, RandomAltChaser.class, PathAltChaser.class, RandomPathAltChaser.class,
              Bomber.class, RandomBomber.class, Portal.class, SpawnPoint.class, SpriteProducer.class, Door.class,
-             FlakAvatar.class, HorizontalAvatar.class,MovingAvatar.class,MissileAvatar.class,
-             OrientedAvatar.class,ShootAvatar.class, OngoingAvatar.class};
+             FlakAvatar.class, HorizontalAvatar.class, VerticalAvatar.class, MovingAvatar.class,MissileAvatar.class,
+             OrientedAvatar.class,ShootAvatar.class, OngoingAvatar.class, OngoingTurningAvatar.class, BomberRandomMissile.class,
+             OngoingShootAvatar.class, NullAvatar.class};
 
     /**
      * Available effects for VGDL.
      */
     private String[] effectStrings = new String[]
             {
-                "stepBack", "turnAround", "killSprite", "killBoth", "transformTo", "transformToSingleton",
+                "stepBack", "turnAround", "killSprite", "killBoth", "killAll", "transformTo", "transformToSingleton", "transformIfCount",
                     "wrapAround", "changeResource", "killIfHasLess", "killIfHasMore", "cloneSprite",
                     "flipDirection", "reverseDirection", "shieldFrom", "undoAll", "spawn", "spawnIfHasMore", "spawnIfHasLess",
                 "pullWithIt", "wallStop", "collectResource", "collectResourceIfHeld", "killIfOtherHasMore", "killIfFromAbove",
-                "teleportToExit", "bounceForward", "attractGaze", "subtractHealthPoints", "addHealthPoints",
-                    "transformToAll", "addTimer", "killIfFrontal", "killIfNotFrontal"
+                "teleportToExit", "bounceForward", "attractGaze", "align", "subtractHealthPoints", "addHealthPoints",
+                    "transformToAll", "addTimer", "killIfFrontal", "killIfNotFrontal", "spawnBehind",
+                    "updateSpawnType", "removeScore", "increaseSpeedToAll", "decreaseSpeedToAll", "setSpeedForAll", "transformToRandomChild",
+                    "addHealthPointsToMax", "spawnIfCounterSubTypes"
             };
 
     /**
@@ -103,12 +87,14 @@ public class VGDLFactory
      */
     private Class[] effectClasses = new Class[]
             {
-                StepBack.class, TurnAround.class, KillSprite.class, KillBoth.class, TransformTo.class, TransformToSingleton.class,
+                StepBack.class, TurnAround.class, KillSprite.class, KillBoth.class, KillAll.class, TransformTo.class, TransformToSingleton.class, TransformIfCount.class,
                     WrapAround.class,ChangeResource.class, KillIfHasLess.class, KillIfHasMore.class, CloneSprite.class,
                     FlipDirection.class, ReverseDirection.class, ShieldFrom.class, UndoAll.class, Spawn.class, SpawnIfHasMore.class, SpawnIfHasLess.class,
                 PullWithIt.class, WallStop.class, CollectResource.class, CollectResourceIfHeld.class, KillIfOtherHasMore.class, KillIfFromAbove.class,
-                TeleportToExit.class, BounceForward.class, AttractGaze.class, SubtractHealthPoints.class, AddHealthPoints.class,
-                    TransformToAll.class, AddTimer.class, KillIfFrontal.class, KillIfNotFrontal.class
+                TeleportToExit.class, BounceForward.class, AttractGaze.class, Align.class, SubtractHealthPoints.class, AddHealthPoints.class,
+                    TransformToAll.class, AddTimer.class, KillIfFrontal.class, KillIfNotFrontal.class, SpawnBehind.class, UpdateSpawnType.class,
+                    RemoveScore.class, IncreaseSpeedToAll.class, DecreaseSpeedToAll.class, SetSpeedForAll.class, TransformToRandomChild.class,
+                    AddHealthPointsToMax.class, SpawnIfCounterSubTypes.class
             };
 
 
@@ -117,7 +103,7 @@ public class VGDLFactory
      */
     private String[] terminationStrings = new String[]
             {
-                    "MultiSpriteCounter", "SpriteCounter", "Timeout"
+                    "MultiSpriteCounter", "SpriteCounter", "SpriteCounterMore", "MultiSpriteCounterSubTypes", "Timeout", "StopCounter"
             };
 
     /**
@@ -125,7 +111,7 @@ public class VGDLFactory
      */
     private Class[] terminationClasses = new Class[]
             {
-                    MultiSpriteCounter.class, SpriteCounter.class, Timeout.class
+                    MultiSpriteCounter.class, SpriteCounter.class, SpriteCounterMore.class, MultiSpriteCounterSubTypes.class, Timeout.class, StopCounter.class
             };
 
 
@@ -342,19 +328,20 @@ public class VGDLFactory
             {
 
                 try {
-                    cfield = Types.class.getField(value);
+                    cfield = Types.processField(value);
                     objVal = cfield.get(null);
                 } catch (Exception e) {
                     try {
-                        objVal = Integer.parseInt(value);
-
+                        if (!parameter.equalsIgnoreCase("scoreChange"))
+                            objVal = Integer.parseInt(value);
+                        else objVal = value;
                     } catch (NumberFormatException e1) {
                         try {
                             objVal = Double.parseDouble(value);
                         } catch (NumberFormatException e2) {
                             try {
-                                if(value.equalsIgnoreCase("true") ||
-                                   value.equalsIgnoreCase("false")  )
+                                if((value.equalsIgnoreCase("true") ||
+                                   value.equalsIgnoreCase("false") ) && !parameter.equalsIgnoreCase("win"))
                                     objVal = Boolean.parseBoolean(value);
                                 else
                                     objVal = value;

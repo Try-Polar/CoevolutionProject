@@ -2,7 +2,9 @@ package ontology;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.lang.reflect.Field;
 
+import tools.Direction;
 import tools.Vector2d;
 
 /**
@@ -26,25 +28,62 @@ public class Types {
     public static final int VGDL_TERMINATION_SET = 4;
 
     public static final Vector2d NIL = new Vector2d(-1, -1);
-
     public static final Vector2d NONE = new Vector2d(0, 0);
     public static final Vector2d RIGHT = new Vector2d(1, 0);
     public static final Vector2d LEFT = new Vector2d(-1, 0);
     public static final Vector2d UP = new Vector2d(0, -1);
     public static final Vector2d DOWN = new Vector2d(0, 1);
-
     public static final Vector2d[] BASEDIRS = new Vector2d[]{UP, LEFT, DOWN, RIGHT};
 
-    public static int[] ALL_ACTIONS = new int[]{KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_DOWN,
-                                                KeyEvent.VK_RIGHT, KeyEvent.VK_SPACE, KeyEvent.VK_ESCAPE};
+    public static final Direction DNIL = new Direction(-1, -1);
+    public static final Direction DNONE = new Direction(0, 0);
+    public static final Direction DRIGHT = new Direction(1, 0);
+    public static final Direction DLEFT = new Direction(-1, 0);
+    public static final Direction DUP = new Direction(0, -1);
+    public static final Direction DDOWN = new Direction(0, 1);
+    public static final Direction[] DBASEDIRS = new Direction[]{DUP, DLEFT, DDOWN, DRIGHT};
+
+    //This is a small method to automatically link and parse vectors to directions.
+    public static Field processField(String value)
+    {
+        Field cfield = null;
+        try{
+            cfield = Types.class.getField(value);
+            Object objVal = cfield.get(null);
+
+            if(objVal instanceof Vector2d) {
+                value = _v2DirStr((Vector2d)objVal);
+                cfield = Types.class.getField(value);
+            }
+        }catch(Exception e) { }
+        return cfield;
+    }
+
+    private static String _v2DirStr(Vector2d v)
+    {
+        if (v.equals(NIL)) return "DNIL";
+        if (v.equals(NONE)) return "DNONE";
+        if (v.equals(UP)) return "DUP";
+        if (v.equals(DOWN)) return "DDOWN";
+        if (v.equals(LEFT)) return "DLEFT";
+        if (v.equals(RIGHT)) return "DRIGHT";
+        return null;
+    }
+
+    public static int DEFAULT_SINGLE_PLAYER_KEYIDX = 0;
+    public static int[][] ALL_ACTIONS = new int[][]{    {KeyEvent.VK_UP, KeyEvent.VK_LEFT, KeyEvent.VK_DOWN,
+                                                         KeyEvent.VK_RIGHT, KeyEvent.VK_SPACE, KeyEvent.VK_ESCAPE},
+                                                        {KeyEvent.VK_W, KeyEvent.VK_A, KeyEvent.VK_S,
+                                                         KeyEvent.VK_D, KeyEvent.VK_SHIFT, KeyEvent.VK_ESCAPE}};
+
     public static enum ACTIONS {
-        ACTION_NIL(new int[]{0}),
-        ACTION_UP(new int[]{KeyEvent.VK_UP}),
-        ACTION_LEFT(new int[]{KeyEvent.VK_LEFT}),
-        ACTION_DOWN(new int[]{KeyEvent.VK_DOWN}),
-        ACTION_RIGHT(new int[]{KeyEvent.VK_RIGHT}),
-        ACTION_USE(new int[]{KeyEvent.VK_SPACE}),
-        ACTION_ESCAPE(new int[]{KeyEvent.VK_ESCAPE});
+        ACTION_NIL(new int[]{0, 0}),
+        ACTION_UP(new int[]{KeyEvent.VK_UP, KeyEvent.VK_W}),
+        ACTION_LEFT(new int[]{KeyEvent.VK_LEFT, KeyEvent.VK_A}),
+        ACTION_DOWN(new int[]{KeyEvent.VK_DOWN, KeyEvent.VK_S}),
+        ACTION_RIGHT(new int[]{KeyEvent.VK_RIGHT, KeyEvent.VK_D}),
+        ACTION_USE(new int[]{KeyEvent.VK_SPACE, KeyEvent.VK_SHIFT}),
+        ACTION_ESCAPE(new int[]{KeyEvent.VK_ESCAPE, KeyEvent.VK_ESCAPE});
 
         private int[] key;
 
@@ -67,10 +106,23 @@ public class Types {
         }
 
         public static ACTIONS fromVector(Vector2d move) {
-            if (move == UP) return ACTION_UP;
-            else if (move == DOWN) return ACTION_DOWN;
-            else if (move == LEFT) return ACTION_LEFT;
-            else if (move == RIGHT) return ACTION_RIGHT;
+        	// Probably better to use .equals() instead of == to test for equality,
+        	// but not necessary for the current call hierarchy of this method
+            if (move.equals(UP)) return ACTION_UP;
+            else if (move.equals(DOWN)) return ACTION_DOWN;
+            else if (move.equals(LEFT)) return ACTION_LEFT;
+            else if (move.equals(RIGHT)) return ACTION_RIGHT;
+            else return ACTION_NIL;
+        }
+
+
+        public static ACTIONS fromVector(Direction move) {
+        	// Probably better to use .equals() instead of == to test for equality,
+        	// but not necessary for the current call hierarchy of this method
+            if (move.equals(DUP)) return ACTION_UP;
+            else if (move.equals(DDOWN)) return ACTION_DOWN;
+            else if (move.equals(DLEFT)) return ACTION_LEFT;
+            else if (move.equals(DRIGHT)) return ACTION_RIGHT;
             else return ACTION_NIL;
         }
 
@@ -112,6 +164,7 @@ public class Types {
     public static final Color LIGHTORANGE = new Color(250, 200, 100);
     public static final Color LIGHTBLUE = new Color(50, 100, 250);
     public static final Color LIGHTGREEN = new Color(50, 250, 50);
+    public static final Color DARKGREEN = new Color(35, 117, 29);
     public static final Color LIGHTYELLOW = new Color(255, 250, 128);
     public static final Color LIGHTGRAY = new Color(238, 238, 238);
     public static final Color DARKGRAY = new Color(30, 30, 30);

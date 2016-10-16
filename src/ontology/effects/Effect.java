@@ -23,7 +23,11 @@ public abstract class Effect{
     public boolean is_stochastic = false;
 
     //Change of the score this effect makes.
-    public int scoreChange = 0;
+    public String scoreChange = "0";
+
+    //Count something
+    public boolean count = true;
+    public String counter = "0";
 
     //Probabilty for stochastic effects.
     public double prob = 1;
@@ -62,6 +66,20 @@ public abstract class Effect{
         hashCode = content.hashCode;
     }
 
+    /**
+     * Determine score change for specific player
+     * @param playerID - player affected
+     * @return - score change
+     */
+    public int getScoreChange(int playerID) {
+        String[] scores = scoreChange.split(",");
+        return playerID < scores.length ? Integer.parseInt(scores[playerID]) : Integer.parseInt(scores[0]);
+    }
+
+    public int getCounter(int idx) {
+        String[] scores = counter.split(",");
+        return idx < scores.length ? Integer.parseInt(scores[idx]) : Integer.parseInt(scores[0]);
+    }
     
     public ArrayList<String> getEffectSprites(){
     	return new ArrayList<String>();

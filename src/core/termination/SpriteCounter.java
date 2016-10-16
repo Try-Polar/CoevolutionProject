@@ -35,8 +35,10 @@ public class SpriteCounter extends Termination
         if(ended)
             return true;
 
-        if(game.getNumSprites(itype) <= limit)
+        if(game.getNumSprites(itype) - game.getNumDisabledSprites(itype) <= limit && canEnd) {
+            countScore(game);
             return true;
+        }
 
         return false;
     }

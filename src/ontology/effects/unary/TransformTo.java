@@ -9,6 +9,7 @@ import core.VGDLRegistry;
 import core.VGDLSprite;
 import core.content.InteractionContent;
 import core.game.Game;
+import core.player.Player;
 import ontology.Types;
 import ontology.avatar.MovingAvatar;
 import ontology.effects.Effect;
@@ -27,6 +28,7 @@ public class TransformTo extends Effect {
     public int itype;
     //Indicates if the second sprite should be killed.
     public boolean killSecond = false;
+    public boolean forceOrientation = false;
 
     public TransformTo(InteractionContent cnt)
     {
@@ -48,7 +50,7 @@ public class TransformTo extends Effect {
         {
             //System.out.println(game.getGameTick() + " " + sprite1 + " --> " + newSprite) ;
             //Orientation
-            if(newSprite.is_oriented && sprite1.is_oriented && newSprite.orientation == Types.NONE)
+            if(forceOrientation || newSprite.is_oriented && sprite1.is_oriented && newSprite.orientation.equals(Types.DNONE))
             {
                 newSprite.orientation = sprite1.orientation;
             }
@@ -71,22 +73,35 @@ public class TransformTo extends Effect {
 
 
             //Avatar handling.
+            boolean transformed = true;
             if(sprite1.is_avatar)
             {
                 try{
-                    game.setAvatar((MovingAvatar) newSprite);
-                    game.getAvatar().player = ((MovingAvatar) sprite1).player;
-                    game.getAvatar().lastAction = ((MovingAvatar) sprite1).lastAction;
-                }catch (ClassCastException e) {}
+                    int id = ((MovingAvatar)sprite1).getPlayerID();
+                    Player p = game.getAvatar(id).player;
+                    double score = game.getAvatar(id).getScore();
+                    Types.WINNER win = game.getAvatar(id).getWinState();
+                    game.setAvatar((MovingAvatar) newSprite, id);
+                    game.getAvatar(id).player = p;
+                    game.getAvatar(id).setKeyHandler(Game.ki);
+                    game.getAvatar(id).setScore(score);
+                    game.getAvatar(id).setWinState(win);
+                    game.getAvatar(id).setPlayerID(id);
+                    transformed = true;
+                }catch (ClassCastException e) {
+                    transformed = false; // new sprite is not an avatar, don't kill the current one
+                }
             }
 
             //Health points should be copied too.
             newSprite.healthPoints = sprite1.healthPoints;
 
-            game.killSprite(sprite1);
+            //boolean variable in method call set to true
+            //to indicate the sprite was transformed
+            game.killSprite(sprite1, transformed);
 
             if(killSecond && sprite2 != null)
-                game.killSprite(sprite2);
+                game.killSprite(sprite2, true);
         }
     }
 
