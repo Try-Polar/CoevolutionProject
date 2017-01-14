@@ -1,3 +1,5 @@
+import gameDesigner.GameDesigner;
+
 import java.util.Random;
 
 import core.ArcadeMachine;
@@ -14,7 +16,9 @@ public class Test
 
     public static void main(String[] args)
     {
-        //Available controllers:
+        GameDesigner test = new GameDesigner();
+    	
+    	//Available controllers:
     	String sampleRandomController = "controllers.singlePlayer.sampleRandom.Agent";
     	String doNothingController = "controllers.singlePlayer.doNothing.Agent";
         String sampleOneStepController = "controllers.singlePlayer.sampleonesteplookahead.Agent";
