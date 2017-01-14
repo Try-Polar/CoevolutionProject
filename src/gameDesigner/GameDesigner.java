@@ -18,7 +18,7 @@ public class GameDesigner {
 	TerminalSymbol lambda;
 	//strings
 	TerminalSymbol game_class;
-	TerminalSymbol LevelMapping;
+	TerminalSymbol levelMapping;
 	TerminalSymbol variableChar;
 	TerminalSymbol greaterThan;
 	TerminalSymbol avatar;
@@ -33,23 +33,23 @@ public class GameDesigner {
 	
 	private void establishVGDLSymbols() {
 		//Declare Non-Terminals
-		NonTerminalSymbol game = new NonTerminalSymbol();
-		NonTerminalSymbol levelBlock = new NonTerminalSymbol();
-		NonTerminalSymbol charMap = new NonTerminalSymbol();
-		NonTerminalSymbol spriteType = new NonTerminalSymbol();
+		game = new NonTerminalSymbol("game");
+		levelBlock = new NonTerminalSymbol("levelBlock");
+		charMap = new NonTerminalSymbol("charMap");
+		spriteType = new NonTerminalSymbol("spriteType");
 		
 		//Declare Terminals		
-		TerminalSymbol eol = new TerminalSymbol("\n");
-		TerminalSymbol indent = new TerminalSymbol("	");
-		TerminalSymbol identifier = new TerminalSymbol("IDENTIFIER");
-		TerminalSymbol lambda = new TerminalSymbol("LAMBDA");
+		eol = new TerminalSymbol("eol","\n");
+		indent = new TerminalSymbol("indent","	");
+		identifier = new TerminalSymbol("identifier","IDENTIFIER");
+		lambda = new TerminalSymbol("lambda","LAMBDA");
 		//strings
-		TerminalSymbol game_class = new TerminalSymbol("BasicGame"); //will not actually be terminal as it can expand to a number of things but this is simpler for now
-		TerminalSymbol LevelMapping = new TerminalSymbol("LevelMapping");
-		TerminalSymbol variableChar = new TerminalSymbol("CHAR"); //Just using "CHAR" as place holder for now
-		TerminalSymbol greaterThan = new TerminalSymbol(" > ");
-		TerminalSymbol avatar = new TerminalSymbol("avatar");
-		TerminalSymbol wall = new TerminalSymbol("wall");
+		game_class = new TerminalSymbol("game_class","BasicGame"); //will not actually be terminal as it can expand to a number of things but this is simpler for now
+		levelMapping = new TerminalSymbol("levelMapping","LevelMapping");
+		variableChar = new TerminalSymbol("char","CHAR"); //Just using "CHAR" as place holder for now
+		greaterThan = new TerminalSymbol("greater than"," > ");
+		avatar = new TerminalSymbol("avatar","avatar");
+		wall = new TerminalSymbol("wall","wall");
 		
 		//Add Children
 		game.addChild(game_class);
@@ -59,9 +59,14 @@ public class GameDesigner {
 		//g.sb
 		//g.ib
 		//g.tb
+		levelBlock.addChild(levelMapping);
+		levelBlock.addChild(eol);
+		levelBlock.addChild(indent);
 		levelBlock.addChild(charMap);
+		charMap.addChild(variableChar);
+		charMap.addChild(greaterThan);
 		charMap.addChild(spriteType);
-		charMap.addChild(lambda);
+		//charMap.addChild(lambda);
 		spriteType.addChild(identifier);
 	}
 	
@@ -71,13 +76,18 @@ public class GameDesigner {
 				//CHAR > IDENTIFIER
 		int i = 0;
 		gameSymbols.add(game);
+		System.out.println(gameSymbols.get(0).name);
 		while (containsNonTerminals()) {
+			if (i > gameSymbols.size()-1) {
+				i = 0;
+			}
 			Symbol currentSymbol = gameSymbols.get(i);
 			if (currentSymbol instanceof NonTerminalSymbol) {
 				gameSymbols.remove(i);
 				System.out.println(((NonTerminalSymbol)currentSymbol).children.size());
 				for (int j=0; j<((NonTerminalSymbol)currentSymbol).children.size(); j++) {
 					gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(j));
+					i++;
 				}
 			}
 			else {
@@ -86,7 +96,7 @@ public class GameDesigner {
 		}
 		System.out.println(gameSymbols.size());
 		for (int j=0; j<gameSymbols.size(); j++) {	
-			System.out.print(((TerminalSymbol)gameSymbols.get(j)).content);
+			System.out.print(((TerminalSymbol)gameSymbols.get(j)).content+" ");
 		}
 	}
 	
