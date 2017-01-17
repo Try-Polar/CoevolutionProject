@@ -20,7 +20,19 @@ public class GameDesigner {
 	NonTerminalSymbol spriteSimple;
 	NonTerminalSymbol option;
 	NonTerminalSymbol eol;
-	
+	//Repitition symbols
+	NonTerminalSymbol charMapNewline;
+	NonTerminalSymbol spriteDefNewline;
+	NonTerminalSymbol interactionDefEol;
+	NonTerminalSymbol terminationDefEol;
+	NonTerminalSymbol spaceSpriteType;
+	NonTerminalSymbol spriteDefEol;
+	NonTerminalSymbol spaceOption;
+	NonTerminalSymbol charOrSpace; 
+	//Optional symbols	
+	NonTerminalSymbol spriteDefOptionalBlock;
+	NonTerminalSymbol spriteSimpleOptionalBlock;
+	NonTerminalSymbol eolOptionalBlock;
 			
 	//Declare Terminals	
 	TerminalSymbol newline;
@@ -56,20 +68,32 @@ public class GameDesigner {
 	
 	private void establishVGDLSymbols() {
 		//Declare Non-Terminals
-		game = new NonTerminalSymbol("game");
-		levelBlock = new NonTerminalSymbol("levelBlock");
-		spriteBlock = new NonTerminalSymbol("spriteBlock");
-		interactionBlock = new NonTerminalSymbol("interactionBlock");
-		terminationBlock = new NonTerminalSymbol("terminationBlock");
-		charMap = new NonTerminalSymbol("charMap");
-		spriteType = new NonTerminalSymbol("spriteType");
-		spriteDef = new NonTerminalSymbol("spriteDef");
-		interactionDef = new NonTerminalSymbol("interactionDef");
-		terminationDef = new NonTerminalSymbol("terminationdef");
-		spriteSimple = new NonTerminalSymbol("spriteSimple");
-		option = new NonTerminalSymbol("option");
-		eol = new NonTerminalSymbol("eol");
-		
+		game = new NonTerminalSymbol("game", false, false);
+		levelBlock = new NonTerminalSymbol("levelBlock", false, false);
+		spriteBlock = new NonTerminalSymbol("spriteBlock", false, false);
+		interactionBlock = new NonTerminalSymbol("interactionBlock", false, false);
+		terminationBlock = new NonTerminalSymbol("terminationBlock", false, false);
+		charMap = new NonTerminalSymbol("charMap", false, false);
+		spriteType = new NonTerminalSymbol("spriteType", false, false);
+		spriteDef = new NonTerminalSymbol("spriteDef", false, false);
+		interactionDef = new NonTerminalSymbol("interactionDef", false, false);
+		terminationDef = new NonTerminalSymbol("terminationdef", false, false);
+		spriteSimple = new NonTerminalSymbol("spriteSimple", false, false);
+		option = new NonTerminalSymbol("option", false, false);
+		eol = new NonTerminalSymbol("eol", false, false);
+		//Repitition Symbols
+		charMapNewline = new NonTerminalSymbol("charMapNewline", true, false);	
+		spriteDefNewline = new NonTerminalSymbol("spriteDefNewline", true, false);
+		interactionDefEol = new NonTerminalSymbol("interactionDefEol", true, false);
+		terminationDefEol = new NonTerminalSymbol("terminationDefEol", true, false);
+		spaceSpriteType = new NonTerminalSymbol("spaceSpriteType", true, false);
+		spriteDefEol = new NonTerminalSymbol("spriteDefEol", true, false);
+		spaceOption = new NonTerminalSymbol("spaceOption", true, false);
+		charOrSpace = new NonTerminalSymbol("charOrSpace", true, false);
+		//Optional Symbols
+		spriteDefOptionalBlock = new NonTerminalSymbol("spriteDefOptional", false, true);
+		spriteSimpleOptionalBlock = new NonTerminalSymbol("spriteSimpleOptional", false, true);
+		eolOptionalBlock = new NonTerminalSymbol("eolOptional", false, true);
 		//Declare Terminals		
 		newline = new TerminalSymbol("newline", "\n");
 		indent = new TerminalSymbol("indent","	");
@@ -105,32 +129,29 @@ public class GameDesigner {
 		levelBlock.addChild(levelMapping);
 		levelBlock.addChild(eol);
 		levelBlock.addChild(indent);
-		levelBlock.addChild(charMap);
-		levelBlock.addChild(newline);
+		levelBlock.addChild(charMapNewline);
 		//sprite-block
 		spriteBlock.addChild(spriteSet);
 		spriteBlock.addChild(eol);
 		spriteBlock.addChild(indent);
-		spriteBlock.addChild(charMap);
-		spriteBlock.addChild(newline);
+		spriteBlock.addChild(spriteDefNewline);
 		//interaction-block
 		interactionBlock.addChild(interactionSet);
 		interactionBlock.addChild(eol);
 		interactionBlock.addChild(indent);
-		interactionBlock.addChild(interactionDef);
-		interactionBlock.addChild(eol);
+		interactionBlock.addChild(interactionDefEol);
 		//termination-block
 		terminationBlock.addChild(terminationSet);
 		terminationBlock.addChild(eol);
 		terminationBlock.addChild(indent);
-		terminationBlock.addChild(terminationDef);
-		terminationBlock.addChild(eol);
+		terminationBlock.addChild(terminationDefEol);
 		//char-map
 		charMap.addChild(variableChar);
 		charMap.addChild(greaterThan);
-		charMap.addChild(spriteType);
+		charMap.addChild(spaceSpriteType);
 		//sprite-def
 		spriteDef.addChild(spriteSimple);
+		spriteDef.addChild(spriteDefOptionalBlock);
 		//spriteDef.addChild(eol); //on hold for now until repeatable and optional sections are setup
 		//spriteDef.addChild(indent);
 		//spriteDef.addChild(spriteDef);
@@ -164,6 +185,42 @@ public class GameDesigner {
 		option.addChild(spriteType);
 		//option.addChild(evaluable); //requires OR functionality
 		spriteType.addChild(identifier);
+		//Repeaters
+		//charMapNewline
+		charMapNewline.addChild(charMap);
+		charMapNewline.addChild(newline);
+		//spriteDefNewline
+		spriteDefNewline.addChild(spriteDef);
+		spriteDefNewline.addChild(newline);
+		//interactionDefEol
+		interactionDefEol.addChild(interactionDef);
+		interactionDefEol.addChild(eol);
+		//terminationDefEol
+		terminationDefEol.addChild(terminationDef);
+		terminationDefEol.addChild(eol);
+		//spacecSpriteType
+		spaceSpriteType.addChild(space);
+		spaceSpriteType.addChild(spriteType);
+		//spriteDefEol
+		spriteDefEol.addChild(spriteDef);
+		spriteDefEol.addChild(eol);
+		//spaceOption
+		spaceOption.addChild(space);
+		spaceOption.addChild(option);
+		//charOrSpace
+		//Orfunctionality not yet ready
+		
+		//Optionals
+		//spriteDefOptionalBlock
+		spriteDefOptionalBlock.addChild(eol);
+		spriteDefOptionalBlock.addChild(indent);
+		spriteDefOptionalBlock.addChild(spriteDefEol);
+		//spriteSimpleOptionalBlock
+		spriteSimpleOptionalBlock.addChild(sprite_class);
+		//eolOptionalBlock
+		eolOptionalBlock.addChild(hash);
+		eolOptionalBlock.addChild(charOrSpace);
+		
 	}
 	
 	public void basicGame() {
@@ -171,6 +228,7 @@ public class GameDesigner {
 			//LevelMapping
 				//CHAR > IDENTIFIER
 		int i = 0;
+		int k=0;
 		gameSymbols.add(game);
 		System.out.println(gameSymbols.get(0).name);
 		while (containsNonTerminals()) {
@@ -178,13 +236,21 @@ public class GameDesigner {
 				i = 0;
 			}
 			Symbol currentSymbol = gameSymbols.get(i);
+			
 			if (currentSymbol instanceof NonTerminalSymbol) {
+				//System.out.println(((NonTerminalSymbol)currentSymbol).repeatable);
 				if (((NonTerminalSymbol) currentSymbol).repeatable == true) {
 					//EA makes decision somehow as to if the thing is repeated
 					//for now its just 50/50 random
-					if (rnd.nextInt(2) == 1)
-					{
+					//if (rnd.nextInt(2) == 1)
+					//System.out.println("repeat");
+					if (k > 2) {
 						gameSymbols.remove(i);
+						System.out.println("repeater removed");
+						k = 0;	
+					}
+					else {
+						k++;
 					}
 				}
 				else
