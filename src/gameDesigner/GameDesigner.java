@@ -2,6 +2,7 @@ package gameDesigner;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 public class GameDesigner {
 	//Symbols
@@ -25,6 +26,8 @@ public class GameDesigner {
 	TerminalSymbol wall;
 	
 	List<Symbol> gameSymbols = new LinkedList<Symbol>();
+	
+	Random rnd = new Random();
 	
 	public GameDesigner() {
 		establishVGDLSymbols();
@@ -83,8 +86,19 @@ public class GameDesigner {
 			}
 			Symbol currentSymbol = gameSymbols.get(i);
 			if (currentSymbol instanceof NonTerminalSymbol) {
-				gameSymbols.remove(i);
-				System.out.println(((NonTerminalSymbol)currentSymbol).children.size());
+				if (((NonTerminalSymbol) currentSymbol).repeatable == true) {
+					//EA makes decision somehow as to if the thing is repeated
+					//for now its just 50/50 random
+					if (rnd.nextInt(2) == 1)
+					{
+						gameSymbols.remove(i);
+					}
+				}
+				else
+				{
+					gameSymbols.remove(i);
+				}
+				//System.out.println(((NonTerminalSymbol)currentSymbol).children.size());
 				for (int j=0; j<((NonTerminalSymbol)currentSymbol).children.size(); j++) {
 					gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(j));
 					i++;
