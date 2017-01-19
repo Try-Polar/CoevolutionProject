@@ -105,9 +105,9 @@ public class GameDesigner {
 		equals = new TerminalSymbol("equals", "=");
 		//strings
 		game_class = new TerminalSymbol("game_class","BasicGame"); //will not actually be terminal as it can expand to a number of things but this is simpler for now
-		sprite_class = new TerminalSymbol("sprite_class", ""); //will need to be passed as some sort of parameter or made into nonTerminal
-		interaction_method = new TerminalSymbol("interaction_method", ""); //will need to be passed as some sort of parameter or made into nonTerminal
-		termination_class = new TerminalSymbol("termination_class", "");
+		sprite_class = new TerminalSymbol("sprite_class", "sprite_class"); //will need to be passed as some sort of parameter or made into nonTerminal
+		interaction_method = new TerminalSymbol("interaction_method", "interaction_method"); //will need to be passed as some sort of parameter or made into nonTerminal
+		termination_class = new TerminalSymbol("termination_class", "termination_class");
 		levelMapping = new TerminalSymbol("levelMapping","LevelMapping");
 		variableChar = new TerminalSymbol("char","CHAR"); //Just using "CHAR" as place holder for now
 		avatar = new TerminalSymbol("avatar","avatar");
@@ -120,34 +120,34 @@ public class GameDesigner {
 		//game
 		game.addChild(game_class);
 		game.addChild(eol);
-		game.addChild(indent);
 		game.addChild(levelBlock);
 		game.addChild(spriteBlock);
 		game.addChild(interactionBlock);
 		game.addChild(terminationBlock);
 		//level-block
+		levelBlock.addChild(indent);
 		levelBlock.addChild(levelMapping);
 		levelBlock.addChild(eol);
-		levelBlock.addChild(indent);
 		levelBlock.addChild(charMapNewline);
 		//sprite-block
+		spriteBlock.addChild(indent);
 		spriteBlock.addChild(spriteSet);
 		spriteBlock.addChild(eol);
-		spriteBlock.addChild(indent);
 		spriteBlock.addChild(spriteDefNewline);
 		//interaction-block
+		interactionBlock.addChild(indent);
 		interactionBlock.addChild(interactionSet);
 		interactionBlock.addChild(eol);
-		interactionBlock.addChild(indent);
 		interactionBlock.addChild(interactionDefEol);
 		//termination-block
+		terminationBlock.addChild(indent);
 		terminationBlock.addChild(terminationSet);
 		terminationBlock.addChild(eol);
-		terminationBlock.addChild(indent);
 		terminationBlock.addChild(terminationDefEol);
 		//char-map
 		charMap.addChild(variableChar);
 		charMap.addChild(greaterThan);
+		charMap.addChild(spriteType);
 		charMap.addChild(spaceSpriteType);
 		//sprite-def
 		spriteDef.addChild(spriteSimple);
@@ -164,6 +164,7 @@ public class GameDesigner {
 		spriteSimple.addChild(option);
 		//interaction-def
 		interactionDef.addChild(spriteType);
+		interactionDef.addChild(space);
 		interactionDef.addChild(spriteType);
 		interactionDef.addChild(greaterThan);
 		interactionDef.addChild(interaction_method);
@@ -187,15 +188,23 @@ public class GameDesigner {
 		spriteType.addChild(identifier);
 		//Repeaters
 		//charMapNewline
+		charMapNewline.addChild(indent);
+		charMapNewline.addChild(indent);
 		charMapNewline.addChild(charMap);
 		charMapNewline.addChild(newline);
 		//spriteDefNewline
+		spriteDefNewline.addChild(indent);
+		spriteDefNewline.addChild(indent);
 		spriteDefNewline.addChild(spriteDef);
 		spriteDefNewline.addChild(newline);
 		//interactionDefEol
+		interactionDefEol.addChild(indent);
+		interactionDefEol.addChild(indent);
 		interactionDefEol.addChild(interactionDef);
 		interactionDefEol.addChild(eol);
 		//terminationDefEol
+		terminationDefEol.addChild(indent);
+		terminationDefEol.addChild(indent);
 		terminationDefEol.addChild(terminationDef);
 		terminationDefEol.addChild(eol);
 		//spacecSpriteType
@@ -214,6 +223,7 @@ public class GameDesigner {
 		//spriteDefOptionalBlock
 		spriteDefOptionalBlock.addChild(eol);
 		spriteDefOptionalBlock.addChild(indent);
+		spriteDefOptionalBlock.addChild(indent);
 		spriteDefOptionalBlock.addChild(spriteDefEol);
 		//spriteSimpleOptionalBlock
 		spriteSimpleOptionalBlock.addChild(sprite_class);
@@ -228,7 +238,6 @@ public class GameDesigner {
 			//LevelMapping
 				//CHAR > IDENTIFIER
 		int i = 0;
-		int k=0;
 		gameSymbols.add(game);
 		System.out.println(gameSymbols.get(0).name);
 		while (containsNonTerminals()) {
@@ -242,15 +251,11 @@ public class GameDesigner {
 				if (((NonTerminalSymbol) currentSymbol).repeatable == true) {
 					//EA makes decision somehow as to if the thing is repeated
 					//for now its just 50/50 random
-					//if (rnd.nextInt(2) == 1)
-					//System.out.println("repeat");
-					if (k > 2) {
+					if (rnd.nextInt(2) == 1) {
+					//if (k > 2) {
 						gameSymbols.remove(i);
 						System.out.println("repeater removed");
-						k = 0;	
-					}
-					else {
-						k++;
+						//k = 0;	
 					}
 				}
 				else
@@ -258,9 +263,19 @@ public class GameDesigner {
 					gameSymbols.remove(i);
 				}
 				//System.out.println(((NonTerminalSymbol)currentSymbol).children.size());
-				for (int j=0; j<((NonTerminalSymbol)currentSymbol).children.size(); j++) {
-					gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(j));
-					i++;
+				if(((NonTerminalSymbol)currentSymbol).optional == false){
+					for (int j=0; j<((NonTerminalSymbol)currentSymbol).children.size(); j++) {
+						gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(j));
+						i++;
+					}
+				}
+				else {
+					if (rnd.nextInt(2) == 1){ 
+						for (int j=0; j<((NonTerminalSymbol)currentSymbol).children.size(); j++) {
+							gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(j));
+							i++;
+						}
+					}
 				}
 			}
 			else {
@@ -269,7 +284,7 @@ public class GameDesigner {
 		}
 		System.out.println(gameSymbols.size());
 		for (int j=0; j<gameSymbols.size(); j++) {	
-			System.out.print(((TerminalSymbol)gameSymbols.get(j)).content+" ");
+			System.out.print(((TerminalSymbol)gameSymbols.get(j)).content);
 		}
 	}
 	
