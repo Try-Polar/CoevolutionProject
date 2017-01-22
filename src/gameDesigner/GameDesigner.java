@@ -13,7 +13,6 @@ public class GameDesigner {
 	NonTerminalSymbol interactionBlock;
 	NonTerminalSymbol terminationBlock;
 	NonTerminalSymbol charMap;
-	NonTerminalSymbol spriteType;
 	NonTerminalSymbol spriteDef;
 	NonTerminalSymbol interactionDef;
 	NonTerminalSymbol terminationDef;
@@ -28,7 +27,8 @@ public class GameDesigner {
 	NonTerminalSymbol spaceSpriteType;
 	NonTerminalSymbol spriteDefEol;
 	NonTerminalSymbol spaceOption;
-	NonTerminalSymbol charOrSpace; 
+	NonTerminalSymbol spaceRepeat;
+	NonTerminalSymbol charOrSpaceRepeat;
 	//Optional symbols	
 	NonTerminalSymbol spriteDefOptionalBlock;
 	NonTerminalSymbol spriteSimpleOptionalBlock;
@@ -53,10 +53,12 @@ public class GameDesigner {
 	TerminalSymbol terminationSet;
 	
 	//ClassSymbol
-	ClassSymbol game_class;
-	ClassSymbol sprite_class;
-	ClassSymbol interaction_method;
-	ClassSymbol termination_class;
+	InterchangableSymbol game_class;
+	InterchangableSymbol sprite_class;
+	InterchangableSymbol interaction_method;
+	InterchangableSymbol termination_class;
+	InterchangableSymbol spriteType;
+	InterchangableSymbol charOrSpace; 
 	
 	String[] gameClasses = {"BasicGame"};
 	String[] spriteClasses = {"Immovable", "Passive", "Flicker", "OrientatedFlick", "Missile", "RandomMissile", "RandomNPC",
@@ -70,6 +72,8 @@ public class GameDesigner {
 			"bounceForward", "collectResource", "changeResource"};
 	String[] terminationClasses = {"SpriteCounter", "SpriteCounterMore", "MultiSpriteCounter", "MultiSpriteCounterSubTypes", "StopCounter", 
 			"TimeOut"};
+	String[] spriteTypes = {"IDENTIFIER", "avatar", "wall", "EOS"};
+	String[] charSpace = {"CHAR", " "};
 	
 	
 	List<Symbol> gameSymbols = new LinkedList<Symbol>();
@@ -89,8 +93,7 @@ public class GameDesigner {
 		interactionBlock = new NonTerminalSymbol("interactionBlock", false, false);
 		terminationBlock = new NonTerminalSymbol("terminationBlock", false, false);
 		charMap = new NonTerminalSymbol("charMap", false, false);
-		spriteType = new NonTerminalSymbol("spriteType", false, false);
-		spriteDef = new NonTerminalSymbol("spriteDef", false, false);
+		spriteDef = new NonTerminalSymbol("sprieDef", false, false);
 		interactionDef = new NonTerminalSymbol("interactionDef", false, false);
 		terminationDef = new NonTerminalSymbol("terminationdef", false, false);
 		spriteSimple = new NonTerminalSymbol("spriteSimple", false, false);
@@ -104,7 +107,8 @@ public class GameDesigner {
 		spaceSpriteType = new NonTerminalSymbol("spaceSpriteType", true, false);
 		spriteDefEol = new NonTerminalSymbol("spriteDefEol", true, false);
 		spaceOption = new NonTerminalSymbol("spaceOption", true, false);
-		charOrSpace = new NonTerminalSymbol("charOrSpace", true, false);
+		spaceRepeat = new NonTerminalSymbol("spaceRepeat", true, false);
+		charOrSpaceRepeat = new NonTerminalSymbol("charOrSpaceRepeat", true, false);
 		//Optional Symbols
 		spriteDefOptionalBlock = new NonTerminalSymbol("spriteDefOptional", false, true);
 		spriteSimpleOptionalBlock = new NonTerminalSymbol("spriteSimpleOptional", false, true);
@@ -127,11 +131,14 @@ public class GameDesigner {
 		interactionSet = new TerminalSymbol("interactionSet","InteractionSet");
 		terminationSet = new TerminalSymbol("terminationSet","TerminationSet");
 		
-		//Declare Class Symbols
-		game_class = new ClassSymbol("game_class", gameClasses); //will not actually be terminal as it can expand to a number of things but this is simpler for now
-		sprite_class = new ClassSymbol("sprite_class", spriteClasses); //will need to be passed as some sort of parameter or made into nonTerminal
-		interaction_method = new ClassSymbol("interaction_method", interactionMethods); //will need to be passed as some sort of parameter or made into nonTerminal
-		termination_class = new ClassSymbol("termination_class", terminationClasses);
+		//Declare Interchangeable Symbols
+		game_class = new InterchangableSymbol("game_class", gameClasses); //will not actually be terminal as it can expand to a number of things but this is simpler for now
+		sprite_class = new InterchangableSymbol("sprite_class", spriteClasses); //will need to be passed as some sort of parameter or made into nonTerminal
+		interaction_method = new InterchangableSymbol("interaction_method", interactionMethods); //will need to be passed as some sort of parameter or made into nonTerminal
+		termination_class = new InterchangableSymbol("termination_class", terminationClasses);
+		spriteType = new InterchangableSymbol("spriteType", spriteTypes);
+		charOrSpace = new InterchangableSymbol("charOrSpace", charSpace);
+
 		
 		//Has been split so that it can minimised and this makes things neater to work with
 		addChildrenVGDLSymbols();		
@@ -174,10 +181,6 @@ public class GameDesigner {
 				//sprite-def
 				spriteDef.addChild(spriteSimple);
 				spriteDef.addChild(spriteDefOptionalBlock);
-				//spriteDef.addChild(eol); //on hold for now until repeatable and optional sections are setup
-				//spriteDef.addChild(indent);
-				//spriteDef.addChild(spriteDef);
-				//spriteDef.addChild(eol);
 				//sprite-simple
 				spriteSimple.addChild(spriteType);
 				spriteSimple.addChild(greaterThan);
@@ -207,7 +210,6 @@ public class GameDesigner {
 				option.addChild(equals);
 				option.addChild(spriteType);
 				//option.addChild(evaluable); //requires OR functionality
-				spriteType.addChild(identifier);
 				//Repeaters
 				//charMapNewline
 				charMapNewline.addChild(indent);
@@ -238,9 +240,11 @@ public class GameDesigner {
 				//spaceOption
 				spaceOption.addChild(space);
 				spaceOption.addChild(option);
-				//charOrSpace
-				//Orfunctionality not yet ready
-				
+				//spaceRepeat
+				spaceRepeat.addChild(space);
+				//charOrSpaceRepeat
+				charOrSpaceRepeat.addChild(charOrSpace);
+
 				//Optionals
 				//spriteDefOptionalBlock
 				spriteDefOptionalBlock.addChild(eol);
@@ -251,7 +255,7 @@ public class GameDesigner {
 				spriteSimpleOptionalBlock.addChild(sprite_class);
 				//eolOptionalBlock
 				eolOptionalBlock.addChild(hash);
-				eolOptionalBlock.addChild(charOrSpace);
+				eolOptionalBlock.addChild(charOrSpaceRepeat);
 	}
 	
 	public void basicGame() {
@@ -303,8 +307,8 @@ public class GameDesigner {
 		//This will later be made to print to a file, but for now just prints it to console
 		//It can still be tested by copying to a file
 		for (int j=0; j<gameSymbols.size(); j++) {	
-			if (gameSymbols.get(j) instanceof ClassSymbol) { 
-				System.out.print(((ClassSymbol)gameSymbols.get(j)).classStrings[rnd.nextInt(((ClassSymbol)gameSymbols.get(j)).classStrings.length)]);
+			if (gameSymbols.get(j) instanceof InterchangableSymbol) { 
+				System.out.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[rnd.nextInt(((InterchangableSymbol)gameSymbols.get(j)).classStrings.length)]);
 			}
 			else {
 				System.out.print(((TerminalSymbol)gameSymbols.get(j)).content);
