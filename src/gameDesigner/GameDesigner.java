@@ -33,11 +33,14 @@ public class GameDesigner {
 	NonTerminalSymbol spriteDefOptionalBlock;
 	NonTerminalSymbol spriteSimpleOptionalBlock;
 	NonTerminalSymbol eolOptionalBlock;
+	//choice symbols (symbol where the string will be chosen by the algorithm
+	NonTerminalSymbol charOrSpace;
+	//NonTerminalSymbol spriteTyeOrEvaluable; does not currently function as evaluable is not implemented
+	NonTerminalSymbol spriteType;
 			
 	//Declare Terminals	
 	TerminalSymbol newline;
 	TerminalSymbol indent;
-	TerminalSymbol identifier;
 	TerminalSymbol lambda;
 	TerminalSymbol greaterThan;
 	TerminalSymbol hash;
@@ -45,9 +48,9 @@ public class GameDesigner {
 	TerminalSymbol equals;
 	//strings
 	TerminalSymbol levelMapping;
-	TerminalSymbol variableChar;
 	TerminalSymbol avatar;
 	TerminalSymbol wall;
+	TerminalSymbol eos;
 	TerminalSymbol spriteSet;
 	TerminalSymbol interactionSet;
 	TerminalSymbol terminationSet;
@@ -57,8 +60,8 @@ public class GameDesigner {
 	InterchangableSymbol sprite_class;
 	InterchangableSymbol interaction_method;
 	InterchangableSymbol termination_class;
-	InterchangableSymbol spriteType;
-	InterchangableSymbol charOrSpace; 
+	InterchangableSymbol identifier;
+	InterchangableSymbol charVar;
 	
 	String[] gameClasses = {"BasicGame"};
 	String[] spriteClasses = {"Immovable", "Passive", "Flicker", "OrientatedFlick", "Missile", "RandomMissile", "RandomNPC",
@@ -72,8 +75,8 @@ public class GameDesigner {
 			"bounceForward", "collectResource", "changeResource"};
 	String[] terminationClasses = {"SpriteCounter", "SpriteCounterMore", "MultiSpriteCounter", "MultiSpriteCounterSubTypes", "StopCounter", 
 			"TimeOut"};
-	String[] spriteTypes = {"IDENTIFIER", "avatar", "wall", "EOS"};
-	String[] charSpace = {"CHAR", " "};
+	String[] identifiers = {"var1", "var2", "var3", "var4", "var5", "var6", "var7", "var8", "var9", "var10", };
+	String[] chars = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
 	
 	
 	List<Symbol> gameSymbols = new LinkedList<Symbol>();
@@ -82,41 +85,47 @@ public class GameDesigner {
 	
 	public GameDesigner() {
 		initiliseVGDLSymbols();
-		basicGame();
+		int[] genomeTest = new int[500];
+		for (int i=0; i < 500; i++) {
+			genomeTest[i] = rnd.nextInt(255);
+		}
+		createGameFromGenome(genomeTest);
 	}
 	
 	private void initiliseVGDLSymbols() {
 		//Declare Non-Terminals
-		game = new NonTerminalSymbol("game", false, false);
-		levelBlock = new NonTerminalSymbol("levelBlock", false, false);
-		spriteBlock = new NonTerminalSymbol("spriteBlock", false, false);
-		interactionBlock = new NonTerminalSymbol("interactionBlock", false, false);
-		terminationBlock = new NonTerminalSymbol("terminationBlock", false, false);
-		charMap = new NonTerminalSymbol("charMap", false, false);
-		spriteDef = new NonTerminalSymbol("sprieDef", false, false);
-		interactionDef = new NonTerminalSymbol("interactionDef", false, false);
-		terminationDef = new NonTerminalSymbol("terminationdef", false, false);
-		spriteSimple = new NonTerminalSymbol("spriteSimple", false, false);
-		option = new NonTerminalSymbol("option", false, false);
-		eol = new NonTerminalSymbol("eol", false, false);
+		game = new NonTerminalSymbol("game", false, false, false);
+		levelBlock = new NonTerminalSymbol("levelBlock", false, false, false);
+		spriteBlock = new NonTerminalSymbol("spriteBlock", false, false, false);
+		interactionBlock = new NonTerminalSymbol("interactionBlock", false, false, false);
+		terminationBlock = new NonTerminalSymbol("terminationBlock", false, false, false);
+		charMap = new NonTerminalSymbol("charMap", false, false, false);
+		spriteDef = new NonTerminalSymbol("sprieDef", false, false, false);
+		interactionDef = new NonTerminalSymbol("interactionDef", false, false, false);
+		terminationDef = new NonTerminalSymbol("terminationdef", false, false, false);
+		spriteSimple = new NonTerminalSymbol("spriteSimple", false, false, false);
+		option = new NonTerminalSymbol("option", false, false, false);
+		eol = new NonTerminalSymbol("eol", false, false, false);
 		//Repitition Symbols
-		charMapNewline = new NonTerminalSymbol("charMapNewline", true, false);	
-		spriteDefNewline = new NonTerminalSymbol("spriteDefNewline", true, false);
-		interactionDefEol = new NonTerminalSymbol("interactionDefEol", true, false);
-		terminationDefEol = new NonTerminalSymbol("terminationDefEol", true, false);
-		spaceSpriteType = new NonTerminalSymbol("spaceSpriteType", true, false);
-		spriteDefEol = new NonTerminalSymbol("spriteDefEol", true, false);
-		spaceOption = new NonTerminalSymbol("spaceOption", true, false);
-		spaceRepeat = new NonTerminalSymbol("spaceRepeat", true, false);
-		charOrSpaceRepeat = new NonTerminalSymbol("charOrSpaceRepeat", true, false);
+		charMapNewline = new NonTerminalSymbol("charMapNewline", true, false, false);	
+		spriteDefNewline = new NonTerminalSymbol("spriteDefNewline", true, false, false);
+		interactionDefEol = new NonTerminalSymbol("interactionDefEol", true, false, false);
+		terminationDefEol = new NonTerminalSymbol("terminationDefEol", true, false, false);
+		spaceSpriteType = new NonTerminalSymbol("spaceSpriteType", true, false, false);
+		spriteDefEol = new NonTerminalSymbol("spriteDefEol", true, false, false);
+		spaceOption = new NonTerminalSymbol("spaceOption", true, false, false);
+		spaceRepeat = new NonTerminalSymbol("spaceRepeat", true, false, false);
+		charOrSpaceRepeat = new NonTerminalSymbol("charOrSpaceRepeat", true, false, false);
 		//Optional Symbols
-		spriteDefOptionalBlock = new NonTerminalSymbol("spriteDefOptional", false, true);
-		spriteSimpleOptionalBlock = new NonTerminalSymbol("spriteSimpleOptional", false, true);
-		eolOptionalBlock = new NonTerminalSymbol("eolOptional", false, true);
+		spriteDefOptionalBlock = new NonTerminalSymbol("spriteDefOptional", false, true, false);
+		spriteSimpleOptionalBlock = new NonTerminalSymbol("spriteSimpleOptional", false, true, false);
+		eolOptionalBlock = new NonTerminalSymbol("eolOptional", false, true, false);
+		//choice Symbols
+		spriteType = new NonTerminalSymbol("spriteType", false, false, true);
+		charOrSpace = new NonTerminalSymbol("charOrSpace", false, false, true);
 		//Declare Terminals		
 		newline = new TerminalSymbol("newline", "\n");
 		indent = new TerminalSymbol("indent","	");
-		identifier = new TerminalSymbol("identifier","IDENTIFIER");
 		lambda = new TerminalSymbol("lambda","LAMBDA");
 		greaterThan = new TerminalSymbol("greater than"," > ");
 		hash = new TerminalSymbol("hash", "#");
@@ -124,9 +133,9 @@ public class GameDesigner {
 		equals = new TerminalSymbol("equals", "=");
 		//strings
 		levelMapping = new TerminalSymbol("levelMapping","LevelMapping");
-		variableChar = new TerminalSymbol("char","CHAR"); //Just using "CHAR" as place holder for now
 		avatar = new TerminalSymbol("avatar","avatar");
 		wall = new TerminalSymbol("wall","wall");
+		eos = new TerminalSymbol("eos", "EOS");
 		spriteSet = new TerminalSymbol("spriteSet","SpriteSet");
 		interactionSet = new TerminalSymbol("interactionSet","InteractionSet");
 		terminationSet = new TerminalSymbol("terminationSet","TerminationSet");
@@ -136,8 +145,8 @@ public class GameDesigner {
 		sprite_class = new InterchangableSymbol("sprite_class", spriteClasses); //will need to be passed as some sort of parameter or made into nonTerminal
 		interaction_method = new InterchangableSymbol("interaction_method", interactionMethods); //will need to be passed as some sort of parameter or made into nonTerminal
 		termination_class = new InterchangableSymbol("termination_class", terminationClasses);
-		spriteType = new InterchangableSymbol("spriteType", spriteTypes);
-		charOrSpace = new InterchangableSymbol("charOrSpace", charSpace);
+		identifier = new InterchangableSymbol("identifier", identifiers);
+		charVar = new InterchangableSymbol("char", chars);
 
 		
 		//Has been split so that it can minimised and this makes things neater to work with
@@ -174,7 +183,7 @@ public class GameDesigner {
 				terminationBlock.addChild(eol);
 				terminationBlock.addChild(terminationDefEol);
 				//char-map
-				charMap.addChild(variableChar);
+				charMap.addChild(charVar);
 				charMap.addChild(greaterThan);
 				charMap.addChild(spriteType);
 				charMap.addChild(spaceSpriteType);
@@ -200,11 +209,8 @@ public class GameDesigner {
 				terminationDef.addChild(space);
 				terminationDef.addChild(option);
 				//eol
-				//eol.addChild(space);
-				//eol.addChild(hash);
-				//eol.addChild(variableChar);
-				//eol.addChild(space);
 				eol.addChild(newline);
+				//eol.addChild(eolOptionalBlock);
 				//option
 				option.addChild(identifier);
 				option.addChild(equals);
@@ -235,6 +241,8 @@ public class GameDesigner {
 				spaceSpriteType.addChild(space);
 				spaceSpriteType.addChild(spriteType);
 				//spriteDefEol
+				spriteDefEol.addChild(indent);
+				spriteDefEol.addChild(indent);
 				spriteDefEol.addChild(spriteDef);
 				spriteDefEol.addChild(eol);
 				//spaceOption
@@ -248,17 +256,25 @@ public class GameDesigner {
 				//Optionals
 				//spriteDefOptionalBlock
 				spriteDefOptionalBlock.addChild(eol);
-				spriteDefOptionalBlock.addChild(indent);
-				spriteDefOptionalBlock.addChild(indent);
 				spriteDefOptionalBlock.addChild(spriteDefEol);
 				//spriteSimpleOptionalBlock
 				spriteSimpleOptionalBlock.addChild(sprite_class);
 				//eolOptionalBlock
 				eolOptionalBlock.addChild(hash);
 				eolOptionalBlock.addChild(charOrSpaceRepeat);
+				
+				//Choices
+				//spriteType
+				spriteType.addChild(identifier);
+				spriteType.addChild(avatar);
+				spriteType.addChild(wall);
+				spriteType.addChild(eos);
+				//charOrSpace
+				charOrSpace.addChild(charVar);
+				charOrSpace.addChild(space);
 	}
 	
-	public void basicGame() {
+	public void createGame() {
 		
 		int i = 0;
 		gameSymbols.add(game);
@@ -286,9 +302,15 @@ public class GameDesigner {
 				}
 				//If symbol is an not optional add children otherwise decide if the the option will be used then continue as before
 				if(((NonTerminalSymbol)currentSymbol).optional == false){
-					for (int j=0; j<((NonTerminalSymbol)currentSymbol).children.size(); j++) {
-						gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(j));
+					if (((NonTerminalSymbol)currentSymbol).choice == true) {
+						gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(rnd.nextInt(((NonTerminalSymbol)currentSymbol).children.size())));
 						i++;
+					}
+					else {
+						for (int j=0; j<((NonTerminalSymbol)currentSymbol).children.size(); j++) {
+							gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(j));
+							i++;
+						}
 					}
 				}
 				else {
@@ -309,6 +331,74 @@ public class GameDesigner {
 		for (int j=0; j<gameSymbols.size(); j++) {	
 			if (gameSymbols.get(j) instanceof InterchangableSymbol) { 
 				System.out.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[rnd.nextInt(((InterchangableSymbol)gameSymbols.get(j)).classStrings.length)]);
+			}
+			else {
+				System.out.print(((TerminalSymbol)gameSymbols.get(j)).content);
+			}
+		}
+	}
+	
+public void createGameFromGenome(int[] genome) {
+		int i = 0;
+		gameSymbols.add(game);
+		int genomeTracker = 0;
+
+		//While there are still symbols that need to be expanded
+		while (containsNonTerminals()) {
+			if (i > gameSymbols.size()-1) {
+				i = 0;
+			}
+			Symbol currentSymbol = gameSymbols.get(i);
+			
+			if (currentSymbol instanceof NonTerminalSymbol) {
+				//If symbol represents a repeatable section of the grammer
+				if (((NonTerminalSymbol) currentSymbol).repeatable == true) {
+					if (genome[genomeTracker] % 2 == 0) {
+						gameSymbols.remove(i);
+					}
+					genomeTracker++;
+				}
+				else
+				{
+					//If symbol is not repeatable remove it 
+					gameSymbols.remove(i);
+					//System.out.println(currentSymbol.name);
+				}
+				//If symbol is an not optional add children otherwise decide if the the option will be used then continue as before
+				if(((NonTerminalSymbol)currentSymbol).optional == false){
+					//CHOICE SECTION
+					if (((NonTerminalSymbol)currentSymbol).choice == true) {
+						gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(rnd.nextInt(((NonTerminalSymbol)currentSymbol).children.size())));
+						i++;
+					}
+					else {
+						for (int j=0; j<((NonTerminalSymbol)currentSymbol).children.size(); j++) {
+							gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(j));
+							i++;
+						}
+					}
+				}
+				else {
+					//OPTIONAL SECTION
+					if (genome[genomeTracker] % 2 == 0) { 
+						for (int j=0; j<((NonTerminalSymbol)currentSymbol).children.size(); j++) {
+							gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(j));
+							i++;
+						}
+					}
+					genomeTracker++;
+				}
+			}
+			else {
+				i++;
+			}
+		}
+		//This will later be made to print to a file, but for now just prints it to console
+		//It can still be tested by copying to a file
+		for (int j=0; j<gameSymbols.size(); j++) {	
+			if (gameSymbols.get(j) instanceof InterchangableSymbol) { 
+				System.out.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[genome[genomeTracker] % ((InterchangableSymbol)gameSymbols.get(j)).classStrings.length]);
+				genomeTracker++;
 			}
 			else {
 				System.out.print(((TerminalSymbol)gameSymbols.get(j)).content);

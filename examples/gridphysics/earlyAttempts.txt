@@ -1,15 +1,21 @@
 BasicGame
 	LevelMapping
-		CHAR > IDENTIFIER IDENTIFIER
-		CHAR > IDENTIFIER IDENTIFIER
-		CHAR > IDENTIFIER IDENTIFIER
-		CHAR > IDENTIFIER IDENTIFIER
-		CHAR > IDENTIFIER IDENTIFIER IDENTIFIER
+		n > EOS var4 wall
 	SpriteSet
-		IDENTIFIER >  IDENTIFIER=IDENTIFIER
-		IDENTIFIER >  IDENTIFIER=IDENTIFIER
+		EOS > Spreader var3=wall
+		var2 > MovingAvatar var7=EOS
+		var6 > OrientatedAvatar var1=var3
+		wall > Flicker var8=var7
+		var10 > Passive var4=EOS
+		var4 > AlternateChaser var7=EOS
+
+
+		avatar > Portal var6=var7
+
+
 	InteractionSet
-		IDENTIFIERIDENTIFIER >  IDENTIFIER=IDENTIFIER
-		IDENTIFIERIDENTIFIER >  IDENTIFIER=IDENTIFIER
+		wall var1 > addHealthPoints var7=avatar
 	TerminationSet
-		 IDENTIFIER=IDENTIFIER
+		MultiSpriteCounter var9=var8
+		MultiSpriteCounterSubTypes var1=avatar
+		SpriteCounterMore var10=avatar
