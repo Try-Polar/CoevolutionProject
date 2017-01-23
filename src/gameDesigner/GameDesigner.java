@@ -1,10 +1,19 @@
 package gameDesigner;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
 public class GameDesigner {
+	
+	String path ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "earlyAttempts.txt";
+	//C:\Users\Elliot\Documents\GitHub\CoevolutionProject\examples\gridphysics
+	File f = new File(path);
+	PrintWriter writer;
+	
 	//Symbols
 	//Declare Non-Terminals
 	NonTerminalSymbol game;
@@ -85,11 +94,14 @@ public class GameDesigner {
 	
 	public GameDesigner() {
 		initiliseVGDLSymbols();
-		int[] genomeTest = new int[500];
-		for (int i=0; i < 500; i++) {
-			genomeTest[i] = rnd.nextInt(255);
+		
+		f.getParentFile().mkdirs();
+		try {
+		f.createNewFile();
+		writer = new PrintWriter(f);
+		} catch (IOException e) { 
+			e.printStackTrace();
 		}
-		createGameFromGenome(genomeTest);
 	}
 	
 	private void initiliseVGDLSymbols() {
@@ -397,14 +409,17 @@ public void createGameFromGenome(int[] genome) {
 		//It can still be tested by copying to a file
 		for (int j=0; j<gameSymbols.size(); j++) {	
 			if (gameSymbols.get(j) instanceof InterchangableSymbol) { 
-				System.out.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[genome[genomeTracker] % ((InterchangableSymbol)gameSymbols.get(j)).classStrings.length]);
+				//System.out.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[genome[genomeTracker] % ((InterchangableSymbol)gameSymbols.get(j)).classStrings.length]);
+				writer.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[genome[genomeTracker] % ((InterchangableSymbol)gameSymbols.get(j)).classStrings.length]);
 				genomeTracker++;
 			}
 			else {
-				System.out.print(((TerminalSymbol)gameSymbols.get(j)).content);
+				//System.out.print(((TerminalSymbol)gameSymbols.get(j)).content);
+				writer.print(((TerminalSymbol)gameSymbols.get(j)).content);
 			}
 		}
-	}
+		writer.close();
+}
 	
 	private boolean containsNonTerminals() {
 		boolean result = false; 

@@ -1,21 +1,12 @@
 BasicGame
 	LevelMapping
-		n > EOS var4 wall
+		e > EOS wall var3
 	SpriteSet
-		EOS > Spreader var3=wall
-		var2 > MovingAvatar var7=EOS
-		var6 > OrientatedAvatar var1=var3
-		wall > Flicker var8=var7
-		var10 > Passive var4=EOS
-		var4 > AlternateChaser var7=EOS
-
-
-		avatar > Portal var6=var7
-
-
+		EOS > RandomAltChaser var10=EOS
 	InteractionSet
-		wall var1 > addHealthPoints var7=avatar
+		wall wall > attractGaze var7=avatar
+		wall wall > killIfOtherHasMore var1=var7
+		avatar avatar > teleportToExit var5=EOS
+		EOS var2 > cloneSprite var5=wall
 	TerminationSet
-		MultiSpriteCounter var9=var8
-		MultiSpriteCounterSubTypes var1=avatar
-		SpriteCounterMore var10=avatar
+		SpriteCounter var6=avatar

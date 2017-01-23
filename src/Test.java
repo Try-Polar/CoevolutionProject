@@ -4,6 +4,8 @@ import java.util.Random;
 
 import core.ArcadeMachine;
 
+import EvolutionaryAgents.EvolutionaryGameDesigner;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Diego
@@ -16,7 +18,9 @@ public class Test
 
     public static void main(String[] args)
     {
-        GameDesigner test = new GameDesigner();
+        //GameDesigner test = new GameDesigner();
+        EvolutionaryGameDesigner evoGameDesigner = new EvolutionaryGameDesigner();
+        evoGameDesigner.eaSimple();
     	
     	//Available controllers:
     	String sampleRandomController = "controllers.singlePlayer.sampleRandom.Agent";
