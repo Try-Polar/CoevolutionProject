@@ -1,12 +1,10 @@
 BasicGame
 	LevelMapping
-		e > EOS wall var3
+		t > EOS EOS
 	SpriteSet
-		EOS > RandomAltChaser var10=EOS
+		EOS > OngoingAvatar var9=EOS
 	InteractionSet
-		wall wall > attractGaze var7=avatar
-		wall wall > killIfOtherHasMore var1=var7
-		avatar avatar > teleportToExit var5=EOS
-		EOS var2 > cloneSprite var5=wall
+		EOS avatar > cloneSprite 
 	TerminationSet
-		SpriteCounter var6=avatar
+		TimeOut win=False
+		SpriteCounter win=True

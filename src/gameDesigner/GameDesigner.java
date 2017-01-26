@@ -44,8 +44,9 @@ public class GameDesigner {
 	NonTerminalSymbol eolOptionalBlock;
 	//choice symbols (symbol where the string will be chosen by the algorithm
 	NonTerminalSymbol charOrSpace;
-	//NonTerminalSymbol spriteTyeOrEvaluable; does not currently function as evaluable is not implemented
+	NonTerminalSymbol spriteTypeOrEvaluable;
 	NonTerminalSymbol spriteType;
+	NonTerminalSymbol evaluable;
 			
 	//Declare Terminals	
 	TerminalSymbol newline;
@@ -71,21 +72,30 @@ public class GameDesigner {
 	InterchangableSymbol termination_class;
 	InterchangableSymbol identifier;
 	InterchangableSymbol charVar;
+	InterchangableSymbol evaluableBoolean;
+	InterchangableSymbol evaluableFloat;
+	InterchangableSymbol evaluableInt;
+	InterchangableSymbol terminationOption;
 	
 	String[] gameClasses = {"BasicGame"};
 	String[] spriteClasses = {"Immovable", "Passive", "Flicker", "OrientatedFlick", "Missile", "RandomMissile", "RandomNPC",
 			"Chaser", "Fleeing", "AlternateChaser", "RandomAltChaser", "SpawnPoint", "Bomber", "RandomBomber", "BomberRandomMissile", "Spreader",
 			"Door", "Portal", "Resource", "MovingAvatar", "HorizontalAvatar", "VerticalAvatar", "OngoingAvatar", "OngoingTurningAvatar", "OngoingShootAvatar",
 			"MissileAvatar", "OrientatedAvatar", "ShootAvatar", "FlakAvatar"};
-	String[] interactionMethods = {"killAll", "killIfHasMore", "killIfHasLess", "killIfFromAbove", "killIfOtherHasMore", "transformToSingleton",
+	/*String[] interactionMethods = {"killAll", "killIfHasMore", "killIfHasLess", "killIfFromAbove", "killIfOtherHasMore", "transformToSingleton",
 			"spawnBehind", "spawnIfHasMore", "spawnIfHasLess", "cloneSprite", "transformTo", "transformIfCounts", "transformToRandomChild", "updateSpawnType",
 			"removeScore", "addHealthPoints", "addHealthPointsToMax", "subtractHealthPoint", "increaseSpeedToAll", "decreaseSpeedToAll", "setSpeedForAll", "stepBack", 
 			"undoAll", "flipDirection", "reverseDirection", "attractGaze", "align", "turnAround", "wrapAround", "teleportToExit", "pullWithIt", 
-			"bounceForward", "collectResource", "changeResource"};
+			"bounceForward", "collectResource", "changeResource"};*/
+	String[] interactionMethods = {"killAll", "stepBack", "cloneSprite", "flipDirection"};
 	String[] terminationClasses = {"SpriteCounter", "SpriteCounterMore", "MultiSpriteCounter", "MultiSpriteCounterSubTypes", "StopCounter", 
 			"TimeOut"};
-	String[] identifiers = {"var1", "var2", "var3", "var4", "var5", "var6", "var7", "var8", "var9", "var10", };
+	String[] identifiers = {"var1", "var2", "var3", "var4", "var5", "var6", "var7", "var8", "var9", "var10", "win"};
 	String[] chars = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
+	String[] evaluableBooleans = {"True", "False"};
+	String[] evaluableFloats = {"0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"};
+	String[] evaluableInts = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
+	String[] terminationOptions = {"win=True", "win=False"};
 	
 	
 	List<Symbol> gameSymbols = new LinkedList<Symbol>();
@@ -135,6 +145,8 @@ public class GameDesigner {
 		//choice Symbols
 		spriteType = new NonTerminalSymbol("spriteType", false, false, true);
 		charOrSpace = new NonTerminalSymbol("charOrSpace", false, false, true);
+		spriteTypeOrEvaluable = new NonTerminalSymbol("spriteTypeOrEvaluable", false, false, true);
+		evaluable = new NonTerminalSymbol("evaluable", false, false, true);
 		//Declare Terminals		
 		newline = new TerminalSymbol("newline", "\n");
 		indent = new TerminalSymbol("indent","	");
@@ -159,7 +171,10 @@ public class GameDesigner {
 		termination_class = new InterchangableSymbol("termination_class", terminationClasses);
 		identifier = new InterchangableSymbol("identifier", identifiers);
 		charVar = new InterchangableSymbol("char", chars);
-
+		evaluableBoolean = new InterchangableSymbol("evaluable", evaluableBooleans);
+		evaluableFloat = new InterchangableSymbol("evaluable", evaluableFloats);
+		evaluableInt = new InterchangableSymbol("evaluable", evaluableInts);
+		terminationOption = new InterchangableSymbol("terminationOption", terminationOptions);
 		
 		//Has been split so that it can minimised and this makes things neater to work with
 		addChildrenVGDLSymbols();		
@@ -215,19 +230,18 @@ public class GameDesigner {
 				interactionDef.addChild(greaterThan);
 				interactionDef.addChild(interaction_method);
 				interactionDef.addChild(space);
-				interactionDef.addChild(option);
+				//interactionDef.addChild(option);
 				//termination-def
 				terminationDef.addChild(termination_class);
 				terminationDef.addChild(space);
-				terminationDef.addChild(option);
+				terminationDef.addChild(terminationOption);
 				//eol
 				eol.addChild(newline);
 				//eol.addChild(eolOptionalBlock);
 				//option
 				option.addChild(identifier);
 				option.addChild(equals);
-				option.addChild(spriteType);
-				//option.addChild(evaluable); //requires OR functionality
+				option.addChild(spriteTypeOrEvaluable);
 				//Repeaters
 				//charMapNewline
 				charMapNewline.addChild(indent);
@@ -284,6 +298,13 @@ public class GameDesigner {
 				//charOrSpace
 				charOrSpace.addChild(charVar);
 				charOrSpace.addChild(space);
+				//spriteTypeOrEvaluable
+				spriteTypeOrEvaluable.addChild(spriteType);
+				spriteTypeOrEvaluable.addChild(evaluable);
+				//evaluable
+				evaluable.addChild(evaluableBoolean);
+				evaluable.addChild(evaluableFloat);
+				evaluable.addChild(evaluableInt);
 	}
 	
 	public void createGame() {
