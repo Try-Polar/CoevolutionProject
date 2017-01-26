@@ -16,87 +16,162 @@ public class GameDesigner {
 	
 	//Symbols
 	//Declare Non-Terminals
-	NonTerminalSymbol game;
-	NonTerminalSymbol levelBlock;
-	NonTerminalSymbol spriteBlock;
-	NonTerminalSymbol interactionBlock;
-	NonTerminalSymbol terminationBlock;
-	NonTerminalSymbol charMap;
-	NonTerminalSymbol spriteDef;
-	NonTerminalSymbol interactionDef;
-	NonTerminalSymbol terminationDef;
-	NonTerminalSymbol spriteSimple;
-	NonTerminalSymbol option;
-	NonTerminalSymbol eol;
+	NonTerminalSymbol game = new NonTerminalSymbol("game", false, false, false);
+	NonTerminalSymbol levelBlock = new NonTerminalSymbol("levelBlock", false, false, false);
+	NonTerminalSymbol spriteBlock = new NonTerminalSymbol("spriteBlock", false, false, false);
+	NonTerminalSymbol interactionBlock = new NonTerminalSymbol("interactionBlock", false, false, false);
+	NonTerminalSymbol terminationBlock = new NonTerminalSymbol("terminationBlock", false, false, false);
+	NonTerminalSymbol charMap = new NonTerminalSymbol("charMap", false, false, false);
+	NonTerminalSymbol spriteDef = new NonTerminalSymbol("sprieDef", false, false, false);
+	NonTerminalSymbol interactionDef = new NonTerminalSymbol("interactionDef", false, false, false);
+	NonTerminalSymbol terminationDef = new NonTerminalSymbol("terminationdef", false, false, false);
+	NonTerminalSymbol spriteSimple = new NonTerminalSymbol("spriteSimple", false, false, false);
+	NonTerminalSymbol option = new NonTerminalSymbol("option", false, false, false);
+	NonTerminalSymbol eol = new NonTerminalSymbol("eol", false, false, false);
 	//Repitition symbols
-	NonTerminalSymbol charMapNewline;
-	NonTerminalSymbol spriteDefNewline;
-	NonTerminalSymbol interactionDefEol;
-	NonTerminalSymbol terminationDefEol;
-	NonTerminalSymbol spaceSpriteType;
-	NonTerminalSymbol spriteDefEol;
-	NonTerminalSymbol spaceOption;
-	NonTerminalSymbol spaceRepeat;
-	NonTerminalSymbol charOrSpaceRepeat;
+	NonTerminalSymbol charMapNewline = new NonTerminalSymbol("charMapNewline", true, false, false);
+	NonTerminalSymbol spriteDefNewline = new NonTerminalSymbol("spriteDefNewline", true, false, false);
+	NonTerminalSymbol interactionDefEol = new NonTerminalSymbol("interactionDefEol", true, false, false);
+	NonTerminalSymbol terminationDefEol = new NonTerminalSymbol("terminationDefEol", true, false, false);
+	NonTerminalSymbol spaceSpriteType = new NonTerminalSymbol("spaceSpriteType", true, false, false);
+	NonTerminalSymbol spriteDefEol = new NonTerminalSymbol("spriteDefEol", true, false, false);
+	NonTerminalSymbol spaceOption = new NonTerminalSymbol("spaceOption", true, false, false);
+	NonTerminalSymbol spaceRepeat = new NonTerminalSymbol("spaceRepeat", true, false, false);
+	NonTerminalSymbol charOrSpaceRepeat = new NonTerminalSymbol("charOrSpaceRepeat", true, false, false);
 	//Optional symbols	
-	NonTerminalSymbol spriteDefOptionalBlock;
-	NonTerminalSymbol spriteSimpleOptionalBlock;
-	NonTerminalSymbol eolOptionalBlock;
+	NonTerminalSymbol spriteDefOptionalBlock = new NonTerminalSymbol("spriteDefOptional", false, true, false);
+	NonTerminalSymbol spriteSimpleOptionalBlock = new NonTerminalSymbol("spriteSimpleOptional", false, true, false);
+	NonTerminalSymbol eolOptionalBlock = new NonTerminalSymbol("eolOptional", false, true, false);
 	//choice symbols (symbol where the string will be chosen by the algorithm
-	NonTerminalSymbol charOrSpace;
-	NonTerminalSymbol spriteTypeOrEvaluable;
-	NonTerminalSymbol spriteType;
-	NonTerminalSymbol evaluable;
-			
-	//Declare Terminals	
-	TerminalSymbol newline;
-	TerminalSymbol indent;
-	TerminalSymbol lambda;
-	TerminalSymbol greaterThan;
-	TerminalSymbol hash;
-	TerminalSymbol space;
-	TerminalSymbol equals;
-	//strings
-	TerminalSymbol levelMapping;
-	TerminalSymbol avatar;
-	TerminalSymbol wall;
-	TerminalSymbol eos;
-	TerminalSymbol spriteSet;
-	TerminalSymbol interactionSet;
-	TerminalSymbol terminationSet;
+	NonTerminalSymbol charOrSpace = new NonTerminalSymbol("charOrSpace", false, false, true);
+	NonTerminalSymbol spriteTypeOrEvaluable = new NonTerminalSymbol("spriteTypeOrEvaluable", false, false, true);
+	NonTerminalSymbol spriteType = new NonTerminalSymbol("spriteType", false, false, true);
+	NonTerminalSymbol evaluable = new NonTerminalSymbol("evaluable", false, false, true);
+	//NonTerminalSymbol game_class; //probably not needed for the type of games we are making, also can't find a clear list of what this would contain
+	NonTerminalSymbol sprite_class = new NonTerminalSymbol("sprite_class", false, false, true);
+	NonTerminalSymbol interaction_method = new NonTerminalSymbol("interaction_method", false, false, true);
+	NonTerminalSymbol termination_class = new NonTerminalSymbol("termination_class", false, false, true);
 	
-	//ClassSymbol
-	InterchangableSymbol game_class;
-	InterchangableSymbol sprite_class;
-	InterchangableSymbol interaction_method;
-	InterchangableSymbol termination_class;
-	InterchangableSymbol identifier;
-	InterchangableSymbol charVar;
-	InterchangableSymbol evaluableBoolean;
-	InterchangableSymbol evaluableFloat;
-	InterchangableSymbol evaluableInt;
-	InterchangableSymbol terminationOption;
+	
+	//Declare Terminals	
+	TerminalSymbol newline = new TerminalSymbol("newline", "\n");
+	TerminalSymbol indent = new TerminalSymbol("indent","	");
+	TerminalSymbol lambda = new TerminalSymbol("lambda","LAMBDA");
+	TerminalSymbol greaterThan = new TerminalSymbol("greater than"," > ");
+	TerminalSymbol hash = new TerminalSymbol("hash", "#");
+	TerminalSymbol space = new TerminalSymbol("space", " ");
+	TerminalSymbol equals = new TerminalSymbol("equals", "=");
+	//strings
+	TerminalSymbol levelMapping = new TerminalSymbol("levelMapping","LevelMapping");
+	TerminalSymbol avatar = new TerminalSymbol("avatar","avatar");
+	TerminalSymbol wall = new TerminalSymbol("wall","wall");
+	TerminalSymbol eos = new TerminalSymbol("eos", "EOS");
+	TerminalSymbol spriteSet = new TerminalSymbol("spriteSet","SpriteSet");
+	TerminalSymbol interactionSet = new TerminalSymbol("interactionSet","InteractionSet");
+	TerminalSymbol terminationSet = new TerminalSymbol("terminationSet","TerminationSet");
+	
+	
+	
+	//Avatar Sprite Classes
+	//Terminals
+	TerminalSymbol movingAvatar = new TerminalSymbol("MovingAvatar", "MovingAvatar");
+	TerminalSymbol horizontalAvatar = new TerminalSymbol("HorizontalAvatar", "HorizontalAvatar");
+	TerminalSymbol verticalAvatar = new TerminalSymbol("VerticalAvatar", "VerticalAvatar");
+	TerminalSymbol ongoingAvatar = new TerminalSymbol("OngoingAvatar", "OngoingAvatar");
+	TerminalSymbol ongoingTurningAvatar = new TerminalSymbol("OngoingTurningAvatar", "OngoingTurningAvatar");
+	TerminalSymbol missileAvatar = new TerminalSymbol("MissileAvatar", "MissileAvatar");
+	TerminalSymbol orientatedAvatar = new TerminalSymbol("OrientatedAvatar", "OrientatedAvatar");
+	//Non Terminals
+	NonTerminalSymbol shootAvatar = new NonTerminalSymbol("ShootAvatar", false, false, false);
+	NonTerminalSymbol flakAvatar = new NonTerminalSymbol("FlakAvatar", false, false, false);
+	//Other Sprite Classes
+	//Terminals
+	TerminalSymbol immovable = new TerminalSymbol("Immovable", "Immovable");
+	TerminalSymbol passive = new TerminalSymbol("Passive", "Passive");
+	TerminalSymbol missile = new TerminalSymbol("Missile", "Missile");
+	TerminalSymbol randomMissile = new TerminalSymbol("RandomMissile", "RandomMissile");
+	TerminalSymbol randomNPC = new TerminalSymbol("RandomNPC", "RandomNPC");
+	TerminalSymbol door = new TerminalSymbol("Door", "Door");
+	//NonTerminals
+	NonTerminalSymbol flicker = new NonTerminalSymbol("Flicker", false, false, false);
+	NonTerminalSymbol orientatedFlicker = new NonTerminalSymbol("OrientatedFlick", false, false, false);
+	NonTerminalSymbol chaser = new NonTerminalSymbol("Chaser", false, false, false);
+	NonTerminalSymbol fleeing = new NonTerminalSymbol("Fleeing", false, false, false);
+	NonTerminalSymbol alternateChaser = new NonTerminalSymbol("AlternateChaser", false, false, false);
+	NonTerminalSymbol randomAltChaser = new NonTerminalSymbol("RandolAltChaser", false, false, false);
+	NonTerminalSymbol spawnPoint = new NonTerminalSymbol("SpawnPoint", false, false, false);
+	NonTerminalSymbol bomber = new NonTerminalSymbol("Bomber", false, false, false);
+	NonTerminalSymbol randomBomber = new NonTerminalSymbol("RandomBomber", false, false, false);
+	NonTerminalSymbol bomberRandomMissile = new NonTerminalSymbol("BomberRandomMissile", false, false, false);
+	NonTerminalSymbol spreader = new NonTerminalSymbol("Spreader", false, false, false);
+	NonTerminalSymbol portal = new NonTerminalSymbol("Portal", false, false, false);
+	NonTerminalSymbol resource = new NonTerminalSymbol("Resource", false, false, false);
+	//Interaction methods
+	//Terminals
+	TerminalSymbol killSprite = new TerminalSymbol("killSprite", "killSprite");
+	TerminalSymbol killIfFromAbove = new TerminalSymbol("killIfFromAbove", "killIfFromAbove");
+	TerminalSymbol cloneSprite = new TerminalSymbol("cloneSprite", "cloneSprite");
+	TerminalSymbol stepBack = new TerminalSymbol("stepBack", "stepBack");
+	TerminalSymbol undoAll = new TerminalSymbol("undoAll", "undoAll");
+	TerminalSymbol flipDirection = new TerminalSymbol("flipDirection", "flipDirection");
+	TerminalSymbol reverseDirection = new TerminalSymbol("reverseDirection", "reverseDirection");
+	TerminalSymbol attactGaze = new TerminalSymbol("attractGaze", "attractGaze");
+	TerminalSymbol align = new TerminalSymbol("align","algin");
+	TerminalSymbol turnAround = new TerminalSymbol("turnAround", "turnAround");
+	TerminalSymbol wrapAround = new TerminalSymbol("wrapAround", "wrapAround");
+	TerminalSymbol teleportToExit = new TerminalSymbol("teleportToExit", "teleportToExit");
+	TerminalSymbol pullWithIt = new TerminalSymbol("pullWithIt", "pullWithIt");
+	TerminalSymbol bounceForward = new TerminalSymbol("bounceForward", "bounceForward");
+	TerminalSymbol collectResource = new TerminalSymbol("collectResource", "collectResource");
+	//NonTerminals
+	NonTerminalSymbol killAll = new NonTerminalSymbol("killAll", false, false, false);
+	NonTerminalSymbol killIfHasMore = new NonTerminalSymbol("killIfHasMore", false, false, false);
+	NonTerminalSymbol killIfHasLess = new NonTerminalSymbol("killIfHasLess", false, false, false);
+	NonTerminalSymbol killIfOtherHasMore = new NonTerminalSymbol("killIfOtherHasMore", false, false, false);
+	NonTerminalSymbol transformToSingleton = new NonTerminalSymbol("transformToSingleton", false, false, false);
+	NonTerminalSymbol spawnBehind = new NonTerminalSymbol("spawnBehind", false, false, false);
+	NonTerminalSymbol spawnIfHasMore = new NonTerminalSymbol("spawnIfHasMore", false, false, false);
+	NonTerminalSymbol spawnIfHasLess = new NonTerminalSymbol("spawnIfHasLess", false, false, false);
+	NonTerminalSymbol transformTo = new NonTerminalSymbol("transformTo", false, false, false);
+	NonTerminalSymbol transformIfCounts = new NonTerminalSymbol("transformIfCounts", false, false, false);
+	NonTerminalSymbol transformToRandomChild = new NonTerminalSymbol("transformToRandomChild", false, false, false);
+	NonTerminalSymbol upateSpawnType = new NonTerminalSymbol("updateSpawnType", false, false, false);
+	NonTerminalSymbol removeScore = new NonTerminalSymbol("removeScore", false, false,false);
+	NonTerminalSymbol addHealthPoints = new NonTerminalSymbol("addHealthPoints", false, false, false);
+	NonTerminalSymbol addHealthPointsToMax = new NonTerminalSymbol("addHealthPointToMax",false,false,false);
+	NonTerminalSymbol subtractHealthPoints = new NonTerminalSymbol("subtracHealthPoints",false,false,false);
+	NonTerminalSymbol increaseSpeedToAll = new NonTerminalSymbol("increaseSpeedToAll",false,false,false);
+	NonTerminalSymbol decreaseSpeedToAll = new NonTerminalSymbol("decreaseSpeedToAll",false,false,false);
+	NonTerminalSymbol setSpeedForAll = new NonTerminalSymbol("setSpeedForAll",false,false,false);
+	NonTerminalSymbol changeResource = new NonTerminalSymbol("changeResource",false,false,false);
+	//Termination Classes
+	//NonTerminals
+	NonTerminalSymbol spriteCounter = new NonTerminalSymbol("SpriteCounter",false,false,false);
+	NonTerminalSymbol spriteCounterMore = new NonTerminalSymbol("SpriteCounterMore",false,false,false);
+	NonTerminalSymbol multiSpriteCounter = new NonTerminalSymbol("MultiSpriteCounter",false,false,false);
+	NonTerminalSymbol multiSpriteCounterSubTypes = new NonTerminalSymbol("MultiSpriteCounterSubTypes",false,false,false);
+	NonTerminalSymbol stopCounter = new NonTerminalSymbol("StopCounter",false,false,false);
+	NonTerminalSymbol timeOut = new NonTerminalSymbol("TimeOut",false,false,false);
+	
+	
 	
 	String[] gameClasses = {"BasicGame"};
-	String[] spriteClasses = {"Immovable", "Passive", "Flicker", "OrientatedFlick", "Missile", "RandomMissile", "RandomNPC",
-			"Chaser", "Fleeing", "AlternateChaser", "RandomAltChaser", "SpawnPoint", "Bomber", "RandomBomber", "BomberRandomMissile", "Spreader",
-			"Door", "Portal", "Resource", "MovingAvatar", "HorizontalAvatar", "VerticalAvatar", "OngoingAvatar", "OngoingTurningAvatar", "OngoingShootAvatar",
-			"MissileAvatar", "OrientatedAvatar", "ShootAvatar", "FlakAvatar"};
-	/*String[] interactionMethods = {"killAll", "killIfHasMore", "killIfHasLess", "killIfFromAbove", "killIfOtherHasMore", "transformToSingleton",
-			"spawnBehind", "spawnIfHasMore", "spawnIfHasLess", "cloneSprite", "transformTo", "transformIfCounts", "transformToRandomChild", "updateSpawnType",
-			"removeScore", "addHealthPoints", "addHealthPointsToMax", "subtractHealthPoint", "increaseSpeedToAll", "decreaseSpeedToAll", "setSpeedForAll", "stepBack", 
-			"undoAll", "flipDirection", "reverseDirection", "attractGaze", "align", "turnAround", "wrapAround", "teleportToExit", "pullWithIt", 
-			"bounceForward", "collectResource", "changeResource"};*/
-	String[] interactionMethods = {"killAll", "stepBack", "cloneSprite", "flipDirection"};
-	String[] terminationClasses = {"SpriteCounter", "SpriteCounterMore", "MultiSpriteCounter", "MultiSpriteCounterSubTypes", "StopCounter", 
-			"TimeOut"};
-	String[] identifiers = {"var1", "var2", "var3", "var4", "var5", "var6", "var7", "var8", "var9", "var10", "win"};
+	String[] identifiers = {"var1", "var2", "var3", "var4", "var5", "avatar"};
 	String[] chars = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
 	String[] evaluableBooleans = {"True", "False"};
 	String[] evaluableFloats = {"0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"};
 	String[] evaluableInts = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
 	String[] terminationOptions = {"win=True", "win=False"};
 	
+	//ClassSymbol //could use NonTerminal choice symbols here but this is slightly neater/uses less lines of code (not sure if its worth it yet)
+		InterchangableSymbol game_class = new InterchangableSymbol("game_class", gameClasses);
+
+		InterchangableSymbol identifier = new InterchangableSymbol("identifier", identifiers);
+		InterchangableSymbol charVar = new InterchangableSymbol("char", chars);
+		InterchangableSymbol evaluableBoolean = new InterchangableSymbol("evaluable", evaluableBooleans);
+		InterchangableSymbol evaluableFloat = new InterchangableSymbol("evaluable", evaluableFloats);
+		InterchangableSymbol evaluableInt = new InterchangableSymbol("evaluable", evaluableInts);
+		InterchangableSymbol terminationOption = new InterchangableSymbol("terminationOption", terminationOptions);
 	
 	List<Symbol> gameSymbols = new LinkedList<Symbol>();
 	
@@ -114,69 +189,7 @@ public class GameDesigner {
 		}
 	}
 	
-	private void initiliseVGDLSymbols() {
-		//Declare Non-Terminals
-		game = new NonTerminalSymbol("game", false, false, false);
-		levelBlock = new NonTerminalSymbol("levelBlock", false, false, false);
-		spriteBlock = new NonTerminalSymbol("spriteBlock", false, false, false);
-		interactionBlock = new NonTerminalSymbol("interactionBlock", false, false, false);
-		terminationBlock = new NonTerminalSymbol("terminationBlock", false, false, false);
-		charMap = new NonTerminalSymbol("charMap", false, false, false);
-		spriteDef = new NonTerminalSymbol("sprieDef", false, false, false);
-		interactionDef = new NonTerminalSymbol("interactionDef", false, false, false);
-		terminationDef = new NonTerminalSymbol("terminationdef", false, false, false);
-		spriteSimple = new NonTerminalSymbol("spriteSimple", false, false, false);
-		option = new NonTerminalSymbol("option", false, false, false);
-		eol = new NonTerminalSymbol("eol", false, false, false);
-		//Repitition Symbols
-		charMapNewline = new NonTerminalSymbol("charMapNewline", true, false, false);	
-		spriteDefNewline = new NonTerminalSymbol("spriteDefNewline", true, false, false);
-		interactionDefEol = new NonTerminalSymbol("interactionDefEol", true, false, false);
-		terminationDefEol = new NonTerminalSymbol("terminationDefEol", true, false, false);
-		spaceSpriteType = new NonTerminalSymbol("spaceSpriteType", true, false, false);
-		spriteDefEol = new NonTerminalSymbol("spriteDefEol", true, false, false);
-		spaceOption = new NonTerminalSymbol("spaceOption", true, false, false);
-		spaceRepeat = new NonTerminalSymbol("spaceRepeat", true, false, false);
-		charOrSpaceRepeat = new NonTerminalSymbol("charOrSpaceRepeat", true, false, false);
-		//Optional Symbols
-		spriteDefOptionalBlock = new NonTerminalSymbol("spriteDefOptional", false, true, false);
-		spriteSimpleOptionalBlock = new NonTerminalSymbol("spriteSimpleOptional", false, true, false);
-		eolOptionalBlock = new NonTerminalSymbol("eolOptional", false, true, false);
-		//choice Symbols
-		spriteType = new NonTerminalSymbol("spriteType", false, false, true);
-		charOrSpace = new NonTerminalSymbol("charOrSpace", false, false, true);
-		spriteTypeOrEvaluable = new NonTerminalSymbol("spriteTypeOrEvaluable", false, false, true);
-		evaluable = new NonTerminalSymbol("evaluable", false, false, true);
-		//Declare Terminals		
-		newline = new TerminalSymbol("newline", "\n");
-		indent = new TerminalSymbol("indent","	");
-		lambda = new TerminalSymbol("lambda","LAMBDA");
-		greaterThan = new TerminalSymbol("greater than"," > ");
-		hash = new TerminalSymbol("hash", "#");
-		space = new TerminalSymbol("space", " ");
-		equals = new TerminalSymbol("equals", "=");
-		//strings
-		levelMapping = new TerminalSymbol("levelMapping","LevelMapping");
-		avatar = new TerminalSymbol("avatar","avatar");
-		wall = new TerminalSymbol("wall","wall");
-		eos = new TerminalSymbol("eos", "EOS");
-		spriteSet = new TerminalSymbol("spriteSet","SpriteSet");
-		interactionSet = new TerminalSymbol("interactionSet","InteractionSet");
-		terminationSet = new TerminalSymbol("terminationSet","TerminationSet");
-		
-		//Declare Interchangeable Symbols
-		game_class = new InterchangableSymbol("game_class", gameClasses); //will not actually be terminal as it can expand to a number of things but this is simpler for now
-		sprite_class = new InterchangableSymbol("sprite_class", spriteClasses); //will need to be passed as some sort of parameter or made into nonTerminal
-		interaction_method = new InterchangableSymbol("interaction_method", interactionMethods); //will need to be passed as some sort of parameter or made into nonTerminal
-		termination_class = new InterchangableSymbol("termination_class", terminationClasses);
-		identifier = new InterchangableSymbol("identifier", identifiers);
-		charVar = new InterchangableSymbol("char", chars);
-		evaluableBoolean = new InterchangableSymbol("evaluable", evaluableBooleans);
-		evaluableFloat = new InterchangableSymbol("evaluable", evaluableFloats);
-		evaluableInt = new InterchangableSymbol("evaluable", evaluableInts);
-		terminationOption = new InterchangableSymbol("terminationOption", terminationOptions);
-		
-		//Has been split so that it can minimised and this makes things neater to work with
+	private void initiliseVGDLSymbols() { //May remove this entirely later, it was useful earlier until I changed things
 		addChildrenVGDLSymbols();		
 	}
 	
