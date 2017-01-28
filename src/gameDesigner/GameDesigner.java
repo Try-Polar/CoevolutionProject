@@ -79,11 +79,19 @@ public class GameDesigner {
 	TerminalSymbol verticalAvatar = new TerminalSymbol("VerticalAvatar", "VerticalAvatar");
 	TerminalSymbol ongoingAvatar = new TerminalSymbol("OngoingAvatar", "OngoingAvatar");
 	TerminalSymbol ongoingTurningAvatar = new TerminalSymbol("OngoingTurningAvatar", "OngoingTurningAvatar");
+	TerminalSymbol ongoingShootAvatar = new TerminalSymbol("OngoingShootAvatar", "OngoingShootAvatar");
 	TerminalSymbol missileAvatar = new TerminalSymbol("MissileAvatar", "MissileAvatar");
-	TerminalSymbol orientatedAvatar = new TerminalSymbol("OrientatedAvatar", "OrientatedAvatar");
+	TerminalSymbol orientedAvatar = new TerminalSymbol("OrientedAvatar", "OrientedAvatar");
 	//Non Terminals
 	NonTerminalSymbol shootAvatar = new NonTerminalSymbol("ShootAvatar", false, false, false);
 	NonTerminalSymbol flakAvatar = new NonTerminalSymbol("FlakAvatar", false, false, false);
+	//avatar strings
+	TerminalSymbol shootAvatarString = new TerminalSymbol("ShootAvatar", "ShootAvatar");
+	TerminalSymbol flakAvatarString = new TerminalSymbol("FlakAvatar", "FlakAvatar");
+	//avatar parameters
+	//TerminalSymbol ammo = new TerminalSymbol("Ammo", "ammo="); //For now not going to give this to the GA to try and figure out
+	//TerminalSymbol minAmmo = new TerminalSymbol("minAmmo", "minAmmo="); //commented same as ammo
+	TerminalSymbol stype = new TerminalSymbol("stype", "stype="); 
 	//Other Sprite Classes
 	//Terminals
 	TerminalSymbol immovable = new TerminalSymbol("Immovable", "Immovable");
@@ -94,7 +102,7 @@ public class GameDesigner {
 	TerminalSymbol door = new TerminalSymbol("Door", "Door");
 	//NonTerminals
 	NonTerminalSymbol flicker = new NonTerminalSymbol("Flicker", false, false, false);
-	NonTerminalSymbol orientatedFlicker = new NonTerminalSymbol("OrientatedFlick", false, false, false);
+	NonTerminalSymbol orientedFlicker = new NonTerminalSymbol("OrientedFlick", false, false, false);
 	NonTerminalSymbol chaser = new NonTerminalSymbol("Chaser", false, false, false);
 	NonTerminalSymbol fleeing = new NonTerminalSymbol("Fleeing", false, false, false);
 	NonTerminalSymbol alternateChaser = new NonTerminalSymbol("AlternateChaser", false, false, false);
@@ -106,6 +114,33 @@ public class GameDesigner {
 	NonTerminalSymbol spreader = new NonTerminalSymbol("Spreader", false, false, false);
 	NonTerminalSymbol portal = new NonTerminalSymbol("Portal", false, false, false);
 	NonTerminalSymbol resource = new NonTerminalSymbol("Resource", false, false, false);
+	//Other sprite class strings
+	TerminalSymbol flickerString = new TerminalSymbol("flicker", "Flicker");
+	TerminalSymbol orientedFlickerString = new TerminalSymbol("orientedFlicker","OrientedFlicker");
+	TerminalSymbol chaserString = new TerminalSymbol("chaser", "Chaser");
+	TerminalSymbol fleeingString = new TerminalSymbol("fleeing", "Fleeing");
+	TerminalSymbol alternateChaserString = new TerminalSymbol("alternateChaser", "AlternateChaser");
+	TerminalSymbol randomAltChaserString = new TerminalSymbol("randomAltChaser", "RandomAltChaser");
+	TerminalSymbol spawnPointString = new TerminalSymbol("spawnPoint", "SpawnPoint");
+	TerminalSymbol bomberString	= new TerminalSymbol("bomber", "Bomber");
+	TerminalSymbol randomBomberString = new TerminalSymbol("randomBomberString", "RandomBomberString");
+	TerminalSymbol bomberRandomMissileString = new TerminalSymbol("bomberRandomMissile", "BomberRandomMissile");
+	TerminalSymbol spreaderString = new TerminalSymbol("spreader", "Spreader");
+	TerminalSymbol portalString = new TerminalSymbol("portal", "Portal");
+	TerminalSymbol resourceString = new TerminalSymbol("resource", "Resource");
+	//Other sprite class parameters
+	TerminalSymbol limit = new TerminalSymbol("limit", "limit=");
+	TerminalSymbol stype1 = new TerminalSymbol("stype1", "stype1=");
+	TerminalSymbol stype2 = new TerminalSymbol("stype2", "stype2=");
+	TerminalSymbol prob = new TerminalSymbol("prob", "prob=");
+	TerminalSymbol total = new TerminalSymbol("total", "total=");
+	TerminalSymbol spawnorientation = new TerminalSymbol("spawnOrientation", "spawnorientation=");
+	TerminalSymbol stypeMissile = new TerminalSymbol("stypeMissile", "stypeMIssile=");
+	//TerminalSymbol updateItype //more complicated so leaving for now
+	TerminalSymbol spreadProb = new TerminalSymbol("spreadProb", "spreadprob=");
+	TerminalSymbol resourceName = new TerminalSymbol("resource", "resource=");
+	TerminalSymbol value = new TerminalSymbol("value", "value=");
+	
 	//Interaction methods
 	//Terminals
 	TerminalSymbol killSprite = new TerminalSymbol("killSprite", "killSprite");
@@ -115,7 +150,7 @@ public class GameDesigner {
 	TerminalSymbol undoAll = new TerminalSymbol("undoAll", "undoAll");
 	TerminalSymbol flipDirection = new TerminalSymbol("flipDirection", "flipDirection");
 	TerminalSymbol reverseDirection = new TerminalSymbol("reverseDirection", "reverseDirection");
-	TerminalSymbol attactGaze = new TerminalSymbol("attractGaze", "attractGaze");
+	TerminalSymbol attractGaze = new TerminalSymbol("attractGaze", "attractGaze");
 	TerminalSymbol align = new TerminalSymbol("align","algin");
 	TerminalSymbol turnAround = new TerminalSymbol("turnAround", "turnAround");
 	TerminalSymbol wrapAround = new TerminalSymbol("wrapAround", "wrapAround");
@@ -135,7 +170,7 @@ public class GameDesigner {
 	NonTerminalSymbol transformTo = new NonTerminalSymbol("transformTo", false, false, false);
 	NonTerminalSymbol transformIfCounts = new NonTerminalSymbol("transformIfCounts", false, false, false);
 	NonTerminalSymbol transformToRandomChild = new NonTerminalSymbol("transformToRandomChild", false, false, false);
-	NonTerminalSymbol upateSpawnType = new NonTerminalSymbol("updateSpawnType", false, false, false);
+	NonTerminalSymbol updateSpawnType = new NonTerminalSymbol("updateSpawnType", false, false, false);
 	NonTerminalSymbol removeScore = new NonTerminalSymbol("removeScore", false, false,false);
 	NonTerminalSymbol addHealthPoints = new NonTerminalSymbol("addHealthPoints", false, false, false);
 	NonTerminalSymbol addHealthPointsToMax = new NonTerminalSymbol("addHealthPointToMax",false,false,false);
@@ -144,6 +179,33 @@ public class GameDesigner {
 	NonTerminalSymbol decreaseSpeedToAll = new NonTerminalSymbol("decreaseSpeedToAll",false,false,false);
 	NonTerminalSymbol setSpeedForAll = new NonTerminalSymbol("setSpeedForAll",false,false,false);
 	NonTerminalSymbol changeResource = new NonTerminalSymbol("changeResource",false,false,false);
+	//Interaction method strings
+	TerminalSymbol killAllString = new TerminalSymbol("killAll","killAll");
+	TerminalSymbol killIfHasMoreString = new TerminalSymbol("killIfHasMore", "killIfHasMore");
+	TerminalSymbol killIfHasLessString = new TerminalSymbol("killIfHasLess", "killIfHasLess");
+	TerminalSymbol killIfOtherHasMoreString = new TerminalSymbol("killIfOtherHasMore", "killIfOtherHasMore");
+	TerminalSymbol transformToSingletonString = new TerminalSymbol("transformToSingleton", "transformToSingleton");
+	TerminalSymbol spawnBehindString = new TerminalSymbol("spawnBehind", "spawnBehind");
+	TerminalSymbol spawnIfHasMoreString = new TerminalSymbol("spawIfHasMore", "spawnIfHasMore");
+	TerminalSymbol spawnIfHasLessString = new TerminalSymbol("spawnIfHasLess", "spawnIfHasLess");
+	TerminalSymbol transformToString = new TerminalSymbol("transformTo", "transformTo");
+	TerminalSymbol transformIfCountsString = new TerminalSymbol("transformIfCounts", "transformIfCounts");
+	TerminalSymbol transformToRandomChildString = new TerminalSymbol("transformToRandomChild", "transformToRandomChild");
+	TerminalSymbol updateSpawnTypeString = new TerminalSymbol("updateSpawnType", "updateSpawnType");
+	TerminalSymbol removeScoreString = new TerminalSymbol("removeScore", "removeScore");
+	TerminalSymbol addHealthPointsString = new TerminalSymbol("addHealthPoints","addHealthPoints");
+	TerminalSymbol addHealthPointsToMaxString = new TerminalSymbol("addHealthPointsToMax", "addHealthPointsToMax");
+	TerminalSymbol subtractHealthPointsString = new TerminalSymbol("subtractHealthPoints", "subtractHealthPoints");
+	TerminalSymbol increaseSpeedToAllString = new TerminalSymbol("increaseSpeedToAll", "increaseSpeedToAll");
+	TerminalSymbol decreaseSpeedToAllString = new TerminalSymbol("decreaseSpeedToAll", "decreaseSpeedToAll");
+	TerminalSymbol setSpeedForAllString = new TerminalSymbol("setSpeedForAll", "setSpeedForAll");
+	TerminalSymbol changeResourceString = new TerminalSymbol("changeResource", "changeResource");
+	//Interaction method paramters
+	TerminalSymbol stype_other = new TerminalSymbol("stype_other","stype_other=");
+	TerminalSymbol forceOrientation = new TerminalSymbol("forceOrientation", "forceOrientation=");
+	TerminalSymbol geq = new TerminalSymbol("geq","geq=");
+	TerminalSymbol leq = new TerminalSymbol("leq","leq=");
+	TerminalSymbol spawnPointParam = new TerminalSymbol("spawnPoint", "spawnPoint=");
 	//Termination Classes
 	//NonTerminals
 	NonTerminalSymbol spriteCounter = new NonTerminalSymbol("SpriteCounter",false,false,false);
@@ -152,7 +214,15 @@ public class GameDesigner {
 	NonTerminalSymbol multiSpriteCounterSubTypes = new NonTerminalSymbol("MultiSpriteCounterSubTypes",false,false,false);
 	NonTerminalSymbol stopCounter = new NonTerminalSymbol("StopCounter",false,false,false);
 	NonTerminalSymbol timeOut = new NonTerminalSymbol("TimeOut",false,false,false);
-	
+	//Termination class strings
+	TerminalSymbol spriteCounterString = new TerminalSymbol("spriteCounter", "SpriteCounter");
+	TerminalSymbol spriteCounterMoreString = new TerminalSymbol("spriteCounterMore", "SpriteCounterMore");
+	TerminalSymbol multiSpriteCounterString = new TerminalSymbol("multiSpriteCounter", "MultiSpriteCounter");
+	TerminalSymbol multiSpriteCounterSubTypesString = new TerminalSymbol("multiSpriteCounterSubTypes", "MultiSpriteCounterSubTypes");
+	TerminalSymbol stopCounterString = new TerminalSymbol("stopCounter", "StopCounter");
+	TerminalSymbol timeOutString = new TerminalSymbol("timeOut", "TimeOut");
+	//Termination class params
+	TerminalSymbol stype3 = new TerminalSymbol("stype3", "stype3=");
 	
 	
 	String[] gameClasses = {"BasicGame"};
@@ -282,6 +352,7 @@ public class GameDesigner {
 				//spriteDefEol
 				spriteDefEol.addChild(indent);
 				spriteDefEol.addChild(indent);
+				spriteDefEol.addChild(indent);
 				spriteDefEol.addChild(spriteDef);
 				spriteDefEol.addChild(eol);
 				//spaceOption
@@ -318,6 +389,83 @@ public class GameDesigner {
 				evaluable.addChild(evaluableBoolean);
 				evaluable.addChild(evaluableFloat);
 				evaluable.addChild(evaluableInt);
+				//sprite_class
+				sprite_class.addChild(movingAvatar);
+				sprite_class.addChild(horizontalAvatar);
+				sprite_class.addChild(verticalAvatar);
+				sprite_class.addChild(ongoingAvatar);
+				sprite_class.addChild(ongoingTurningAvatar);
+				sprite_class.addChild(ongoingShootAvatar);
+				sprite_class.addChild(missileAvatar);
+				sprite_class.addChild(orientedAvatar);
+				sprite_class.addChild(shootAvatar);
+				sprite_class.addChild(flakAvatar);
+				//Potentially split avatar sprite classes from other sprite classes
+				sprite_class.addChild(immovable);
+				sprite_class.addChild(passive);
+				sprite_class.addChild(flicker);
+				sprite_class.addChild(orientedFlicker);
+				sprite_class.addChild(missile);
+				sprite_class.addChild(randomMissile);
+				sprite_class.addChild(randomNPC);
+				sprite_class.addChild(chaser);
+				sprite_class.addChild(fleeing);
+				sprite_class.addChild(alternateChaser);
+				sprite_class.addChild(randomAltChaser);
+				sprite_class.addChild(spawnPoint);
+				sprite_class.addChild(bomber);
+				sprite_class.addChild(randomBomber);
+				sprite_class.addChild(bomberRandomMissile);
+				sprite_class.addChild(spreader);
+				sprite_class.addChild(door);
+				sprite_class.addChild(portal);
+				sprite_class.addChild(resource);
+				//interaction_method
+				interaction_method.addChild(killSprite);
+				interaction_method.addChild(killAll);
+				interaction_method.addChild(killIfHasMore);
+				interaction_method.addChild(killIfHasLess);
+				interaction_method.addChild(killIfFromAbove);
+				interaction_method.addChild(killIfOtherHasMore);
+				interaction_method.addChild(transformToSingleton);
+				interaction_method.addChild(spawnBehind);
+				interaction_method.addChild(spawnIfHasMore);
+				interaction_method.addChild(spawnIfHasLess);
+				interaction_method.addChild(cloneSprite);
+				interaction_method.addChild(transformTo);
+				interaction_method.addChild(transformIfCounts);
+				interaction_method.addChild(transformToRandomChild);
+				interaction_method.addChild(updateSpawnType);
+				interaction_method.addChild(removeScore);
+				interaction_method.addChild(addHealthPoints);
+				interaction_method.addChild(addHealthPointsToMax);
+				interaction_method.addChild(subtractHealthPoints);
+				interaction_method.addChild(increaseSpeedToAll);
+				interaction_method.addChild(decreaseSpeedToAll);
+				interaction_method.addChild(setSpeedForAll);
+				interaction_method.addChild(stepBack);
+				interaction_method.addChild(undoAll);
+				interaction_method.addChild(flipDirection);
+				interaction_method.addChild(reverseDirection);
+				interaction_method.addChild(attractGaze);
+				interaction_method.addChild(align);
+				interaction_method.addChild(turnAround);
+				interaction_method.addChild(wrapAround);
+				interaction_method.addChild(teleportToExit);
+				interaction_method.addChild(pullWithIt);
+				interaction_method.addChild(bounceForward);
+				interaction_method.addChild(collectResource);
+				interaction_method.addChild(changeResource);
+				//termination__class
+				termination_class.addChild(spriteCounter);
+				termination_class.addChild(spriteCounterMore);
+				termination_class.addChild(multiSpriteCounter);
+				termination_class.addChild(multiSpriteCounterSubTypes);
+				termination_class.addChild(stopCounter);
+				termination_class.addChild(timeOut);
+				
+				
+				
 	}
 	
 	public void createGame() {
