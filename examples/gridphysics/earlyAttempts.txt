@@ -1,0 +1,17 @@
+BasicGame
+	LevelMapping
+		i > var2 EOS
+		m > EOS avatar wall avatar
+		b > wall wall avatar
+	SpriteSet
+		var3 > MovingAvatar var2=True
+		avatar >  var5=0.1
+		avatar > MissileAvatar var5=2
+		wall > AlternateChaser stype1=var2 stype2=var3 avatar=True
+	InteractionSet
+		EOS wall > subtractHealthPoints value=18 stype=var5 
+		var2 wall > transformToRandomChild stype=var3 stype_other=var5 
+	TerminationSet
+		 win=True
+		SpriteCounter stype=var3 limit=20 win=True
+		 win=True

@@ -17,7 +17,7 @@ public class EvolutionaryGameDesigner {
 	
 	int populationSize = 5;
 	int generations = 20;
-	int individualSize = 750;
+	int individualSize = 400;
 	float mutationProbability = 0.5f;
 	float crossoverProbability = 0.5f;
 	float indpb = 0.4f;
@@ -103,8 +103,10 @@ public class EvolutionaryGameDesigner {
 	public int evaluationFunction(int[] individual) {
 		//If game does not run return negative score for now if game runs return score of 0
 		//Strings will later be changed to variables
+		System.out.println("evaluation is begining");
 		gameDesigner.createGameFromGenome(individual);
 		try {
+			System.out.println("valid game########################## I think");
 			ArcadeMachine.runOneGame("examples/gridphysics/earlyattempts.txt", "examples/gridphysics/earlyAttempts_lvl0.txt", true, sampleMCTSController, null, 15, 0);
 		} catch (Exception e) {
 			System.out.println("invalid game----------------------------------------------------------------------");

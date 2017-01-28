@@ -86,8 +86,8 @@ public class GameDesigner {
 	NonTerminalSymbol shootAvatar = new NonTerminalSymbol("ShootAvatar", false, false, false);
 	NonTerminalSymbol flakAvatar = new NonTerminalSymbol("FlakAvatar", false, false, false);
 	//avatar strings
-	TerminalSymbol shootAvatarString = new TerminalSymbol("ShootAvatar", "ShootAvatar");
-	TerminalSymbol flakAvatarString = new TerminalSymbol("FlakAvatar", "FlakAvatar");
+	TerminalSymbol shootAvatarString = new TerminalSymbol("ShootAvatar", "ShootAvatar ");
+	TerminalSymbol flakAvatarString = new TerminalSymbol("FlakAvatar", "FlakAvatar ");
 	//avatar parameters
 	//TerminalSymbol ammo = new TerminalSymbol("Ammo", "ammo="); //For now not going to give this to the GA to try and figure out
 	//TerminalSymbol minAmmo = new TerminalSymbol("minAmmo", "minAmmo="); //commented same as ammo
@@ -115,19 +115,19 @@ public class GameDesigner {
 	NonTerminalSymbol portal = new NonTerminalSymbol("Portal", false, false, false);
 	NonTerminalSymbol resource = new NonTerminalSymbol("Resource", false, false, false);
 	//Other sprite class strings
-	TerminalSymbol flickerString = new TerminalSymbol("flicker", "Flicker");
-	TerminalSymbol orientedFlickerString = new TerminalSymbol("orientedFlicker","OrientedFlicker");
-	TerminalSymbol chaserString = new TerminalSymbol("chaser", "Chaser");
+	TerminalSymbol flickerString = new TerminalSymbol("flicker", "Flicker ");
+	TerminalSymbol orientedFlickerString = new TerminalSymbol("orientedFlicker","OrientedFlicker ");
+	TerminalSymbol chaserString = new TerminalSymbol("chaser", "Chaser ");
 	TerminalSymbol fleeingString = new TerminalSymbol("fleeing", "Fleeing");
-	TerminalSymbol alternateChaserString = new TerminalSymbol("alternateChaser", "AlternateChaser");
-	TerminalSymbol randomAltChaserString = new TerminalSymbol("randomAltChaser", "RandomAltChaser");
-	TerminalSymbol spawnPointString = new TerminalSymbol("spawnPoint", "SpawnPoint");
-	TerminalSymbol bomberString	= new TerminalSymbol("bomber", "Bomber");
-	TerminalSymbol randomBomberString = new TerminalSymbol("randomBomberString", "RandomBomberString");
-	TerminalSymbol bomberRandomMissileString = new TerminalSymbol("bomberRandomMissile", "BomberRandomMissile");
-	TerminalSymbol spreaderString = new TerminalSymbol("spreader", "Spreader");
-	TerminalSymbol portalString = new TerminalSymbol("portal", "Portal");
-	TerminalSymbol resourceString = new TerminalSymbol("resource", "Resource");
+	TerminalSymbol alternateChaserString = new TerminalSymbol("alternateChaser", "AlternateChaser ");
+	TerminalSymbol randomAltChaserString = new TerminalSymbol("randomAltChaser", "RandomAltChaser ");
+	TerminalSymbol spawnPointString = new TerminalSymbol("spawnPoint", "SpawnPoint ");
+	TerminalSymbol bomberString	= new TerminalSymbol("bomber", "Bomber ");
+	TerminalSymbol randomBomberString = new TerminalSymbol("randomBomberString", "RandomBomberString ");
+	TerminalSymbol bomberRandomMissileString = new TerminalSymbol("bomberRandomMissile", "BomberRandomMissile ");
+	TerminalSymbol spreaderString = new TerminalSymbol("spreader", "Spreader ");
+	TerminalSymbol portalString = new TerminalSymbol("portal", "Portal ");
+	TerminalSymbol resourceString = new TerminalSymbol("resource", "Resource ");
 	//Other sprite class parameters
 	TerminalSymbol limit = new TerminalSymbol("limit", "limit=");
 	TerminalSymbol stype1 = new TerminalSymbol("stype1", "stype1=");
@@ -180,29 +180,30 @@ public class GameDesigner {
 	NonTerminalSymbol setSpeedForAll = new NonTerminalSymbol("setSpeedForAll",false,false,false);
 	NonTerminalSymbol changeResource = new NonTerminalSymbol("changeResource",false,false,false);
 	//Interaction method strings
-	TerminalSymbol killAllString = new TerminalSymbol("killAll","killAll");
-	TerminalSymbol killIfHasMoreString = new TerminalSymbol("killIfHasMore", "killIfHasMore");
-	TerminalSymbol killIfHasLessString = new TerminalSymbol("killIfHasLess", "killIfHasLess");
-	TerminalSymbol killIfOtherHasMoreString = new TerminalSymbol("killIfOtherHasMore", "killIfOtherHasMore");
-	TerminalSymbol transformToSingletonString = new TerminalSymbol("transformToSingleton", "transformToSingleton");
-	TerminalSymbol spawnBehindString = new TerminalSymbol("spawnBehind", "spawnBehind");
-	TerminalSymbol spawnIfHasMoreString = new TerminalSymbol("spawIfHasMore", "spawnIfHasMore");
-	TerminalSymbol spawnIfHasLessString = new TerminalSymbol("spawnIfHasLess", "spawnIfHasLess");
-	TerminalSymbol transformToString = new TerminalSymbol("transformTo", "transformTo");
-	TerminalSymbol transformIfCountsString = new TerminalSymbol("transformIfCounts", "transformIfCounts");
-	TerminalSymbol transformToRandomChildString = new TerminalSymbol("transformToRandomChild", "transformToRandomChild");
-	TerminalSymbol updateSpawnTypeString = new TerminalSymbol("updateSpawnType", "updateSpawnType");
-	TerminalSymbol removeScoreString = new TerminalSymbol("removeScore", "removeScore");
-	TerminalSymbol addHealthPointsString = new TerminalSymbol("addHealthPoints","addHealthPoints");
-	TerminalSymbol addHealthPointsToMaxString = new TerminalSymbol("addHealthPointsToMax", "addHealthPointsToMax");
-	TerminalSymbol subtractHealthPointsString = new TerminalSymbol("subtractHealthPoints", "subtractHealthPoints");
-	TerminalSymbol increaseSpeedToAllString = new TerminalSymbol("increaseSpeedToAll", "increaseSpeedToAll");
-	TerminalSymbol decreaseSpeedToAllString = new TerminalSymbol("decreaseSpeedToAll", "decreaseSpeedToAll");
-	TerminalSymbol setSpeedForAllString = new TerminalSymbol("setSpeedForAll", "setSpeedForAll");
-	TerminalSymbol changeResourceString = new TerminalSymbol("changeResource", "changeResource");
+	TerminalSymbol killAllString = new TerminalSymbol("killAll","killAll ");
+	TerminalSymbol killIfHasMoreString = new TerminalSymbol("killIfHasMore", "killIfHasMore ");
+	TerminalSymbol killIfHasLessString = new TerminalSymbol("killIfHasLess", "killIfHasLess ");
+	TerminalSymbol killIfOtherHasMoreString = new TerminalSymbol("killIfOtherHasMore", "killIfOtherHasMore ");
+	TerminalSymbol transformToSingletonString = new TerminalSymbol("transformToSingleton", "transformToSingleton ");
+	TerminalSymbol spawnBehindString = new TerminalSymbol("spawnBehind", "spawnBehind ");
+	TerminalSymbol spawnIfHasMoreString = new TerminalSymbol("spawIfHasMore", "spawnIfHasMore ");
+	TerminalSymbol spawnIfHasLessString = new TerminalSymbol("spawnIfHasLess", "spawnIfHasLess ");
+	TerminalSymbol transformToString = new TerminalSymbol("transformTo", "transformTo ");
+	TerminalSymbol transformIfCountsString = new TerminalSymbol("transformIfCounts", "transformIfCounts ");
+	TerminalSymbol transformToRandomChildString = new TerminalSymbol("transformToRandomChild", "transformToRandomChild ");
+	TerminalSymbol updateSpawnTypeString = new TerminalSymbol("updateSpawnType", "updateSpawnType ");
+	TerminalSymbol removeScoreString = new TerminalSymbol("removeScore", "removeScore ");
+	TerminalSymbol addHealthPointsString = new TerminalSymbol("addHealthPoints","addHealthPoints ");
+	TerminalSymbol addHealthPointsToMaxString = new TerminalSymbol("addHealthPointsToMax", "addHealthPointsToMax ");
+	TerminalSymbol subtractHealthPointsString = new TerminalSymbol("subtractHealthPoints", "subtractHealthPoints ");
+	TerminalSymbol increaseSpeedToAllString = new TerminalSymbol("increaseSpeedToAll", "increaseSpeedToAll ");
+	TerminalSymbol decreaseSpeedToAllString = new TerminalSymbol("decreaseSpeedToAll", "decreaseSpeedToAll ");
+	TerminalSymbol setSpeedForAllString = new TerminalSymbol("setSpeedForAll", "setSpeedForAll ");
+	TerminalSymbol changeResourceString = new TerminalSymbol("changeResource", "changeResource ");
 	//Interaction method paramters
 	TerminalSymbol stype_other = new TerminalSymbol("stype_other","stype_other=");
 	TerminalSymbol forceOrientation = new TerminalSymbol("forceOrientation", "forceOrientation=");
+	TerminalSymbol stypeCount = new TerminalSymbol("stypeCount", "stypeCount=");
 	TerminalSymbol geq = new TerminalSymbol("geq","geq=");
 	TerminalSymbol leq = new TerminalSymbol("leq","leq=");
 	TerminalSymbol spawnPointParam = new TerminalSymbol("spawnPoint", "spawnPoint=");
@@ -215,12 +216,12 @@ public class GameDesigner {
 	NonTerminalSymbol stopCounter = new NonTerminalSymbol("StopCounter",false,false,false);
 	NonTerminalSymbol timeOut = new NonTerminalSymbol("TimeOut",false,false,false);
 	//Termination class strings
-	TerminalSymbol spriteCounterString = new TerminalSymbol("spriteCounter", "SpriteCounter");
-	TerminalSymbol spriteCounterMoreString = new TerminalSymbol("spriteCounterMore", "SpriteCounterMore");
-	TerminalSymbol multiSpriteCounterString = new TerminalSymbol("multiSpriteCounter", "MultiSpriteCounter");
-	TerminalSymbol multiSpriteCounterSubTypesString = new TerminalSymbol("multiSpriteCounterSubTypes", "MultiSpriteCounterSubTypes");
-	TerminalSymbol stopCounterString = new TerminalSymbol("stopCounter", "StopCounter");
-	TerminalSymbol timeOutString = new TerminalSymbol("timeOut", "TimeOut");
+	TerminalSymbol spriteCounterString = new TerminalSymbol("spriteCounter", "SpriteCounter ");
+	TerminalSymbol spriteCounterMoreString = new TerminalSymbol("spriteCounterMore", "SpriteCounterMore ");
+	TerminalSymbol multiSpriteCounterString = new TerminalSymbol("multiSpriteCounter", "MultiSpriteCounter ");
+	TerminalSymbol multiSpriteCounterSubTypesString = new TerminalSymbol("multiSpriteCounterSubTypes", "MultiSpriteCounterSubTypes ");
+	TerminalSymbol stopCounterString = new TerminalSymbol("stopCounter", "StopCounter ");
+	TerminalSymbol timeOutString = new TerminalSymbol("timeOut", "TimeOut ");
 	//Termination class params
 	TerminalSymbol stype3 = new TerminalSymbol("stype3", "stype3=");
 	
@@ -229,9 +230,10 @@ public class GameDesigner {
 	String[] identifiers = {"var1", "var2", "var3", "var4", "var5", "avatar"};
 	String[] chars = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
 	String[] evaluableBooleans = {"True", "False"};
-	String[] evaluableFloats = {"0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"};
-	String[] evaluableInts = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
+	String[] evaluableFloats = {"0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"}; //make for loop to expand
+	String[] evaluableInts = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"}; //make for loop to expand
 	String[] terminationOptions = {"win=True", "win=False"};
+	String[] evaluableDirections = {"UP", "DOWN", "LEFT", "RIGHT"};
 	
 	//ClassSymbol //could use NonTerminal choice symbols here but this is slightly neater/uses less lines of code (not sure if its worth it yet)
 		InterchangableSymbol game_class = new InterchangableSymbol("game_class", gameClasses);
@@ -242,6 +244,7 @@ public class GameDesigner {
 		InterchangableSymbol evaluableFloat = new InterchangableSymbol("evaluable", evaluableFloats);
 		InterchangableSymbol evaluableInt = new InterchangableSymbol("evaluable", evaluableInts);
 		InterchangableSymbol terminationOption = new InterchangableSymbol("terminationOption", terminationOptions);
+		InterchangableSymbol evaluableDirection = new InterchangableSymbol("evaluableDirection", evaluableDirections);
 	
 	List<Symbol> gameSymbols = new LinkedList<Symbol>();
 	
@@ -352,7 +355,6 @@ public class GameDesigner {
 				//spriteDefEol
 				spriteDefEol.addChild(indent);
 				spriteDefEol.addChild(indent);
-				spriteDefEol.addChild(indent);
 				spriteDefEol.addChild(spriteDef);
 				spriteDefEol.addChild(eol);
 				//spaceOption
@@ -366,6 +368,7 @@ public class GameDesigner {
 				//Optionals
 				//spriteDefOptionalBlock
 				spriteDefOptionalBlock.addChild(eol);
+				spriteDefOptionalBlock.addChild(indent);
 				spriteDefOptionalBlock.addChild(spriteDefEol);
 				//spriteSimpleOptionalBlock
 				spriteSimpleOptionalBlock.addChild(sprite_class);
@@ -463,9 +466,244 @@ public class GameDesigner {
 				termination_class.addChild(multiSpriteCounterSubTypes);
 				termination_class.addChild(stopCounter);
 				termination_class.addChild(timeOut);
-				
-				
-				
+				//Avatar sprite classes
+				shootAvatar.addChild(shootAvatarString);
+				shootAvatar.addChild(stype);
+				shootAvatar.addChild(identifier);
+				flakAvatar.addChild(flakAvatarString);
+				flakAvatar.addChild(stype);
+				flakAvatar.addChild(identifier);
+				//flakAvatar ammo params current not being used
+				//Other sprite classes
+				flicker.addChild(flickerString);
+				flicker.addChild(limit);
+				flicker.addChild(evaluableInt);
+				orientedFlicker.addChild(orientedFlickerString);
+				orientedFlicker.addChild(limit);
+				orientedFlicker.addChild(evaluableInt);
+				chaser.addChild(chaserString);
+				chaser.addChild(stype);
+				chaser.addChild(identifier);
+				fleeing.addChild(fleeingString);
+				fleeing.addChild(stype);
+				fleeing.addChild(identifier);
+				alternateChaser.addChild(alternateChaserString);
+				alternateChaser.addChild(stype1);
+				alternateChaser.addChild(identifier);
+				alternateChaser.addChild(space);
+				alternateChaser.addChild(stype2);
+				alternateChaser.addChild(identifier);
+				randomAltChaser.addChild(randomAltChaserString);
+				randomAltChaser.addChild(stype1);
+				randomAltChaser.addChild(identifier);
+				randomAltChaser.addChild(space);
+				randomAltChaser.addChild(stype2);
+				randomAltChaser.addChild(identifier);
+				randomAltChaser.addChild(space);
+				randomAltChaser.addChild(prob);
+				randomAltChaser.addChild(evaluableFloat);
+				spawnPoint.addChild(spawnPointString);
+				spawnPoint.addChild(stype);
+				spawnPoint.addChild(identifier);
+				spawnPoint.addChild(space);
+				spawnPoint.addChild(total);
+				spawnPoint.addChild(evaluableInt);
+				spawnPoint.addChild(space);
+				spawnPoint.addChild(prob);
+				spawnPoint.addChild(evaluableFloat);
+				spawnPoint.addChild(spawnorientation);
+				spawnPoint.addChild(evaluableDirection);
+				bomber.addChild(bomberString);
+				bomber.addChild(stype);
+				bomber.addChild(identifier);
+				bomber.addChild(space);
+				bomber.addChild(total);
+				bomber.addChild(evaluableInt);
+				bomber.addChild(space);
+				bomber.addChild(spawnorientation);
+				bomber.addChild(evaluableDirection);
+				bomberRandomMissile.addChild(bomberRandomMissileString);
+				bomberRandomMissile.addChild(stypeMissile);
+				bomberRandomMissile.addChild(identifier);
+				bomberRandomMissile.addChild(space);
+				bomberRandomMissile.addChild(total);
+				bomberRandomMissile.addChild(evaluableInt);
+				bomberRandomMissile.addChild(space);
+				bomberRandomMissile.addChild(prob);
+				bomberRandomMissile.addChild(evaluableFloat);
+				bomberRandomMissile.addChild(space);
+				bomberRandomMissile.addChild(spawnorientation);
+				bomberRandomMissile.addChild(evaluableDirection);
+				spreader.addChild(spreaderString);
+				spreader.addChild(stype);
+				spreader.addChild(identifier);
+				spreader.addChild(space);
+				spreader.addChild(spreadProb);
+				spreader.addChild(evaluableFloat);
+				portal.addChild(portalString);
+				portal.addChild(stype);
+				portal.addChild(identifier);
+				resource.addChild(resourceString);
+				resource.addChild(resourceName);
+				resource.addChild(identifier);
+				resource.addChild(space);
+				resource.addChild(value);
+				resource.addChild(evaluableInt);
+				resource.addChild(limit);
+				resource.addChild(evaluableInt);
+				killAll.addChild(killAllString);
+				killAll.addChild(stype);
+				killAll.addChild(identifier);
+				killIfHasMore.addChild(killIfHasMoreString);
+				killIfHasMore.addChild(resourceName);
+				killIfHasMore.addChild(identifier);
+				killIfHasMore.addChild(space);
+				killIfHasMore.addChild(limit);
+				killIfHasMore.addChild(evaluableInt);
+				killIfHasLess.addChild(killIfHasLessString);
+				killIfHasLess.addChild(resourceName);
+				killIfHasLess.addChild(identifier);
+				killIfHasLess.addChild(space);
+				killIfHasLess.addChild(limit);
+				killIfHasLess.addChild(evaluableInt);
+				killIfOtherHasMore.addChild(killIfOtherHasMoreString);
+				killIfOtherHasMore.addChild(resourceName);
+				killIfOtherHasMore.addChild(identifier);
+				killIfOtherHasMore.addChild(space);
+				killIfOtherHasMore.addChild(limit);
+				killIfOtherHasMore.addChild(evaluableInt);
+				transformToSingleton.addChild(transformToRandomChildString);
+				transformToSingleton.addChild(stype);
+				transformToSingleton.addChild(identifier);
+				transformToSingleton.addChild(space);
+				transformToSingleton.addChild(stype_other);
+				transformToSingleton.addChild(identifier);
+				spawnBehind.addChild(spawnBehindString);
+				spawnBehind.addChild(stype);
+				spawnBehind.addChild(identifier);
+				spawnIfHasMore.addChild(spawnIfHasMoreString);
+				spawnIfHasMore.addChild(stype);
+				spawnIfHasMore.addChild(identifier);
+				spawnIfHasMore.addChild(space);
+				spawnIfHasMore.addChild(resourceName);
+				spawnIfHasMore.addChild(identifier);
+				spawnIfHasMore.addChild(space);
+				spawnIfHasMore.addChild(limit);
+				spawnIfHasMore.addChild(evaluableInt);
+				spawnIfHasLess.addChild(spawnIfHasLessString);
+				spawnIfHasLess.addChild(stype);
+				spawnIfHasLess.addChild(identifier);
+				spawnIfHasLess.addChild(space);
+				spawnIfHasLess.addChild(resourceName);
+				spawnIfHasLess.addChild(identifier);
+				spawnIfHasLess.addChild(space);
+				spawnIfHasLess.addChild(limit);
+				spawnIfHasLess.addChild(evaluableInt);
+				transformTo.addChild(transformToString);
+				transformTo.addChild(stype);
+				transformTo.addChild(identifier);
+				transformTo.addChild(space);
+				transformTo.addChild(forceOrientation);
+				transformTo.addChild(evaluableDirection);
+				transformIfCounts.addChild(transformIfCountsString);
+				transformIfCounts.addChild(stype);
+				transformIfCounts.addChild(identifier);
+				transformIfCounts.addChild(space);
+				transformIfCounts.addChild(stypeCount);
+				transformIfCounts.addChild(identifier);
+				transformIfCounts.addChild(space);
+				transformIfCounts.addChild(geq);
+				transformIfCounts.addChild(evaluableInt);
+				transformIfCounts.addChild(space);
+				transformIfCounts.addChild(leq);
+				transformIfCounts.addChild(evaluableInt);
+				transformToRandomChild.addChild(transformToRandomChildString);
+				transformToRandomChild.addChild(stype);
+				transformToRandomChild.addChild(identifier);
+				updateSpawnType.addChild(updateSpawnTypeString);
+				updateSpawnType.addChild(stype);
+				updateSpawnType.addChild(identifier);
+				updateSpawnType.addChild(space);
+				updateSpawnType.addChild(spawnPointParam);
+				updateSpawnType.addChild(identifier);
+				removeScore.addChild(removeScoreString);
+				removeScore.addChild(stype);
+				removeScore.addChild(identifier);
+				addHealthPoints.addChild(addHealthPointsString);
+				addHealthPoints.addChild(value);
+				addHealthPoints.addChild(evaluableInt);
+				addHealthPointsToMax.addChild(addHealthPointsToMaxString);
+				addHealthPointsToMax.addChild(value);
+				addHealthPointsToMax.addChild(evaluableInt);
+				subtractHealthPoints.addChild(subtractHealthPointsString);
+				subtractHealthPoints.addChild(value);
+				subtractHealthPoints.addChild(evaluableInt);
+				subtractHealthPoints.addChild(space);
+				subtractHealthPoints.addChild(stype);
+				subtractHealthPoints.addChild(identifier);
+				increaseSpeedToAll.addChild(increaseSpeedToAllString);
+				increaseSpeedToAll.addChild(value);
+				increaseSpeedToAll.addChild(evaluableInt);
+				increaseSpeedToAll.addChild(space);
+				increaseSpeedToAll.addChild(stype);
+				increaseSpeedToAll.addChild(identifier);
+				decreaseSpeedToAll.addChild(decreaseSpeedToAllString);
+				decreaseSpeedToAll.addChild(value);
+				decreaseSpeedToAll.addChild(evaluableInt);
+				decreaseSpeedToAll.addChild(stype);
+				decreaseSpeedToAll.addChild(identifier);
+				setSpeedForAll.addChild(setSpeedForAllString);
+				setSpeedForAll.addChild(value);
+				setSpeedForAll.addChild(evaluableInt);
+				setSpeedForAll.addChild(space);
+				setSpeedForAll.addChild(stype);
+				setSpeedForAll.addChild(identifier);
+				changeResource.addChild(changeResourceString);
+				changeResource.addChild(resourceName);
+				changeResource.addChild(identifier);
+				changeResource.addChild(space);
+				changeResource.addChild(value);
+				changeResource.addChild(evaluableInt);
+				//termination classes
+				spriteCounter.addChild(spriteCounterString);
+				spriteCounter.addChild(stype);
+				spriteCounter.addChild(identifier);
+				spriteCounter.addChild(space);
+				spriteCounter.addChild(limit);
+				spriteCounter.addChild(evaluableInt);
+				spriteCounterMore.addChild(spriteCounterMoreString);
+				spriteCounterMore.addChild(stype);
+				spriteCounterMore.addChild(identifier);
+				spriteCounterMore.addChild(space);
+				spriteCounterMore.addChild(limit);
+				spriteCounterMore.addChild(evaluableInt);
+				multiSpriteCounterSubTypes.addChild(multiSpriteCounterSubTypesString);
+				multiSpriteCounterSubTypes.addChild(stype1);
+				multiSpriteCounterSubTypes.addChild(identifier);
+				multiSpriteCounterSubTypes.addChild(space);
+				multiSpriteCounterSubTypes.addChild(stype2);
+				multiSpriteCounterSubTypes.addChild(identifier);
+				multiSpriteCounterSubTypes.addChild(space);
+				multiSpriteCounterSubTypes.addChild(stype3);
+				multiSpriteCounterSubTypes.addChild(identifier);
+				multiSpriteCounterSubTypes.addChild(space);
+				multiSpriteCounterSubTypes.addChild(limit);
+				multiSpriteCounterSubTypes.addChild(evaluableInt);
+				stopCounter.addChild(stopCounterString);
+				stopCounter.addChild(stype1);
+				stopCounter.addChild(identifier);
+				stopCounter.addChild(space);
+				stopCounter.addChild(stype2);
+				stopCounter.addChild(identifier);
+				stopCounter.addChild(space);
+				stopCounter.addChild(stype3);
+				stopCounter.addChild(identifier);
+				stopCounter.addChild(space);
+				stopCounter.addChild(limit);
+				stopCounter.addChild(evaluableInt);
+				timeOut.addChild(timeOutString);
+				timeOut.addChild(limit);
+				timeOut.addChild(evaluableInt);
 	}
 	
 	public void createGame() {
@@ -481,7 +719,7 @@ public class GameDesigner {
 			Symbol currentSymbol = gameSymbols.get(i);
 			
 			if (currentSymbol instanceof NonTerminalSymbol) {
-				//If symbol represents a repeatable section of the grammer
+				//If symbol represents a repeatable section of the grammar
 				if (((NonTerminalSymbol) currentSymbol).repeatable == true) {
 					//EA makes decision somehow as to if the thing is repeated
 					//for now its just 50/50 random
@@ -545,12 +783,15 @@ public void createGameFromGenome(int[] genome) {
 			Symbol currentSymbol = gameSymbols.get(i);
 			
 			if (currentSymbol instanceof NonTerminalSymbol) {
-				//If symbol represents a repeatable section of the grammer
+				//If symbol represents a repeatable section of the grammar
 				if (((NonTerminalSymbol) currentSymbol).repeatable == true) {
 					if (genome[genomeTracker] % 2 == 0) {
 						gameSymbols.remove(i);
 					}
 					genomeTracker++;
+					if (genomeTracker > genome.length-1) {
+						genomeTracker = 0;
+					}
 				}
 				else
 				{
@@ -581,6 +822,9 @@ public void createGameFromGenome(int[] genome) {
 						}
 					}
 					genomeTracker++;
+					if (genomeTracker > genome.length-1) {
+						genomeTracker = 0;
+					}
 				}
 			}
 			else {
@@ -594,6 +838,9 @@ public void createGameFromGenome(int[] genome) {
 				//System.out.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[genome[genomeTracker] % ((InterchangableSymbol)gameSymbols.get(j)).classStrings.length]);
 				writer.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[genome[genomeTracker] % ((InterchangableSymbol)gameSymbols.get(j)).classStrings.length]);
 				genomeTracker++;
+				if (genomeTracker > genome.length-1) {
+					genomeTracker = 0;
+				}
 			}
 			else {
 				//System.out.print(((TerminalSymbol)gameSymbols.get(j)).content);
