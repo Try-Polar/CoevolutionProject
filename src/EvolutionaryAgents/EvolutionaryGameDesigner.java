@@ -17,7 +17,7 @@ public class EvolutionaryGameDesigner {
 	
 	int populationSize = 5;
 	int generations = 20;
-	int individualSize = 400;
+	int individualSize = 750;
 	float mutationProbability = 0.5f;
 	float crossoverProbability = 0.5f;
 	float indpb = 0.4f;

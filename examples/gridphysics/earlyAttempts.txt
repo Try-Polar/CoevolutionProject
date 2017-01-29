@@ -1,17 +1,16 @@
 BasicGame
 	LevelMapping
-		i > var2 EOS
-		m > EOS avatar wall avatar
-		b > wall wall avatar
+		. > background
+		j > avatar background
+		g > var1 background
 	SpriteSet
-		var3 > MovingAvatar var2=True
-		avatar >  var5=0.1
-		avatar > MissileAvatar var5=2
-		wall > AlternateChaser stype1=var2 stype2=var3 avatar=True
-	InteractionSet
-		EOS wall > subtractHealthPoints value=18 stype=var5 
-		var2 wall > transformToRandomChild stype=var3 stype_other=var5 
+		background > Immovable img=oryx/space1 hidden=True
+		avatar > MovingAvatar img=oryx/spaceship1
+		var1 > RandomNPC img=oryx/alien1
 	TerminationSet
-		 win=True
-		SpriteCounter stype=var3 limit=20 win=True
-		 win=True
+		Timeout limit=750 win=True
+		SpriteCounterMore stype=var1 limit=25 win=False
+	InteractionSet
+		var1 avatar > cloneSprite scoreChange=-1
+		avatar EOS > stepBack
+		var1 EOS > stepBack

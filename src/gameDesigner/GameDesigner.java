@@ -135,7 +135,7 @@ public class GameDesigner {
 	TerminalSymbol prob = new TerminalSymbol("prob", "prob=");
 	TerminalSymbol total = new TerminalSymbol("total", "total=");
 	TerminalSymbol spawnorientation = new TerminalSymbol("spawnOrientation", "spawnorientation=");
-	TerminalSymbol stypeMissile = new TerminalSymbol("stypeMissile", "stypeMIssile=");
+	TerminalSymbol stypeMissile = new TerminalSymbol("stypeMissile", "stypeMissile=");
 	//TerminalSymbol updateItype //more complicated so leaving for now
 	TerminalSymbol spreadProb = new TerminalSymbol("spreadProb", "spreadprob=");
 	TerminalSymbol resourceName = new TerminalSymbol("resource", "resource=");
@@ -214,20 +214,20 @@ public class GameDesigner {
 	NonTerminalSymbol multiSpriteCounter = new NonTerminalSymbol("MultiSpriteCounter",false,false,false);
 	NonTerminalSymbol multiSpriteCounterSubTypes = new NonTerminalSymbol("MultiSpriteCounterSubTypes",false,false,false);
 	NonTerminalSymbol stopCounter = new NonTerminalSymbol("StopCounter",false,false,false);
-	NonTerminalSymbol timeOut = new NonTerminalSymbol("TimeOut",false,false,false);
+	NonTerminalSymbol timeout = new NonTerminalSymbol("Timeout",false,false,false);
 	//Termination class strings
 	TerminalSymbol spriteCounterString = new TerminalSymbol("spriteCounter", "SpriteCounter ");
 	TerminalSymbol spriteCounterMoreString = new TerminalSymbol("spriteCounterMore", "SpriteCounterMore ");
 	TerminalSymbol multiSpriteCounterString = new TerminalSymbol("multiSpriteCounter", "MultiSpriteCounter ");
 	TerminalSymbol multiSpriteCounterSubTypesString = new TerminalSymbol("multiSpriteCounterSubTypes", "MultiSpriteCounterSubTypes ");
 	TerminalSymbol stopCounterString = new TerminalSymbol("stopCounter", "StopCounter ");
-	TerminalSymbol timeOutString = new TerminalSymbol("timeOut", "TimeOut ");
+	TerminalSymbol timeOutString = new TerminalSymbol("timeout", "Timeout ");
 	//Termination class params
 	TerminalSymbol stype3 = new TerminalSymbol("stype3", "stype3=");
 	
 	
 	String[] gameClasses = {"BasicGame"};
-	String[] identifiers = {"var1", "var2", "var3", "var4", "var5", "avatar"};
+	String[] identifiers = {"avatar", "var1", "var2"};//, "var3", "var4", "var5", "avatar"};
 	String[] chars = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
 	String[] evaluableBooleans = {"True", "False"};
 	String[] evaluableFloats = {"0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"}; //make for loop to expand
@@ -252,6 +252,8 @@ public class GameDesigner {
 	
 	public GameDesigner() {
 		initiliseVGDLSymbols();
+		
+		System.out.println("delete");
 		
 		f.getParentFile().mkdirs();
 		try {
@@ -308,7 +310,7 @@ public class GameDesigner {
 				spriteSimple.addChild(greaterThan);
 				spriteSimple.addChild(sprite_class);
 				spriteSimple.addChild(space);
-				spriteSimple.addChild(option);
+				//spriteSimple.addChild(option); //I believe this is not currently necessary as parameters are done serparately
 				//interaction-def
 				interactionDef.addChild(spriteType);
 				interactionDef.addChild(space);
@@ -319,8 +321,8 @@ public class GameDesigner {
 				//interactionDef.addChild(option);
 				//termination-def
 				terminationDef.addChild(termination_class);
-				terminationDef.addChild(space);
-				terminationDef.addChild(terminationOption);
+				//terminationDef.addChild(space);
+				//terminationDef.addChild(terminationOption);
 				//eol
 				eol.addChild(newline);
 				//eol.addChild(eolOptionalBlock);
@@ -465,7 +467,7 @@ public class GameDesigner {
 				termination_class.addChild(multiSpriteCounter);
 				termination_class.addChild(multiSpriteCounterSubTypes);
 				termination_class.addChild(stopCounter);
-				termination_class.addChild(timeOut);
+				termination_class.addChild(timeout);
 				//Avatar sprite classes
 				shootAvatar.addChild(shootAvatarString);
 				shootAvatar.addChild(stype);
@@ -701,9 +703,9 @@ public class GameDesigner {
 				stopCounter.addChild(space);
 				stopCounter.addChild(limit);
 				stopCounter.addChild(evaluableInt);
-				timeOut.addChild(timeOutString);
-				timeOut.addChild(limit);
-				timeOut.addChild(evaluableInt);
+				timeout.addChild(timeOutString);
+				timeout.addChild(limit);
+				timeout.addChild(evaluableInt);
 	}
 	
 	public void createGame() {
@@ -771,6 +773,11 @@ public class GameDesigner {
 	}
 	
 public void createGameFromGenome(int[] genome) {
+		
+		System.out.println("creating game from genome");
+	
+
+		
 		int i = 0;
 		gameSymbols.add(game);
 		int genomeTracker = 0;
@@ -847,6 +854,7 @@ public void createGameFromGenome(int[] genome) {
 				writer.print(((TerminalSymbol)gameSymbols.get(j)).content);
 			}
 		}
+		System.out.println("creating game from genome");
 		writer.close();
 }
 	
