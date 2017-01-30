@@ -19,8 +19,9 @@ public class Test
     public static void main(String[] args)
     {
         //GameDesigner test = new GameDesigner();
-        //EvolutionaryGameDesigner evoGameDesigner = new EvolutionaryGameDesigner();
+        EvolutionaryGameDesigner evoGameDesigner = new EvolutionaryGameDesigner();
         //evoGameDesigner.eaSimple();
+        evoGameDesigner.makeSingleGame();
     	
     	//Available controllers:
     	String sampleRandomController = "controllers.singlePlayer.sampleRandom.Agent";
@@ -82,7 +83,7 @@ public class Test
         //ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
         
         // 2. This plays a game in a level by the controller.
-        ArcadeMachine.runOneGame(game, level1, visuals, sampleGAController, recordActionsFile, seed, 0);
+        //ArcadeMachine.runOneGame(game, level1, visuals, sampleGAController, recordActionsFile, seed, 0);
 
         // 3. This replays a game from an action file previously recorded
         //String readActionsFile = recordActionsFile;
@@ -97,13 +98,19 @@ public class Test
 //        	ArcadeMachine.runGames(game, new String[]{level1}, M, sampleMCTSController, null);
 //        }
         
-        //5. This starts a game, in a generated level created by a specific level generator
+        //5. This starts a game, in a generated level created by a specific level generator played by a human
 
-        //if(ArcadeMachine.generateOneLevel(game, geneticGenerator, recordLevelFile)){
+        //if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
         //	ArcadeMachine.playOneGeneratedLevel(game, recordActionsFile, recordLevelFile, seed);
         //}
         
-        //6. This plays N games, in the first L levels, M times each. Actions to file optional (set saveActions to true).
+        //6. This starts a game, in a generated level created by a specific level generator played by a selected agent
+        
+        if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
+        	ArcadeMachine.runOneGeneratedLevel(game, true, sampleMCTSController, recordActionsFile, recordLevelFile, 5, false);
+        }
+        
+        //7. This plays N games, in the first L levels, M times each. Actions to file optional (set saveActions to true).
 //        int N = 82, L = 5, M = 1;
 //        boolean saveActions = false;
 //        String[] levels = new String[L];
@@ -119,5 +126,7 @@ public class Test
 //            }
 //            ArcadeMachine.runGames(game, levels, M, sampleMCTSController, saveActions? actionFiles:null);
 //        }
+        
+        
     }
 }

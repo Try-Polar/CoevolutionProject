@@ -45,6 +45,11 @@ public class EvolutionaryGameDesigner {
 		System.out.println("Finished");
 	}
 	
+	public void makeSingleGame() {
+		initialisePopulation();
+		evaluationFunction(pop[0]);
+	}
+	
 	private void tournament() {
 		int a,b,c,W,L1,L2;
 		a = rnd.nextInt(populationSize);

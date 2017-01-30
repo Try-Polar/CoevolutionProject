@@ -1,16 +1,21 @@
 BasicGame
 	LevelMapping
-		. > background
-		j > avatar background
-		g > var1 background
+		j > avatar
+		r > var1
+		f > var2
+		l > var3
+		n > var4
+		p > var5
 	SpriteSet
-		background > Immovable img=oryx/space1 hidden=True
-		avatar > MovingAvatar img=oryx/spaceship1
-		var1 > RandomNPC img=oryx/alien1
-	TerminationSet
-		Timeout limit=750 win=True
-		SpriteCounterMore stype=var1 limit=25 win=False
+		avatar > HorizontalAvatar
+		var1 > SpawnPoint stype=var2 total=6 prob=0.1spawnorientation=UP
+		var2 > Passive
+		var3 > Flicker limit=14
+		var4 > RandomNPC
+		var5 > OrientedFlicker limit=1
 	InteractionSet
-		var1 avatar > cloneSprite scoreChange=-1
-		avatar EOS > stepBack
-		var1 EOS > stepBack
+		var2 EOS > removeScore stype=var2 
+		avatar wall > pullWithIt 
+	TerminationSet
+		StopCounter stype1=var2 stype2=var2 stype3=var2 limit=14
+		MultiSpriteCounterSubTypes stype1=var3 stype2=var3 stype3=var3 limit=3
