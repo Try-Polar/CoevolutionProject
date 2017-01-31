@@ -20,8 +20,8 @@ public class Test
     {
         //GameDesigner test = new GameDesigner();
         EvolutionaryGameDesigner evoGameDesigner = new EvolutionaryGameDesigner();
-        //evoGameDesigner.eaSimple();
-        evoGameDesigner.makeSingleGame();
+        evoGameDesigner.eaSimple();
+        //evoGameDesigner.makeSingleGame();
     	
     	//Available controllers:
     	String sampleRandomController = "controllers.singlePlayer.sampleRandom.Agent";
@@ -106,9 +106,9 @@ public class Test
         
         //6. This starts a game, in a generated level created by a specific level generator played by a selected agent
         
-        if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
-        	ArcadeMachine.runOneGeneratedLevel(game, true, sampleMCTSController, recordActionsFile, recordLevelFile, 5, false);
-        }
+        //if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
+        //	ArcadeMachine.runOneGeneratedLevel(game, true, sampleMCTSController, recordActionsFile, recordLevelFile, 5, false);
+        //}
         
         //7. This plays N games, in the first L levels, M times each. Actions to file optional (set saveActions to true).
 //        int N = 82, L = 5, M = 1;

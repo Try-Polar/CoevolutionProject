@@ -1,21 +1,15 @@
 BasicGame
 	LevelMapping
-		j > avatar
-		r > var1
-		f > var2
-		l > var3
-		n > var4
-		p > var5
+		r > avatar
+		y > var1
+		b > var2
+		h > var3
 	SpriteSet
-		avatar > HorizontalAvatar
-		var1 > SpawnPoint stype=var2 total=6 prob=0.1spawnorientation=UP
-		var2 > Passive
-		var3 > Flicker limit=14
-		var4 > RandomNPC
-		var5 > OrientedFlicker limit=1
+		avatar > OngoingTurningAvatar
+		var1 > BomberRandomMissile stypeMissile=var1 total=19 prob=0.1 spawnorientation=RIGHT
+		var2 > RandomNPC
+		var3 > RandomBomber stype=var2 total=10 prob=0.9 spawnorientation=RIGHT
 	InteractionSet
-		var2 EOS > removeScore stype=var2 
-		avatar wall > pullWithIt 
+		var2 EOS > increaseSpeedToAll value=10 stype=var2 
 	TerminationSet
-		StopCounter stype1=var2 stype2=var2 stype3=var2 limit=14
-		MultiSpriteCounterSubTypes stype1=var3 stype2=var3 stype3=var3 limit=3
+		

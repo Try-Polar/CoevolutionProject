@@ -128,7 +128,7 @@ public class GameDesigner {
 	TerminalSymbol randomAltChaserString = new TerminalSymbol("randomAltChaser", "RandomAltChaser ");
 	TerminalSymbol spawnPointString = new TerminalSymbol("spawnPoint", "SpawnPoint ");
 	TerminalSymbol bomberString	= new TerminalSymbol("bomber", "Bomber ");
-	TerminalSymbol randomBomberString = new TerminalSymbol("randomBomberString", "RandomBomberString ");
+	TerminalSymbol randomBomberString = new TerminalSymbol("randomBomberString", "RandomBomber ");
 	TerminalSymbol bomberRandomMissileString = new TerminalSymbol("bomberRandomMissile", "BomberRandomMissile ");
 	TerminalSymbol spreaderString = new TerminalSymbol("spreader", "Spreader ");
 	TerminalSymbol portalString = new TerminalSymbol("portal", "Portal ");
@@ -542,6 +542,7 @@ public class GameDesigner {
 				spawnPoint.addChild(space);
 				spawnPoint.addChild(prob);
 				spawnPoint.addChild(evaluableFloat);
+				spawnPoint.addChild(space);
 				spawnPoint.addChild(spawnorientation);
 				spawnPoint.addChild(evaluableDirection);
 				bomber.addChild(bomberString);
@@ -553,6 +554,18 @@ public class GameDesigner {
 				bomber.addChild(space);
 				bomber.addChild(spawnorientation);
 				bomber.addChild(evaluableDirection);
+				randomBomber.addChild(randomBomberString);
+				randomBomber.addChild(stype);
+				randomBomber.addChild(parameter);
+				randomBomber.addChild(space);
+				randomBomber.addChild(total);
+				randomBomber.addChild(evaluableInt);
+				randomBomber.addChild(space);
+				randomBomber.addChild(prob);
+				randomBomber.addChild(evaluableFloat);
+				randomBomber.addChild(space);
+				randomBomber.addChild(spawnorientation);
+				randomBomber.addChild(evaluableDirection);
 				bomberRandomMissile.addChild(bomberRandomMissileString);
 				bomberRandomMissile.addChild(stypeMissile);
 				bomberRandomMissile.addChild(parameter);
@@ -682,6 +695,7 @@ public class GameDesigner {
 				decreaseSpeedToAll.addChild(decreaseSpeedToAllString);
 				decreaseSpeedToAll.addChild(value);
 				decreaseSpeedToAll.addChild(evaluableInt);
+				decreaseSpeedToAll.addChild(space);
 				decreaseSpeedToAll.addChild(stype);
 				decreaseSpeedToAll.addChild(parameter);
 				setSpeedForAll.addChild(setSpeedForAllString);
@@ -809,11 +823,15 @@ public void createGameFromGenome(int[] genome) {
 
 		
 		int i = 0;
+		gameSymbols.clear();
 		gameSymbols.add(game);
 		int genomeTracker = 0;
 		int variablesUsed = 0;
 		boolean levelBlockSizeDetermined = false;
 		boolean spriteBlockSizeDetermined = false;
+		int variableTracker = 0;
+		boolean inLevelBlock = false;
+		boolean inSpriteBlock = false;
 
 		//While there are still symbols that need to be expanded
 		while (containsNonTerminals()) {
@@ -899,9 +917,8 @@ public void createGameFromGenome(int[] genome) {
 				i++;
 			}
 		}
-		int variableTracker = 0;
-		boolean inLevelBlock = false;
-		boolean inSpriteBlock = false;
+
+		System.out.println("HALFWAY-----------------------------------------------------------");
 		
 		for (int j=0; j<gameSymbols.size(); j++) {	
 			if (gameSymbols.get(j) instanceof InterchangableSymbol) { 	//	--------INTERCHANGABLE SYMBOLS-----------
@@ -949,7 +966,7 @@ public void createGameFromGenome(int[] genome) {
 				}
 			}
 		}
-		System.out.println("creating game from genome");
+		System.out.println("finished creating game from genome");
 		writer.close();
 }
 	
