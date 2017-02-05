@@ -1,15 +1,17 @@
 BasicGame
 	LevelMapping
-		r > avatar
-		y > var1
-		b > var2
-		h > var3
+		u > avatar
+		r > var1
+		k > var2
+		c > var3
+		l > var4
 	SpriteSet
-		avatar > OngoingTurningAvatar
-		var1 > BomberRandomMissile stypeMissile=var1 total=19 prob=0.1 spawnorientation=RIGHT
-		var2 > RandomNPC
-		var3 > RandomBomber stype=var2 total=10 prob=0.9 spawnorientation=RIGHT
+		avatar > ShootAvatar stype=var3
+		var1 > RandomAltChaser stype1=var3 stype2=var3 prob=0.6
+		var2 > RandomAltChaser stype1=var1 stype2=var1 prob=0.7
+		var3 > Flicker limit=5
+		var4 > AlternateChaser stype1=var3 stype2=var3
 	InteractionSet
-		var2 EOS > increaseSpeedToAll value=10 stype=var2 
+		EOS var3 > addHealthPointsToMax value=5 scoreChange=1 
 	TerminationSet
-		
+		Timeout limit=1500

@@ -1,0 +1,12 @@
+LevelMapping
+    A > avatar 
+    w > wall 
+    g > var1 
+    y > var2 
+    n > avatar 
+
+LevelDescription
+    
+ yw 
+ Ag 
+    

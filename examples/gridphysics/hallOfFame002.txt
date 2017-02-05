@@ -1,0 +1,22 @@
+BasicGame
+	LevelMapping
+		q > avatar
+		t > var1
+		a > var2
+		y > var3
+		n > var4
+		g > var5
+	SpriteSet
+		avatar > OrientedAvatar
+		var1 > RandomBomber stype=var3 total=11 prob=0.8 spawnorientation=UP
+		var2 > Bomber stype=var4 total=12 spawnorientation=UP
+		var3 > Chaser stype=var1
+		var4 > Portal stype=var1
+		var5 > Passive
+	InteractionSet
+		avatar var1 > updateSpawnType stype=var1 spawnPoint=var1 
+	TerminationSet
+		
+		SpriteCounter stype=var1 limit=9
+		SpriteCounterMore stype=var4 limit=20
+		Timeout limit=15

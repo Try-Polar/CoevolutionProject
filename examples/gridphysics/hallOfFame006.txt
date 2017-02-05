@@ -1,0 +1,14 @@
+BasicGame
+	LevelMapping
+		g > avatar
+		t > var1
+		w > var2
+	SpriteSet
+		avatar > OngoingAvatar
+		var1 > OrientedFlicker limit=9
+		var2 > Flicker limit=20
+	InteractionSet
+		avatar EOS > subtractHealthPoints value=6 stype=var1  
+	TerminationSet
+		
+		MultiSpriteCounterSubTypes stype1=var1 stype2=var1 stype3=var1 limit=1

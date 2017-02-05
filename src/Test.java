@@ -19,8 +19,8 @@ public class Test
     public static void main(String[] args)
     {
         //GameDesigner test = new GameDesigner();
-        EvolutionaryGameDesigner evoGameDesigner = new EvolutionaryGameDesigner();
-        evoGameDesigner.eaSimple();
+        //EvolutionaryGameDesigner evoGameDesigner = new EvolutionaryGameDesigner();
+        //evoGameDesigner.eaSimple();
         //evoGameDesigner.makeSingleGame();
     	
     	//Available controllers:
@@ -63,7 +63,7 @@ public class Test
                 "sokoban", "solarfox" ,"superman", "surround", "survivezombies",              //75-79
                 "tercio", "thecitadel", "thesnowman",  "waitforbreakfast", "watergame",       //80-84
                 "waves", "whackamole", "wildgunman", "witnessprotection", "wrapsokoban",      //85-89
-                "zelda", "zenpuzzle", "earlyAttempts" };                                                       //90, 91
+                "zelda", "zenpuzzle", "earlyAttempts", "hallOfFame006" };                     //90-93
 
 
         //Other settings
@@ -71,19 +71,19 @@ public class Test
         int seed = new Random().nextInt();
 
         //Game and level to play
-        int gameIdx = 92;
+        int gameIdx = 93;
         int levelIdx = 0; //level names from 0 to 4 (game_lvlN.txt).
         String game = gamesPath + games[gameIdx] + ".txt";
         String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
 
         String recordLevelFile = generateLevelPath + games[gameIdx] + "_glvl.txt";
         String recordActionsFile = null;//"actions_" + games[gameIdx] + "_lvl" + levelIdx + "_" + seed + ".txt"; //where to record the actions executed. null if not to save.
-
+        
         // 1. This starts a game, in a level, played by a human.
         //ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
         
         // 2. This plays a game in a level by the controller.
-        //ArcadeMachine.runOneGame(game, level1, visuals, sampleGAController, recordActionsFile, seed, 0);
+        //ArcadeMachine.runOneGame(game, level1, visuals, sampleMCTSController, recordActionsFile, seed, 0);
 
         // 3. This replays a game from an action file previously recorded
         //String readActionsFile = recordActionsFile;
@@ -100,9 +100,10 @@ public class Test
         
         //5. This starts a game, in a generated level created by a specific level generator played by a human
 
-        //if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
-        //	ArcadeMachine.playOneGeneratedLevel(game, recordActionsFile, recordLevelFile, seed);
-        //}
+        if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
+        	//ArcadeMachine.playOneGeneratedLevel(game, recordActionsFile, recordLevelFile, seed);
+        	ArcadeMachine.runOneGeneratedLevel(game, true, sampleMCTSController, recordActionsFile, recordLevelFile, 5, false);
+        }
         
         //6. This starts a game, in a generated level created by a specific level generator played by a selected agent
         

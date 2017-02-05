@@ -1,0 +1,15 @@
+BasicGame
+	LevelMapping
+		k > avatar
+		w > var1
+		r > var2
+		s > var3
+	SpriteSet
+		avatar > OngoingAvatar
+		var1 > RandomAltChaser stype1=var2 stype2=var2 prob=0.5
+		var2 > Portal stype=var2
+		var3 > RandomAltChaser stype1=var2 stype2=var2 prob=0.3
+	InteractionSet
+		avatar var2 > undoAll scoreChange=-2 
+	TerminationSet
+		MultiSpriteCounterSubTypes stype1=var2 stype2=var2 stype3=var2 limit=18

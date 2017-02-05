@@ -1,0 +1,17 @@
+BasicGame
+	LevelMapping
+		t > avatar
+		g > var1
+		a > var2
+		n > var3
+	SpriteSet
+		avatar > OngoingAvatar
+		var1 > OrientedFlicker limit=16
+		var2 > Chaser stype=var2
+		var3 > SpawnPoint stype=var2 total=20 prob=0.3 spawnorientation=LEFT
+	InteractionSet
+		wall var1 > killSprite 
+		var1 avatar > killIfHasMore resource=var1 limit=11 
+	TerminationSet
+		SpriteCounter stype=var2 limit=18
+		SpriteCounter stype=var2 limit=10

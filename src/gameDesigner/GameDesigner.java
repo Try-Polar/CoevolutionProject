@@ -10,9 +10,12 @@ import java.util.Random;
 public class GameDesigner {
 	
 	String path ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "earlyAttempts.txt";
+	String savePath ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "hallOfFame007.txt";
 	//C:\Users\Elliot\Documents\GitHub\CoevolutionProject\examples\gridphysics
 	File f = new File(path);
+	File s = new File(savePath);
 	PrintWriter writer;
+	PrintWriter saveWriter;
 	
 	//Symbols
 	//Declare Non-Terminals
@@ -75,6 +78,7 @@ public class GameDesigner {
 	TerminalSymbol spriteSet = new TerminalSymbol("spriteSet","SpriteSet");
 	TerminalSymbol interactionSet = new TerminalSymbol("interactionSet","InteractionSet");
 	TerminalSymbol terminationSet = new TerminalSymbol("terminationSet","TerminationSet");
+	TerminalSymbol scoreChangeString = new TerminalSymbol("scoreChangeString", "scoreChange=");
 	
 	
 	//Avatar Sprite Classes
@@ -123,7 +127,7 @@ public class GameDesigner {
 	TerminalSymbol flickerString = new TerminalSymbol("flicker", "Flicker ");
 	TerminalSymbol orientedFlickerString = new TerminalSymbol("orientedFlicker","OrientedFlicker ");
 	TerminalSymbol chaserString = new TerminalSymbol("chaser", "Chaser ");
-	TerminalSymbol fleeingString = new TerminalSymbol("fleeing", "Fleeing");
+	TerminalSymbol fleeingString = new TerminalSymbol("fleeing", "Fleeing ");
 	TerminalSymbol alternateChaserString = new TerminalSymbol("alternateChaser", "AlternateChaser ");
 	TerminalSymbol randomAltChaserString = new TerminalSymbol("randomAltChaser", "RandomAltChaser ");
 	TerminalSymbol spawnPointString = new TerminalSymbol("spawnPoint", "SpawnPoint ");
@@ -147,31 +151,18 @@ public class GameDesigner {
 	TerminalSymbol value = new TerminalSymbol("value", "value=");
 	
 	//Interaction methods
-	//Terminals
-	TerminalSymbol killSprite = new TerminalSymbol("killSprite", "killSprite");
-	TerminalSymbol killIfFromAbove = new TerminalSymbol("killIfFromAbove", "killIfFromAbove");
-	TerminalSymbol cloneSprite = new TerminalSymbol("cloneSprite", "cloneSprite");
-	TerminalSymbol stepBack = new TerminalSymbol("stepBack", "stepBack");
-	TerminalSymbol undoAll = new TerminalSymbol("undoAll", "undoAll");
-	TerminalSymbol flipDirection = new TerminalSymbol("flipDirection", "flipDirection");
-	TerminalSymbol reverseDirection = new TerminalSymbol("reverseDirection", "reverseDirection");
-	TerminalSymbol attractGaze = new TerminalSymbol("attractGaze", "attractGaze");
-	TerminalSymbol align = new TerminalSymbol("align","algin");
-	TerminalSymbol turnAround = new TerminalSymbol("turnAround", "turnAround");
-	TerminalSymbol wrapAround = new TerminalSymbol("wrapAround", "wrapAround");
-	TerminalSymbol teleportToExit = new TerminalSymbol("teleportToExit", "teleportToExit");
-	TerminalSymbol pullWithIt = new TerminalSymbol("pullWithIt", "pullWithIt");
-	TerminalSymbol bounceForward = new TerminalSymbol("bounceForward", "bounceForward");
-	TerminalSymbol collectResource = new TerminalSymbol("collectResource", "collectResource");
 	//NonTerminals
+	NonTerminalSymbol killSprite = new NonTerminalSymbol("killSprite", false, false, false);
 	NonTerminalSymbol killAll = new NonTerminalSymbol("killAll", false, false, false);
 	NonTerminalSymbol killIfHasMore = new NonTerminalSymbol("killIfHasMore", false, false, false);
 	NonTerminalSymbol killIfHasLess = new NonTerminalSymbol("killIfHasLess", false, false, false);
+	NonTerminalSymbol killIfFromAbove = new NonTerminalSymbol("killIfFromAbove", false, false, false);
 	NonTerminalSymbol killIfOtherHasMore = new NonTerminalSymbol("killIfOtherHasMore", false, false, false);
 	NonTerminalSymbol transformToSingleton = new NonTerminalSymbol("transformToSingleton", false, false, false);
 	NonTerminalSymbol spawnBehind = new NonTerminalSymbol("spawnBehind", false, false, false);
 	NonTerminalSymbol spawnIfHasMore = new NonTerminalSymbol("spawnIfHasMore", false, false, false);
 	NonTerminalSymbol spawnIfHasLess = new NonTerminalSymbol("spawnIfHasLess", false, false, false);
+	NonTerminalSymbol cloneSprite = new NonTerminalSymbol("cloneSprite", false, false, false);
 	NonTerminalSymbol transformTo = new NonTerminalSymbol("transformTo", false, false, false);
 	NonTerminalSymbol transformIfCounts = new NonTerminalSymbol("transformIfCounts", false, false, false);
 	NonTerminalSymbol transformToRandomChild = new NonTerminalSymbol("transformToRandomChild", false, false, false);
@@ -183,16 +174,31 @@ public class GameDesigner {
 	NonTerminalSymbol increaseSpeedToAll = new NonTerminalSymbol("increaseSpeedToAll",false,false,false);
 	NonTerminalSymbol decreaseSpeedToAll = new NonTerminalSymbol("decreaseSpeedToAll",false,false,false);
 	NonTerminalSymbol setSpeedForAll = new NonTerminalSymbol("setSpeedForAll",false,false,false);
+	NonTerminalSymbol stepBack = new NonTerminalSymbol("stepBack", false, false, false);
+	NonTerminalSymbol undoAll = new NonTerminalSymbol("undoAll", false, false, false);
+	NonTerminalSymbol flipDirection = new NonTerminalSymbol("flipDirection", false, false, false);
+	NonTerminalSymbol reverseDirection = new NonTerminalSymbol("reverseDirection", false, false, false);
+	NonTerminalSymbol attractGaze = new NonTerminalSymbol("attractGaze", false, false, false);
+	NonTerminalSymbol align = new NonTerminalSymbol("align", false, false, false);
+	NonTerminalSymbol turnAround = new NonTerminalSymbol("turnAround", false, false, false);
+	NonTerminalSymbol wrapAround = new NonTerminalSymbol("wrapAround", false, false, false);
+	NonTerminalSymbol teleportToExit = new NonTerminalSymbol("teleportToExit", false, false, false);
+	NonTerminalSymbol pullWithIt = new NonTerminalSymbol("pullWithIt", false, false, false);
+	NonTerminalSymbol bounceForward	 = new NonTerminalSymbol("bounceForward", false, false, false);
+	NonTerminalSymbol collectResource = new NonTerminalSymbol("collectResource", false, false, false);
 	NonTerminalSymbol changeResource = new NonTerminalSymbol("changeResource",false,false,false);
 	//Interaction method strings
+	TerminalSymbol killSpriteString = new TerminalSymbol("killSprite", "killSprite ");
 	TerminalSymbol killAllString = new TerminalSymbol("killAll","killAll ");
 	TerminalSymbol killIfHasMoreString = new TerminalSymbol("killIfHasMore", "killIfHasMore ");
 	TerminalSymbol killIfHasLessString = new TerminalSymbol("killIfHasLess", "killIfHasLess ");
+	TerminalSymbol killIfFromAboveString = new TerminalSymbol("killIfFromAbove", "killIfFromAbove ");
 	TerminalSymbol killIfOtherHasMoreString = new TerminalSymbol("killIfOtherHasMore", "killIfOtherHasMore ");
 	TerminalSymbol transformToSingletonString = new TerminalSymbol("transformToSingleton", "transformToSingleton ");
 	TerminalSymbol spawnBehindString = new TerminalSymbol("spawnBehind", "spawnBehind ");
 	TerminalSymbol spawnIfHasMoreString = new TerminalSymbol("spawIfHasMore", "spawnIfHasMore ");
 	TerminalSymbol spawnIfHasLessString = new TerminalSymbol("spawnIfHasLess", "spawnIfHasLess ");
+	TerminalSymbol cloneSpriteString = new TerminalSymbol("cloneSprite", "cloneSprite ");
 	TerminalSymbol transformToString = new TerminalSymbol("transformTo", "transformTo ");
 	TerminalSymbol transformIfCountsString = new TerminalSymbol("transformIfCounts", "transformIfCounts ");
 	TerminalSymbol transformToRandomChildString = new TerminalSymbol("transformToRandomChild", "transformToRandomChild ");
@@ -204,14 +210,27 @@ public class GameDesigner {
 	TerminalSymbol increaseSpeedToAllString = new TerminalSymbol("increaseSpeedToAll", "increaseSpeedToAll ");
 	TerminalSymbol decreaseSpeedToAllString = new TerminalSymbol("decreaseSpeedToAll", "decreaseSpeedToAll ");
 	TerminalSymbol setSpeedForAllString = new TerminalSymbol("setSpeedForAll", "setSpeedForAll ");
+	TerminalSymbol stepBackString = new TerminalSymbol("stepBack", "stepBack ");
+	TerminalSymbol undoAllString = new TerminalSymbol("undoAll", "undoAll ");
+	TerminalSymbol flipDirectionString = new TerminalSymbol("flipDirection", "flipDirection ");
+	TerminalSymbol reverseDirectionString = new TerminalSymbol("reverseDirection", "reverseDirection ");
+	TerminalSymbol attractGazeString = new TerminalSymbol("attractGaze", "attractGaze ");
+	TerminalSymbol alignString = new TerminalSymbol("align","algin ");
+	TerminalSymbol turnAroundString = new TerminalSymbol("turnAround", "turnAround ");
+	TerminalSymbol wrapAroundString = new TerminalSymbol("wrapAround", "wrapAround ");
+	TerminalSymbol teleportToExitString = new TerminalSymbol("teleportToExit", "teleportToExit ");
+	TerminalSymbol pullWithItString = new TerminalSymbol("pullWithIt", "pullWithIt ");
+	TerminalSymbol bounceForwardString = new TerminalSymbol("bounceForward", "bounceForward ");
+	TerminalSymbol collectResourceString = new TerminalSymbol("collectResource", "collectResource ");
 	TerminalSymbol changeResourceString = new TerminalSymbol("changeResource", "changeResource ");
-	//Interaction method paramters
+	//Interaction method parameters
 	TerminalSymbol stype_other = new TerminalSymbol("stype_other","stype_other=");
 	TerminalSymbol forceOrientation = new TerminalSymbol("forceOrientation", "forceOrientation=");
 	TerminalSymbol stypeCount = new TerminalSymbol("stypeCount", "stypeCount=");
 	TerminalSymbol geq = new TerminalSymbol("geq","geq=");
 	TerminalSymbol leq = new TerminalSymbol("leq","leq=");
 	TerminalSymbol spawnPointParam = new TerminalSymbol("spawnPoint", "spawnPoint=");
+	NonTerminalSymbol scoreChange = new NonTerminalSymbol("scoreChange", false, true, false);
 	//Termination Classes
 	//NonTerminals
 	NonTerminalSymbol spriteCounter = new NonTerminalSymbol("SpriteCounter",false,false,false);
@@ -240,38 +259,36 @@ public class GameDesigner {
 	String[] evaluableInts = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"}; //make for loop to expand
 	String[] terminationOptions = {"win=True", "win=False"};
 	String[] evaluableDirections = {"UP", "DOWN", "LEFT", "RIGHT"};
+	String[] evaluableScoreInts = {"-3", "-2", "-1", "1", "2", "3"};
+	String[] evaluableLargeInts = new String[150];
 	
 	//ClassSymbol //could use NonTerminal choice symbols here but this is slightly neater/uses less lines of code (not sure if its worth it yet)
 		InterchangableSymbol game_class = new InterchangableSymbol("game_class", gameClasses);
 
 		InterchangableSymbol identifier = new InterchangableSymbol("identifier", identifiers);
-		InterchangableSymbol parameter = new InterchangableSymbol("parameter", identifiers); //basically the same thing named differently so that parameters are treated differently to identifiers
+		InterchangableSymbol parameter = new InterchangableSymbol("parameter", parameters); //basically the same thing named differently so that parameters are treated differently to identifiers
 		InterchangableSymbol charVar = new InterchangableSymbol("char", chars);
 		InterchangableSymbol evaluableBoolean = new InterchangableSymbol("evaluable", evaluableBooleans);
 		InterchangableSymbol evaluableFloat = new InterchangableSymbol("evaluable", evaluableFloats);
 		InterchangableSymbol evaluableInt = new InterchangableSymbol("evaluable", evaluableInts);
 		InterchangableSymbol terminationOption = new InterchangableSymbol("terminationOption", terminationOptions);
 		InterchangableSymbol evaluableDirection = new InterchangableSymbol("evaluableDirection", evaluableDirections);
+		InterchangableSymbol evaluableScoreInt = new InterchangableSymbol("evaluableScoreInt", evaluableScoreInts);
+		InterchangableSymbol evaluableLargeInt;
 	
 	List<Symbol> gameSymbols = new LinkedList<Symbol>();
 	
 	Random rnd = new Random();
 	
 	public GameDesigner() {
-		initiliseVGDLSymbols();
-		
-		System.out.println("delete");
-		
-		f.getParentFile().mkdirs();
-		try {
-		f.createNewFile();
-		writer = new PrintWriter(f);
-		} catch (IOException e) { 
-			e.printStackTrace();
-		}
+		initiliseVGDLSymbols();		
 	}
 	
 	private void initiliseVGDLSymbols() { //May remove this entirely later, it was useful earlier until I changed things
+		for (int i=0; i < 150; i++) {
+			evaluableLargeInts[i] = Integer.toString(500 + (i * 10));
+		}
+		evaluableLargeInt = new InterchangableSymbol("evaluableLargeInt", evaluableLargeInts);
 		addChildrenVGDLSymbols();		
 	}
 	
@@ -404,12 +421,15 @@ public class GameDesigner {
 				//eolOptionalBlock
 				eolOptionalBlock.addChild(hash);
 				eolOptionalBlock.addChild(charOrSpaceRepeat);
+				//scoreChange
+				scoreChange.addChild(scoreChangeString);
+				scoreChange.addChild(evaluableScoreInt);
 				
 				//Choices
 				//spriteType
 				spriteType.addChild(identifier);
 				spriteType.addChild(avatar);
-				spriteType.addChild(wall);
+				//spriteType.addChild(wall);
 				spriteType.addChild(eos);
 				//spriteTypeMinusAvatar
 				spriteTypeMinusAvatar.addChild(identifier);
@@ -429,7 +449,7 @@ public class GameDesigner {
 				avatar_class.addChild(verticalAvatar);
 				avatar_class.addChild(ongoingAvatar);
 				avatar_class.addChild(ongoingTurningAvatar);
-				avatar_class.addChild(ongoingShootAvatar);
+				//avatar_class.addChild(ongoingShootAvatar);
 				avatar_class.addChild(missileAvatar);
 				avatar_class.addChild(orientedAvatar);
 				avatar_class.addChild(shootAvatar);
@@ -453,7 +473,7 @@ public class GameDesigner {
 				sprite_class.addChild(spreader);
 				sprite_class.addChild(door);
 				sprite_class.addChild(portal);
-				sprite_class.addChild(resource);
+				//sprite_class.addChild(resource);
 				//interaction_method
 				interaction_method.addChild(killSprite);
 				interaction_method.addChild(killAll);
@@ -488,8 +508,8 @@ public class GameDesigner {
 				interaction_method.addChild(teleportToExit);
 				interaction_method.addChild(pullWithIt);
 				interaction_method.addChild(bounceForward);
-				interaction_method.addChild(collectResource);
-				interaction_method.addChild(changeResource);
+				//interaction_method.addChild(collectResource);
+				//interaction_method.addChild(changeResource);
 				//termination__class
 				termination_class.addChild(spriteCounter);
 				termination_class.addChild(spriteCounterMore);
@@ -596,36 +616,53 @@ public class GameDesigner {
 				resource.addChild(space);
 				resource.addChild(limit);
 				resource.addChild(evaluableInt);
+				//Interaction Methods
+				killSprite.addChild(killSpriteString);
+				killSprite.addChild(scoreChange);
 				killAll.addChild(killAllString);
 				killAll.addChild(stype);
 				killAll.addChild(parameter);
+				killAll.addChild(space);
+				killAll.addChild(scoreChange);
 				killIfHasMore.addChild(killIfHasMoreString);
 				killIfHasMore.addChild(resourceName);
 				killIfHasMore.addChild(parameter);
 				killIfHasMore.addChild(space);
 				killIfHasMore.addChild(limit);
 				killIfHasMore.addChild(evaluableInt);
+				killIfHasMore.addChild(space);
+				killIfHasMore.addChild(scoreChange);
 				killIfHasLess.addChild(killIfHasLessString);
 				killIfHasLess.addChild(resourceName);
 				killIfHasLess.addChild(parameter);
 				killIfHasLess.addChild(space);
 				killIfHasLess.addChild(limit);
 				killIfHasLess.addChild(evaluableInt);
+				killIfHasLess.addChild(space);
+				killIfHasLess.addChild(scoreChange);
+				killIfFromAbove.addChild(killIfFromAboveString);
+				killIfFromAbove.addChild(scoreChange);
 				killIfOtherHasMore.addChild(killIfOtherHasMoreString);
 				killIfOtherHasMore.addChild(resourceName);
 				killIfOtherHasMore.addChild(parameter);
 				killIfOtherHasMore.addChild(space);
 				killIfOtherHasMore.addChild(limit);
 				killIfOtherHasMore.addChild(evaluableInt);
+				killIfOtherHasMore.addChild(space);
+				killIfOtherHasMore.addChild(scoreChange);
 				transformToSingleton.addChild(transformToRandomChildString);
 				transformToSingleton.addChild(stype);
 				transformToSingleton.addChild(parameter);
 				transformToSingleton.addChild(space);
 				transformToSingleton.addChild(stype_other);
 				transformToSingleton.addChild(parameter);
+				transformToSingleton.addChild(space);
+				transformToSingleton.addChild(scoreChange);
 				spawnBehind.addChild(spawnBehindString);
 				spawnBehind.addChild(stype);
 				spawnBehind.addChild(parameter);
+				spawnBehind.addChild(space);
+				spawnBehind.addChild(scoreChange);
 				spawnIfHasMore.addChild(spawnIfHasMoreString);
 				spawnIfHasMore.addChild(stype);
 				spawnIfHasMore.addChild(parameter);
@@ -635,6 +672,8 @@ public class GameDesigner {
 				spawnIfHasMore.addChild(space);
 				spawnIfHasMore.addChild(limit);
 				spawnIfHasMore.addChild(evaluableInt);
+				spawnIfHasMore.addChild(space);
+				spawnIfHasMore.addChild(scoreChange);
 				spawnIfHasLess.addChild(spawnIfHasLessString);
 				spawnIfHasLess.addChild(stype);
 				spawnIfHasLess.addChild(parameter);
@@ -644,12 +683,18 @@ public class GameDesigner {
 				spawnIfHasLess.addChild(space);
 				spawnIfHasLess.addChild(limit);
 				spawnIfHasLess.addChild(evaluableInt);
+				spawnIfHasLess.addChild(space);
+				spawnIfHasLess.addChild(scoreChange);
+				cloneSprite.addChild(cloneSpriteString);
+				cloneSprite.addChild(scoreChange);
 				transformTo.addChild(transformToString);
 				transformTo.addChild(stype);
 				transformTo.addChild(parameter);
 				transformTo.addChild(space);
 				transformTo.addChild(forceOrientation);
 				transformTo.addChild(evaluableDirection);
+				transformTo.addChild(space);
+				transformTo.addChild(scoreChange);
 				transformIfCounts.addChild(transformIfCountsString);
 				transformIfCounts.addChild(stype);
 				transformIfCounts.addChild(parameter);
@@ -662,54 +707,98 @@ public class GameDesigner {
 				transformIfCounts.addChild(space);
 				transformIfCounts.addChild(leq);
 				transformIfCounts.addChild(evaluableInt);
+				transformIfCounts.addChild(space);
+				transformIfCounts.addChild(scoreChange);
 				transformToRandomChild.addChild(transformToRandomChildString);
 				transformToRandomChild.addChild(stype);
 				transformToRandomChild.addChild(parameter);
+				transformToRandomChild.addChild(space);
+				transformToRandomChild.addChild(scoreChange);
 				updateSpawnType.addChild(updateSpawnTypeString);
 				updateSpawnType.addChild(stype);
 				updateSpawnType.addChild(parameter);
 				updateSpawnType.addChild(space);
 				updateSpawnType.addChild(spawnPointParam);
 				updateSpawnType.addChild(parameter);
+				updateSpawnType.addChild(space);
+				updateSpawnType.addChild(scoreChange);
 				removeScore.addChild(removeScoreString);
 				removeScore.addChild(stype);
 				removeScore.addChild(parameter);
 				addHealthPoints.addChild(addHealthPointsString);
 				addHealthPoints.addChild(value);
 				addHealthPoints.addChild(evaluableInt);
+				addHealthPoints.addChild(space);
+				addHealthPoints.addChild(scoreChange);
 				addHealthPointsToMax.addChild(addHealthPointsToMaxString);
 				addHealthPointsToMax.addChild(value);
 				addHealthPointsToMax.addChild(evaluableInt);
+				addHealthPointsToMax.addChild(space);
+				addHealthPointsToMax.addChild(scoreChange);
 				subtractHealthPoints.addChild(subtractHealthPointsString);
 				subtractHealthPoints.addChild(value);
 				subtractHealthPoints.addChild(evaluableInt);
 				subtractHealthPoints.addChild(space);
 				subtractHealthPoints.addChild(stype);
 				subtractHealthPoints.addChild(parameter);
+				subtractHealthPoints.addChild(space);
+				subtractHealthPoints.addChild(scoreChange);
 				increaseSpeedToAll.addChild(increaseSpeedToAllString);
 				increaseSpeedToAll.addChild(value);
 				increaseSpeedToAll.addChild(evaluableInt);
 				increaseSpeedToAll.addChild(space);
 				increaseSpeedToAll.addChild(stype);
 				increaseSpeedToAll.addChild(parameter);
+				increaseSpeedToAll.addChild(space);
+				increaseSpeedToAll.addChild(scoreChange);
 				decreaseSpeedToAll.addChild(decreaseSpeedToAllString);
 				decreaseSpeedToAll.addChild(value);
 				decreaseSpeedToAll.addChild(evaluableInt);
 				decreaseSpeedToAll.addChild(space);
 				decreaseSpeedToAll.addChild(stype);
 				decreaseSpeedToAll.addChild(parameter);
+				decreaseSpeedToAll.addChild(space);
+				decreaseSpeedToAll.addChild(scoreChange);
 				setSpeedForAll.addChild(setSpeedForAllString);
 				setSpeedForAll.addChild(value);
 				setSpeedForAll.addChild(evaluableInt);
 				setSpeedForAll.addChild(space);
 				setSpeedForAll.addChild(stype);
 				setSpeedForAll.addChild(parameter);
+				setSpeedForAll.addChild(space);
+				setSpeedForAll.addChild(scoreChange);
+				stepBack.addChild(stepBackString);
+				stepBack.addChild(scoreChange);
+				undoAll.addChild(undoAllString);
+				undoAll.addChild(scoreChange);
+				flipDirection.addChild(flipDirectionString);
+				flipDirection.addChild(scoreChange);
+				reverseDirection.addChild(reverseDirectionString);
+				reverseDirection.addChild(scoreChange);
+				attractGaze.addChild(attractGazeString);
+				attractGaze.addChild(scoreChange);
+				align.addChild(alignString);
+				align.addChild(scoreChange);
+				turnAround.addChild(turnAroundString);
+				turnAround.addChild(scoreChange);
+				wrapAround.addChild(wrapAroundString);
+				wrapAround.addChild(scoreChange);
+				teleportToExit.addChild(teleportToExitString);
+				teleportToExit.addChild(scoreChange);
+				pullWithIt.addChild(pullWithItString);
+				pullWithIt.addChild(scoreChange);
+				bounceForward.addChild(bounceForwardString);
+				bounceForward.addChild(scoreChange);
+				collectResource.addChild(collectResourceString);
+				collectResource.addChild(scoreChange);
 				changeResource.addChild(changeResourceString);
 				changeResource.addChild(resourceName);
 				changeResource.addChild(parameter);
 				changeResource.addChild(space);
 				changeResource.addChild(value);
 				changeResource.addChild(evaluableInt);
+				changeResource.addChild(space);
+				changeResource.addChild(scoreChange);
 				//termination classes
 				spriteCounter.addChild(spriteCounterString);
 				spriteCounter.addChild(stype);
@@ -749,7 +838,7 @@ public class GameDesigner {
 				stopCounter.addChild(evaluableInt);
 				timeout.addChild(timeOutString);
 				timeout.addChild(limit);
-				timeout.addChild(evaluableInt);
+				timeout.addChild(evaluableLargeInt);
 	}
 	
 	public void createGame() {
@@ -816,11 +905,17 @@ public class GameDesigner {
 		}
 	}
 	
-public void createGameFromGenome(int[] genome) {
+public void saveGameFromGenome(int[] genome) {
 		
-		System.out.println("creating game from genome");
+		System.out.println("Saving individual in " + savePath);
 	
-
+		s.getParentFile().mkdirs();
+		try {
+		s.createNewFile();
+		saveWriter = new PrintWriter(s);
+		} catch (IOException e) { 
+			e.printStackTrace();
+		}
 		
 		int i = 0;
 		gameSymbols.clear();
@@ -918,29 +1013,27 @@ public void createGameFromGenome(int[] genome) {
 			}
 		}
 
-		System.out.println("HALFWAY-----------------------------------------------------------");
-		
 		for (int j=0; j<gameSymbols.size(); j++) {	
 			if (gameSymbols.get(j) instanceof InterchangableSymbol) { 	//	--------INTERCHANGABLE SYMBOLS-----------
 				if ((inLevelBlock) && (((InterchangableSymbol)gameSymbols.get(j)).name == "identifier")) {
 					
 					System.out.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[variableTracker]);
-					writer.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[variableTracker]);
+					saveWriter.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[variableTracker]);
 					variableTracker++;
 				} 
 				else if ((inSpriteBlock) && (((InterchangableSymbol)gameSymbols.get(j)).name == "identifier")) {
 					
 					System.out.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[variableTracker]);
-					writer.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[variableTracker]);
+					saveWriter.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[variableTracker]);
 					variableTracker++;
 				}
 				else if ((((InterchangableSymbol)gameSymbols.get(j)).name == "identifier") || (((InterchangableSymbol)gameSymbols.get(j)).name == "parameter") ) {
-					writer.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[genome[genomeTracker] % variablesUsed]);
+					saveWriter.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[genome[genomeTracker] % variablesUsed]);
 				}
 				else {	
 					
 					System.out.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[genome[genomeTracker] % ((InterchangableSymbol)gameSymbols.get(j)).classStrings.length]);
-					writer.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[genome[genomeTracker] % ((InterchangableSymbol)gameSymbols.get(j)).classStrings.length]);
+					saveWriter.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[genome[genomeTracker] % ((InterchangableSymbol)gameSymbols.get(j)).classStrings.length]);
 					genomeTracker++;
 					if (genomeTracker > genome.length-1) {
 						genomeTracker = 0;
@@ -951,7 +1044,7 @@ public void createGameFromGenome(int[] genome) {
 				
 				System.out.print(((TerminalSymbol)gameSymbols.get(j)).content);
 				
-				writer.print(((TerminalSymbol)gameSymbols.get(j)).content);
+				saveWriter.print(((TerminalSymbol)gameSymbols.get(j)).content);
 				if (((TerminalSymbol)gameSymbols.get(j)).name == "levelMapping") {
 					inLevelBlock = true;
 				}
@@ -966,19 +1059,173 @@ public void createGameFromGenome(int[] genome) {
 				}
 			}
 		}
-		System.out.println("finished creating game from genome");
-		writer.close();
+		saveWriter.close();
+}
+
+public void createGameFromGenome(int[] genome) {
+	
+	System.out.println("creating game from genome");
+
+	f.getParentFile().mkdirs();
+	try {
+	f.createNewFile();
+	writer = new PrintWriter(f);
+	} catch (IOException e) { 
+		e.printStackTrace();
+	}
+	
+	int i = 0;
+	gameSymbols.clear();
+	gameSymbols.add(game);
+	int genomeTracker = 0;
+	int variablesUsed = 0;
+	boolean levelBlockSizeDetermined = false;
+	boolean spriteBlockSizeDetermined = false;
+	int variableTracker = 0;
+	boolean inLevelBlock = false;
+	boolean inSpriteBlock = false;
+
+	//While there are still symbols that need to be expanded
+	while (containsNonTerminals()) {
+		//System.out.println(i);
+		if (i > gameSymbols.size()-1) {
+			i = 0;
+		}
+		Symbol currentSymbol = gameSymbols.get(i);
+		
+		if (currentSymbol instanceof NonTerminalSymbol) {
+			//If symbol represents a repeatable section of the grammar 	------REPEATABLE SYMBOLS-----
+			if (((NonTerminalSymbol) currentSymbol).repeatable == true) {
+				if (genome[genomeTracker] % 2 == 0) {
+					gameSymbols.remove(i);
+				}
+				genomeTracker++;
+				if (genomeTracker > genome.length-1) {
+					genomeTracker = 0;
+				}
+			}
+			else
+			{
+				//If symbol is not repeatable remove it 
+				gameSymbols.remove(i);
+				//System.out.println(currentSymbol.name);
+			}
+			
+			//This section is used to fix variables, without this there were many issues with variables being used without being defined 
+			//or being defined and not used, this should ensure that variables declared in level block and used exactly once in sprite block
+			//as a result this should produce many more working games
+			//LevelBlock size
+			if (currentSymbol.name == "charMapNewline" && !levelBlockSizeDetermined) {
+				for (int j=0; j < (genome[genomeTracker] % 4) + 1; j++) {
+					levelBlockSizeDetermined = true;
+					gameSymbols.add(i,charMapNewline);
+					variablesUsed++;
+				}
+				genomeTracker++;
+				if (genomeTracker > genome.length-1) {
+					genomeTracker = 0;
+				}
+			}
+			//SpriteBlock size
+			if (currentSymbol.name == "spriteDefNewline" && !spriteBlockSizeDetermined) {
+				for (int j=0; j < variablesUsed; j++) {
+					spriteBlockSizeDetermined = true;
+					gameSymbols.add(i,spriteDefNewline);
+				}
+			}
+			
+			//If symbol is an not optional add children otherwise decide if the the option will be used then continue as before
+			if(((NonTerminalSymbol)currentSymbol).optional){  
+				//OPTIONAL SECTION										---------OPTIONAL SYMBOLS-------
+				if (genome[genomeTracker] % 2 == 0) { 
+					for (int j=0; j<((NonTerminalSymbol)currentSymbol).children.size(); j++) {
+						gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(j));
+						i++;
+					}
+				}
+				genomeTracker++;
+				if (genomeTracker > genome.length-1) {
+					genomeTracker = 0;
+				}
+			}
+			else if (((NonTerminalSymbol)currentSymbol).choice == true) {
+				//CHOICE SECTION										----------CHOICE SYMBOLS-----------
+				gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(genome[genomeTracker] % (((NonTerminalSymbol)currentSymbol).children.size())));
+				genomeTracker++;
+				if (genomeTracker > genome.length-1) {
+					genomeTracker = 0;
+				}
+				i++;
+			}
+			else {
+				for (int j=0; j<((NonTerminalSymbol)currentSymbol).children.size(); j++) {
+					System.out.println(((NonTerminalSymbol)currentSymbol).children.get(j).name);
+					gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(j));
+					i++;
+				}
+			}
+		}
+		else {
+			i++;
+		}
+	}
+	
+	for (int j=0; j<gameSymbols.size(); j++) {	
+		if (gameSymbols.get(j) instanceof InterchangableSymbol) { 	//	--------INTERCHANGABLE SYMBOLS-----------
+			if ((inLevelBlock) && (((InterchangableSymbol)gameSymbols.get(j)).name == "identifier")) {
+				
+				System.out.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[variableTracker]);
+				writer.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[variableTracker]);
+				variableTracker++;
+			} 
+			else if ((inSpriteBlock) && (((InterchangableSymbol)gameSymbols.get(j)).name == "identifier")) {
+				
+				System.out.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[variableTracker]);
+				writer.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[variableTracker]);
+				variableTracker++;
+			}
+			else if ((((InterchangableSymbol)gameSymbols.get(j)).name == "identifier") || (((InterchangableSymbol)gameSymbols.get(j)).name == "parameter") ) {
+				writer.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[genome[genomeTracker] % variablesUsed]);
+			}
+			else {	
+				
+				System.out.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[genome[genomeTracker] % ((InterchangableSymbol)gameSymbols.get(j)).classStrings.length]);
+				writer.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[genome[genomeTracker] % ((InterchangableSymbol)gameSymbols.get(j)).classStrings.length]);
+				genomeTracker++;
+				if (genomeTracker > genome.length-1) {
+					genomeTracker = 0;
+				}
+			}
+		}
+		else {
+			
+			System.out.print(((TerminalSymbol)gameSymbols.get(j)).content);
+			
+			writer.print(((TerminalSymbol)gameSymbols.get(j)).content);
+			if (((TerminalSymbol)gameSymbols.get(j)).name == "levelMapping") {
+				inLevelBlock = true;
+			}
+			if (((TerminalSymbol)gameSymbols.get(j)).name == "spriteSet") {
+				variableTracker = 0;
+				inLevelBlock = false;
+				inSpriteBlock = true;
+			}
+			if (((TerminalSymbol)gameSymbols.get(j)).name == "interactionSet") {
+				inLevelBlock = false;
+				inSpriteBlock = false;
+			}
+		}
+	}
+	writer.close();
 }
 	
 	private boolean containsNonTerminals() {
-		boolean result = false; 
 		for (int i=0; i<gameSymbols.size(); i++) {
 			if (gameSymbols.get(i) instanceof NonTerminalSymbol) {
-				result = true;
-				break;
+				return true;
 			}
 		}
-		return result;
+		return false;
 	}
 
 }

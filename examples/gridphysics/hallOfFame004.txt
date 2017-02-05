@@ -1,0 +1,15 @@
+BasicGame
+	LevelMapping
+		n > avatar
+		g > var1
+		y > var2
+	SpriteSet
+		avatar > ShootAvatar stype=var1
+		var1 > Bomber stype=var1 total=12 spawnorientation=DOWN
+		var2 > AlternateChaser stype1=var1 stype2=var1
+	InteractionSet
+		EOS avatar > teleportToExit  
+		avatar EOS > stepBack  
+		EOS avatar > increaseSpeedToAll value=7 stype=var1 scoreChange=-2 
+	TerminationSet
+		StopCounter stype1=var1 stype2=var1 stype3=var1 limit=17

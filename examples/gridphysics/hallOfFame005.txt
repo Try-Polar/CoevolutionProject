@@ -1,0 +1,19 @@
+BasicGame
+	LevelMapping
+		d > avatar
+		i > var1
+		b > var2
+		z > var3
+		a > var4
+		k > var5
+	SpriteSet
+		avatar > OngoingAvatar
+		var1 > Flicker limit=14
+		var2 > RandomBomber stype=var3 total=19 prob=0.7 spawnorientation=LEFT
+		var3 > SpawnPoint stype=var1 total=1 prob=0.3 spawnorientation=RIGHT
+		var4 > RandomMissile
+		var5 > Missile
+	InteractionSet
+		EOS avatar > attractGaze scoreChange=3 
+	TerminationSet
+		Timeout limit=13
