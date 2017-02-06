@@ -63,7 +63,7 @@ public class Test
                 "sokoban", "solarfox" ,"superman", "surround", "survivezombies",              //75-79
                 "tercio", "thecitadel", "thesnowman",  "waitforbreakfast", "watergame",       //80-84
                 "waves", "whackamole", "wildgunman", "witnessprotection", "wrapsokoban",      //85-89
-                "zelda", "zenpuzzle", "earlyAttempts", "hallOfFame006" };                     //90-93
+                "zelda", "zenpuzzle", "earlyAttempts", "hallOfFame007" };                     //90-93
 
 
         //Other settings
