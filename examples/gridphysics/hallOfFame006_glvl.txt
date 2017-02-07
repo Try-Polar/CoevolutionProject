@@ -3,7 +3,7 @@ LevelMapping
     b > var1 
 
 LevelDescription
+   a
+   b
     
-    
-  ab
- b  
+   b

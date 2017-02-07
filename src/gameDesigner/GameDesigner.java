@@ -215,7 +215,7 @@ public class GameDesigner {
 	TerminalSymbol flipDirectionString = new TerminalSymbol("flipDirection", "flipDirection ");
 	TerminalSymbol reverseDirectionString = new TerminalSymbol("reverseDirection", "reverseDirection ");
 	TerminalSymbol attractGazeString = new TerminalSymbol("attractGaze", "attractGaze ");
-	TerminalSymbol alignString = new TerminalSymbol("align","algin ");
+	TerminalSymbol alignString = new TerminalSymbol("align","align ");
 	TerminalSymbol turnAroundString = new TerminalSymbol("turnAround", "turnAround ");
 	TerminalSymbol wrapAroundString = new TerminalSymbol("wrapAround", "wrapAround ");
 	TerminalSymbol teleportToExitString = new TerminalSymbol("teleportToExit", "teleportToExit ");

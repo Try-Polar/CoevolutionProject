@@ -14,10 +14,10 @@ BasicGame
 		var4 > BomberRandomMissile stypeMissile=var3 total=20 prob=0.6 spawnorientation=LEFT
 		var5 > Missile
 	InteractionSet
-		avatar avatar > addHealthPoints value=16  
-		EOS EOS > updateSpawnType stype=var2 spawnPoint=var2 scoreChange=-3 
+		avatar EOS > addHealthPoints value=16  
+		var4 EOS > updateSpawnType stype=var2 spawnPoint=var2 scoreChange=-3 
 		var3 EOS > spawnBehind stype=var2 scoreChange=-1 
-		avatar var1 > algin scoreChange=2 
+		avatar var1 > align scoreChange=2 
 		EOS avatar > cloneSprite  
 	TerminationSet
 		SpriteCounterMore stype=avatar limit=1

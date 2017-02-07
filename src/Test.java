@@ -63,7 +63,8 @@ public class Test
                 "sokoban", "solarfox" ,"superman", "surround", "survivezombies",              //75-79
                 "tercio", "thecitadel", "thesnowman",  "waitforbreakfast", "watergame",       //80-84
                 "waves", "whackamole", "wildgunman", "witnessprotection", "wrapsokoban",      //85-89
-                "zelda", "zenpuzzle", "earlyAttempts", "hallOfFame007" };                     //90-93
+                "zelda", "zenpuzzle", "earlyAttempts", "hallOfFame001", "hallOfFame002",	  //90-94
+                "hallOfFame003", "hallOfFame004", "hallOfFame005", "hallOfFame006", "hallOfFame007"};//95-99
 
 
         //Other settings
@@ -71,7 +72,7 @@ public class Test
         int seed = new Random().nextInt();
 
         //Game and level to play
-        int gameIdx = 93;
+        int gameIdx = 99;
         int levelIdx = 0; //level names from 0 to 4 (game_lvlN.txt).
         String game = gamesPath + games[gameIdx] + ".txt";
         String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";

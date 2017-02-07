@@ -63,7 +63,22 @@ public class EvolutionaryGameDesigner {
 		initialisePopulation();
 		int[] hof = new int[individualSize];
 		double hofFitness = -100;
+		
+		//Initial Evaluation
+		for (int ind=0; ind < populationSize; ind++)	{
+			fitnesses[ind] = evaluationFunction(pop[ind]);
+			if (fitnesses[ind] > hofFitness) {
+				hof = pop[ind];
+				hofFitness = fitnesses[ind];
+			}
+		}
+		
 		for (int gen=0; gen < generations; gen++) {
+			//Selection, Crossover, Mutation
+			for (int i=0; i<populationSize/3; i++) {
+				tournament2();
+			}
+			
 			//Evaluation
 			for (int ind=0; ind < populationSize; ind++)	{
 				fitnesses[ind] = evaluationFunction(pop[ind]);
@@ -72,10 +87,7 @@ public class EvolutionaryGameDesigner {
 					hofFitness = fitnesses[ind];
 				}
 			}
-			//Selection, Crossover, Mutation
-			for (int i=0; i<populationSize/3; i++) {
-				tournament2();
-			}
+			
 		}
 		
 		gameDesigner.saveGameFromGenome(hof);
