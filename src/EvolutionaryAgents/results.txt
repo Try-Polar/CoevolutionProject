@@ -9,9 +9,16 @@ RDScore 0.0
 0.0
 RDWins 0.0
 0.0
-win_50 1.0
+win_50 -1.0
 win_lose 0
-FITNESS = 0.25
+FITNESS = -0.25
+RDScore 0.0
+0.0
+RDWins 0.0
+0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
 RDScore 0.0
 0.0
 RDWins 0.0
@@ -30,9 +37,16 @@ RDScore 0.0
 0.0
 RDWins 0.0
 0.0
-win_50 1.0
+win_50 -1.0
 win_lose 0
-FITNESS = 0.25
+FITNESS = -0.25
+RDScore 0.0
+0.0
+RDWins 0.0
+0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
 RDScore 0.0
 0.0
 RDWins 0.0
@@ -51,9 +65,16 @@ RDScore 0.0
 0.0
 RDWins 0.0
 0.0
-win_50 1.0
+win_50 -1.0
 win_lose 0
-FITNESS = 0.25
+FITNESS = -0.25
+RDScore 0.0
+0.0
+RDWins 0.0
+0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
 RDScore 0.0
 0.0
 RDWins 0.0
@@ -72,20 +93,6 @@ RDScore 0.0
 0.0
 RDWins 0.0
 0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
 win_50 -1.0
 win_lose 0
 FITNESS = -0.25
@@ -100,219 +107,9 @@ RDScore 0.0
 0.0
 RDWins 0.0
 0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
 win_50 -1.0
 win_lose 0
 FITNESS = -0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 -1.0
-win_lose 0
-FITNESS = -0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 -1.0
-win_lose 0
-FITNESS = -0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 -1.0
-win_lose 0
-FITNESS = -0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 -1.0
-win_lose 0
-FITNESS = -0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 -1.0
-win_lose 0
-FITNESS = -0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 -1.0
-win_lose 0
-FITNESS = -0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 -1.0
-win_lose 0
-FITNESS = -0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
 RDScore 0.0
 0.0
 RDWins 0.0
@@ -373,30 +170,9 @@ RDScore 0.0
 0.0
 RDWins 0.0
 0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
 win_50 -1.0
 win_lose 0
 FITNESS = -0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 -1.0
-win_lose 0
-FITNESS = -0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
 RDScore 0.0
 0.0
 RDWins 0.0
@@ -429,27 +205,6 @@ RDScore 0.0
 0.0
 RDWins 0.0
 0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 -1.0
-win_lose 0
-FITNESS = -0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 -1.0
-win_lose 0
-FITNESS = -0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
 win_50 -1.0
 win_lose 0
 FITNESS = -0.25
@@ -460,34 +215,6 @@ RDWins 0.0
 win_50 1.0
 win_lose 0
 FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 1.0
-win_lose 0
-FITNESS = 0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 -1.0
-win_lose 0
-FITNESS = -0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 -1.0
-win_lose 0
-FITNESS = -0.25
-RDScore 0.0
-0.0
-RDWins 0.0
-0.0
-win_50 -1.0
-win_lose 0
-FITNESS = -0.25
 RDScore 0.0
 0.0
 RDWins 0.0
