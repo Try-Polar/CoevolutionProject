@@ -1,23 +1,19 @@
 BasicGame
 	LevelMapping
-		o > avatar
+		d > avatar
 		p > var1
-		y > var2
-		y > var3
-		u > var4
-		n > var5
+		d > var2
+		c > var3
+		y > var4
 	SpriteSet
-		avatar > MovingAvatar
-		var1 > BomberRandomMissile stypeMissile=var2 total=19 prob=0.4 spawnorientation=DOWN
-		var2 > SpawnPoint stype=var1 total=18 prob=0.5 spawnorientation=DOWN
-		var3 > Bomber stype=var1 total=2 spawnorientation=RIGHT
-		var4 > BomberRandomMissile stypeMissile=var3 total=20 prob=0.6 spawnorientation=LEFT
-		var5 > Missile
+		avatar > OngoingTurningAvatar
+		var1 > Portal stype=var1
+		var2 > RandomNPC
+		var3 > AlternateChaser stype1=var1 stype2=var1
+		var4 > BomberRandomMissile stypeMissile=var1 total=5 prob=0.3 spawnorientation=LEFT
 	InteractionSet
-		avatar avatar > addHealthPoints value=16  
-		EOS EOS > updateSpawnType stype=var2 spawnPoint=var2 scoreChange=-3 
-		var3 EOS > spawnBehind stype=var2 scoreChange=-1 
-		avatar var1 > algin scoreChange=2 
-		EOS avatar > cloneSprite  
+		avatar avatar > killIfHasMore resource=var1 limit=1  
 	TerminationSet
-		SpriteCounterMore stype=avatar limit=1
+		Timeout limit=1470
+		Timeout limit=1520
+		StopCounter stype1=avatar stype2=avatar stype3=avatar limit=11
