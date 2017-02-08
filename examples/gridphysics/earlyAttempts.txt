@@ -17,3 +17,4 @@ BasicGame
 		Timeout limit=1470
 		Timeout limit=1520
 		StopCounter stype1=avatar stype2=avatar stype3=avatar limit=11
+
