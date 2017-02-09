@@ -1,20 +1,18 @@
 BasicGame
 	LevelMapping
-		d > avatar
-		p > var1
+		e > avatar
+		r > var1
 		d > var2
-		c > var3
-		y > var4
 	SpriteSet
 		avatar > OngoingTurningAvatar
-		var1 > Portal stype=var1
-		var2 > RandomNPC
-		var3 > AlternateChaser stype1=var1 stype2=var1
-		var4 > BomberRandomMissile stypeMissile=var1 total=5 prob=0.3 spawnorientation=LEFT
+		var1 > AlternateChaser stype1=avatar stype2=avatar
+		var2 > AlternateChaser stype1=avatar stype2=avatar
 	InteractionSet
-		avatar avatar > killIfHasMore resource=var1 limit=1  
+		avatar var1 > killIfOtherHasMore resource=avatar limit=1 scoreChange=2 
 	TerminationSet
-		Timeout limit=1470
-		Timeout limit=1520
-		StopCounter stype1=avatar stype2=avatar stype3=avatar limit=11
-
+		
+		Timeout limit=690
+		MultiSpriteCounterSubTypes stype1=avatar stype2=avatar stype3=avatar limit=2
+		MultiSpriteCounterSubTypes stype1=avatar stype2=avatar stype3=avatar limit=1
+		SpriteCounter stype=avatar limit=1
+		MultiSpriteCounterSubTypes stype1=avatar stype2=avatar stype3=avatar limit=20

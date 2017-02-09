@@ -1,0 +1,21 @@
+BasicGame
+	LevelMapping
+		g > avatar
+		d > var1
+		b > var2
+		u > var3
+		h > var4
+		e > var5
+	SpriteSet
+		avatar > VerticalAvatar
+		var1 > Bomber stype=var3 total=8 spawnorientation=RIGHT
+		var2 > Passive
+		var3 > AlternateChaser stype1=var1 stype2=var1
+		var4 > Flicker limit=14
+		var5 > AlternateChaser stype1=var3 stype2=var3
+	InteractionSet
+		var4 var4 > killSprite scoreChange=3 
+		var4 var4 > pullWithIt  
+	TerminationSet
+		
+		
