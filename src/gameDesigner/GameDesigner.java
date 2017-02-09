@@ -38,7 +38,7 @@ public class GameDesigner {
 	//Repitition symbols
 	NonTerminalSymbol charMapNewline = new NonTerminalSymbol("charMapNewline", false, false, false); //Will be repeated but is not defined as a repeatable symbol
 	NonTerminalSymbol spriteDefNewline = new NonTerminalSymbol("spriteDefNewline", false, false, false); //Will be repeated but is not defined as a repeatable symbol
-	NonTerminalSymbol interactionDefEol = new NonTerminalSymbol("interactionDefEol", true, false, false);
+	NonTerminalSymbol interactionDefEol = new NonTerminalSymbol("interactionDefEol", false, false, false); //Will be repeated but is not defined as a repeatable symbol
 	NonTerminalSymbol terminationDefEol = new NonTerminalSymbol("terminationDefEol", true, false, false);
 	NonTerminalSymbol spaceSpriteType = new NonTerminalSymbol("spaceSpriteType", true, false, false);
 	NonTerminalSymbol spriteDefEol = new NonTerminalSymbol("spriteDefEol", true, false, false);
@@ -806,12 +806,16 @@ public class GameDesigner {
 				spriteCounter.addChild(space);
 				spriteCounter.addChild(limit);
 				spriteCounter.addChild(evaluableInt);
+				spriteCounter.addChild(space);
+				spriteCounter.addChild(terminationOption);
 				spriteCounterMore.addChild(spriteCounterMoreString);
 				spriteCounterMore.addChild(stype);
 				spriteCounterMore.addChild(parameter);
 				spriteCounterMore.addChild(space);
 				spriteCounterMore.addChild(limit);
 				spriteCounterMore.addChild(evaluableInt);
+				spriteCounterMore.addChild(space);
+				spriteCounterMore.addChild(terminationOption);
 				multiSpriteCounterSubTypes.addChild(multiSpriteCounterSubTypesString);
 				multiSpriteCounterSubTypes.addChild(stype1);
 				multiSpriteCounterSubTypes.addChild(parameter);
@@ -824,6 +828,8 @@ public class GameDesigner {
 				multiSpriteCounterSubTypes.addChild(space);
 				multiSpriteCounterSubTypes.addChild(limit);
 				multiSpriteCounterSubTypes.addChild(evaluableInt);
+				multiSpriteCounterSubTypes.addChild(space);
+				multiSpriteCounterSubTypes.addChild(terminationOption);
 				stopCounter.addChild(stopCounterString);
 				stopCounter.addChild(stype1);
 				stopCounter.addChild(parameter);
@@ -836,9 +842,13 @@ public class GameDesigner {
 				stopCounter.addChild(space);
 				stopCounter.addChild(limit);
 				stopCounter.addChild(evaluableInt);
+				stopCounter.addChild(space);
+				stopCounter.addChild(terminationOption);
 				timeout.addChild(timeOutString);
 				timeout.addChild(limit);
 				timeout.addChild(evaluableLargeInt);
+				timeout.addChild(space);
+				timeout.addChild(terminationOption);
 	}
 	
 	public void createGame() {
@@ -924,6 +934,7 @@ public void saveGameFromGenome(int[] genome) {
 		int variablesUsed = 0;
 		boolean levelBlockSizeDetermined = false;
 		boolean spriteBlockSizeDetermined = false;
+		boolean interactionBlockSizeDetermined = false;
 		int variableTracker = 0;
 		boolean inLevelBlock = false;
 		boolean inSpriteBlock = false;
@@ -973,6 +984,14 @@ public void saveGameFromGenome(int[] genome) {
 					for (int j=0; j < variablesUsed; j++) {
 						spriteBlockSizeDetermined = true;
 						gameSymbols.add(i,spriteDefNewline);
+					}
+				}
+				//InteractionBlock size
+				if (currentSymbol.name == "interactionDefEol" && !interactionBlockSizeDetermined) {
+					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+					for (int j=0; j < (genome[genomeTracker] % 5) + 3; j++) {
+						interactionBlockSizeDetermined = true;
+						gameSymbols.add(i,interactionDefEol);
 					}
 				}
 				
@@ -1029,6 +1048,10 @@ public void saveGameFromGenome(int[] genome) {
 				}
 				else if ((((InterchangableSymbol)gameSymbols.get(j)).name == "identifier") || (((InterchangableSymbol)gameSymbols.get(j)).name == "parameter") ) {
 					saveWriter.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[genome[genomeTracker] % variablesUsed]);
+					genomeTracker++;
+					if (genomeTracker > genome.length-1) {
+						genomeTracker = 0;
+					}
 				}
 				else {	
 					
@@ -1081,6 +1104,7 @@ public void createGameFromGenome(int[] genome) {
 	int variablesUsed = 0;
 	boolean levelBlockSizeDetermined = false;
 	boolean spriteBlockSizeDetermined = false;
+	boolean interactionBlockSizeDetermined = false;
 	int variableTracker = 0;
 	boolean inLevelBlock = false;
 	boolean inSpriteBlock = false;
@@ -1131,6 +1155,14 @@ public void createGameFromGenome(int[] genome) {
 				for (int j=0; j < variablesUsed; j++) {
 					spriteBlockSizeDetermined = true;
 					gameSymbols.add(i,spriteDefNewline);
+				}
+			}
+			//InteractionBlock size
+			if (currentSymbol.name == "interactionDefEol" && !interactionBlockSizeDetermined) {
+				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+				for (int j=0; j < (genome[genomeTracker] % 5) + 3; j++) {
+					interactionBlockSizeDetermined = true;
+					gameSymbols.add(i,interactionDefEol);
 				}
 			}
 			
