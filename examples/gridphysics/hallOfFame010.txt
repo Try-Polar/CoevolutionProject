@@ -1,0 +1,24 @@
+BasicGame
+	LevelMapping
+		t > avatar
+		p > var1
+		z > var2
+		v > var3
+		w > var4
+		g > var5
+	SpriteSet
+		avatar > MissileAvatar
+		var1 > RandomAltChaser stype1=var3 stype2=var3 prob=0.7
+		var2 > Chaser stype=var1
+		var3 > Immovable
+		var4 > OrientedFlicker limit=9
+		var5 > RandomNPC
+	InteractionSet
+		var1 var2 > killSprite scoreChange=-1 
+		var1 EOS > stepBack  
+		EOS var1 > spawnIfHasLess stype=var1 resource=var3 limit=13 scoreChange=1 
+		var3 avatar > addHealthPointsToMax value=17 scoreChange=-3 
+		avatar avatar > killIfHasLess resource=var2 limit=2 scoreChange=-3 
+		EOS avatar > killIfHasMore resource=var1 limit=16 scoreChange=-2 
+	TerminationSet
+		StopCounter stype1=var3 stype2=var2 stype3=avatar limit=18 win=True

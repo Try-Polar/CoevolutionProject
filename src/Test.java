@@ -3,7 +3,6 @@ import gameDesigner.GameDesigner;
 import java.util.Random;
 
 import core.ArcadeMachine;
-
 import EvolutionaryAgents.EvolutionaryGameDesigner;
 
 /**
@@ -20,8 +19,8 @@ public class Test
     {
         //GameDesigner test = new GameDesigner();
         EvolutionaryGameDesigner evoGameDesigner = new EvolutionaryGameDesigner();
-        //evoGameDesigner.eaSimple();
-        evoGameDesigner.makeSingleGame();
+        evoGameDesigner.eaSimple();
+        //evoGameDesigner.makeSingleGame();
     	
     	//Available controllers:
     	String sampleRandomController = "controllers.singlePlayer.sampleRandom.Agent";
@@ -72,7 +71,7 @@ public class Test
         int seed = new Random().nextInt();
 
         //Game and level to play
-        int gameIdx = 99;
+        int gameIdx = 0;
         int levelIdx = 0; //level names from 0 to 4 (game_lvlN.txt).
         String game = gamesPath + games[gameIdx] + ".txt";
         String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
@@ -85,7 +84,7 @@ public class Test
         
         // 2. This plays a game in a level by the controller.
         //ArcadeMachine.runOneGame(game, level1, visuals, sampleMCTSController, recordActionsFile, seed, 0);
-
+        
         // 3. This replays a game from an action file previously recorded
         //String readActionsFile = recordActionsFile;
         //ArcadeMachine.replayGame(game, level1, visuals, readActionsFile);
@@ -103,7 +102,7 @@ public class Test
 
         //if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
         	//ArcadeMachine.playOneGeneratedLevel(game, recordActionsFile, recordLevelFile, seed);
-        //	ArcadeMachine.runOneGeneratedLevel(game, true, sampleMCTSController, recordActionsFile, recordLevelFile, 5, false);
+        //	ArcadeMachine.runOneGeneratedLevel(game, true, doNothingController, recordActionsFile, recordLevelFile, 5, false);
         //}
         
         //6. This starts a game, in a generated level created by a specific level generator played by a selected agent
