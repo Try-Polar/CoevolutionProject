@@ -1,0 +1,25 @@
+BasicGame
+	LevelMapping
+		b > avatar
+		c > var1
+		p > var2
+		z > var3
+		y > var4
+	SpriteSet
+		avatar > HorizontalAvatar
+		var1 > Bomber stype=var2 total=11 spawnorientation=UP
+		var2 > Flicker limit=14
+		var3 > RandomMissile
+		var4 > Bomber stype=var1 total=9 spawnorientation=DOWN
+	InteractionSet
+		avatar avatar > pullWithIt  
+		avatar avatar > spawnBehind stype=avatar scoreChange=-2 
+		avatar EOS > addHealthPointsToMax value=9 scoreChange=1 
+		var2 avatar > bounceForward scoreChange=3 
+		avatar var3 > pullWithIt scoreChange=1 
+		var3 avatar > killIfHasLess resource=var1 limit=3 scoreChange=-3 
+		avatar var3 > addHealthPoints value=6 scoreChange=1 
+		EOS var3 > decreaseSpeedToAll value=12 stype=var2  
+	TerminationSet
+		MultiSpriteCounterSubTypes stype1=avatar stype2=avatar stype3=var1 limit=9 win=True
+		MultiSpriteCounterSubTypes stype1=avatar stype2=var1 stype3=var1 limit=5 win=False

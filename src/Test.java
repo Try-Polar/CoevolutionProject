@@ -20,8 +20,8 @@ public class Test
     {
         //GameDesigner test = new GameDesigner();
         EvolutionaryGameDesigner evoGameDesigner = new EvolutionaryGameDesigner();
-        //evoGameDesigner.eaSimple();
-        evoGameDesigner.makeSingleGame();
+        evoGameDesigner.eaSimple();
+        //evoGameDesigner.makeSingleGame();
     	
     	//Available controllers:
     	String sampleRandomController = "controllers.singlePlayer.sampleRandom.Agent";
@@ -64,7 +64,7 @@ public class Test
                 "tercio", "thecitadel", "thesnowman",  "waitforbreakfast", "watergame",       //80-84
                 "waves", "whackamole", "wildgunman", "witnessprotection", "wrapsokoban",      //85-89
                 "zelda", "zenpuzzle", "earlyAttempts", "hallOfFame001", "hallOfFame002",	  //90-94
-                "hallOfFame003", "hallOfFame004", "hallOfFame005", "hallOfFame006", "hallOfFame007"};//95-99
+                "hallOfFame003", "hallOfFame004", "hallOfFame005", "hallOfFame006", "hallOfFame008"};//95-99
 
 
         //Other settings
@@ -103,7 +103,7 @@ public class Test
 
         //if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
         	//ArcadeMachine.playOneGeneratedLevel(game, recordActionsFile, recordLevelFile, seed);
-        //	ArcadeMachine.runOneGeneratedLevel(game, true, sampleMCTSController, recordActionsFile, recordLevelFile, 5, false);
+        //	ArcadeMachine.runOneGeneratedLevel(game, true, doNothingController, recordActionsFile, recordLevelFile, 5, false);
         //}
         
         //6. This starts a game, in a generated level created by a specific level generator played by a selected agent

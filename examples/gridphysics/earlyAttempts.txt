@@ -1,20 +1,22 @@
 BasicGame
 	LevelMapping
-		n > avatar
-		l > var1
-		v > var2
-		t > var3
+		g > avatar
+		e > var1
+		b > var2
+		l > var3
+		f > var4
+		v > var5
 	SpriteSet
-		avatar > FlakAvatar stype=var1
-		var1 > RandomAltChaser stype1=var1 stype2=var1 prob=0.3
-		var2 > Chaser stype=var1
-		var3 > RandomAltChaser stype1=var1 stype2=var1 prob=0.9
+		avatar > OngoingTurningAvatar
+		var1 > Passive
+		var2 > AlternateChaser stype1=var2 stype2=avatar
+		var3 > RandomNPC
+		var4 > Fleeing stype=var3
+		var5 > OrientedFlicker limit=13
 	InteractionSet
-		var1 var1 > killIfHasMore resource=avatar limit=9 scoreChange=2 
-		EOS EOS > addHealthPointsToMax value=3  
-		avatar avatar > transformToRandomChild stype=var1 scoreChange=-2 
-		var2 EOS > cloneSprite scoreChange=-2 
-		var1 avatar > transformToRandomChild stype=avatar stype_other=avatar  
+		EOS EOS > bounceForward  
+		var3 avatar > wrapAround scoreChange=-3 
+		var2 var4 > bounceForward  
+		EOS var4 > reverseDirection scoreChange=-3 
 	TerminationSet
-		Timeout limit=640 win=True
-		
+		StopCounter stype1=var3 stype2=var2 stype3=avatar limit=20 win=False

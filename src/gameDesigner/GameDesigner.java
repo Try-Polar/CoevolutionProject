@@ -10,7 +10,7 @@ import java.util.Random;
 public class GameDesigner {
 	
 	String path ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "earlyAttempts.txt";
-	String savePath ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "hallOfFame008.txt";
+	String savePath ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "hallOfFame011.txt";
 	//C:\Users\Elliot\Documents\GitHub\CoevolutionProject\examples\gridphysics
 	File f = new File(path);
 	File s = new File(savePath);
@@ -1159,7 +1159,6 @@ public void createGameFromGenome(int[] genome) {
 			}
 			//InteractionBlock size
 			if (currentSymbol.name == "interactionDefEol" && !interactionBlockSizeDetermined) {
-				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 				for (int j=0; j < (genome[genomeTracker] % 5) + 3; j++) {
 					interactionBlockSizeDetermined = true;
 					gameSymbols.add(i,interactionDefEol);
@@ -1218,6 +1217,10 @@ public void createGameFromGenome(int[] genome) {
 			}
 			else if ((((InterchangableSymbol)gameSymbols.get(j)).name == "identifier") || (((InterchangableSymbol)gameSymbols.get(j)).name == "parameter") ) {
 				writer.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[genome[genomeTracker] % variablesUsed]);
+				genomeTracker++;
+				if (genomeTracker > genome.length-1) {
+					genomeTracker = 0;
+				}
 			}
 			else {	
 				

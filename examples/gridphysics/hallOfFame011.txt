@@ -1,0 +1,22 @@
+BasicGame
+	LevelMapping
+		l > avatar
+		j > var1
+		s > var2
+		h > var3
+		b > var4
+		f > var5
+	SpriteSet
+		avatar > FlakAvatar stype=var1
+		var1 > Missile
+		var2 > Immovable
+		var3 > Immovable
+		var4 > OrientedFlicker limit=7
+		var5 > Chaser stype=var2
+	InteractionSet
+		avatar var2 > bounceForward scoreChange=-2 
+		EOS avatar > removeScore stype=var2 
+		EOS avatar > decreaseSpeedToAll value=20 stype=var3 scoreChange=3 
+		avatar EOS > killAll stype=var3  
+	TerminationSet
+		MultiSpriteCounterSubTypes stype1=var2 stype2=var3 stype3=var3 limit=1 win=False
