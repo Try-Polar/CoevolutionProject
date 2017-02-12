@@ -988,7 +988,6 @@ public void saveGameFromGenome(int[] genome) {
 				}
 				//InteractionBlock size
 				if (currentSymbol.name == "interactionDefEol" && !interactionBlockSizeDetermined) {
-					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 					for (int j=0; j < (genome[genomeTracker] % 5) + 3; j++) {
 						interactionBlockSizeDetermined = true;
 						gameSymbols.add(i,interactionDefEol);

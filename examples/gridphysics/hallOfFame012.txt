@@ -1,0 +1,25 @@
+BasicGame
+	LevelMapping
+		e > avatar
+		w > var1
+		b > var2
+		h > var3
+		i > var4
+	SpriteSet
+		avatar > VerticalAvatar
+		var1 > RandomNPC
+		var2 > Immovable
+		var3 > OrientedFlicker limit=10
+		var4 > RandomAltChaser stype1=avatar stype2=var1 prob=0.7
+	InteractionSet
+		var2 var2 > addHealthPointsToMax value=18 scoreChange=3 
+		var3 avatar > setSpeedForAll value=8 stype=var1  
+		avatar avatar > transformTo stype=var2 forceOrientation=DOWN  
+		var2 var1 > spawnIfHasMore stype=avatar resource=avatar limit=20  
+		EOS avatar > stepBack scoreChange=-3 
+		var1 var3 > pullWithIt  
+		var2 var2 > turnAround  
+		EOS avatar > updateSpawnType stype=avatar spawnPoint=var1  
+	TerminationSet
+		Timeout limit=1140 win=False
+		Timeout limit=830 win=True

@@ -219,7 +219,7 @@ public class EvolutionaryGameDesigner {
 			//randomScore = ArcadeMachine.runOneGame(game, recordLevelFile, true, sampleRandomController, null, 15, 0);			
 			//oneStepScore = ArcadeMachine.runOneGame(game, recordLevelFile, true, sampleOneStepController, null, 15, 0);
 			for (int i=0; i < runs; i++) {
-				doNothingScore = ArcadeMachine.runOneGame(game, recordLevelFile, false, sampleMCTSController, null, 15, 0);
+				doNothingScore = ArcadeMachine.runOneGame(game, recordLevelFile, false, doNothingController, null, 15, 0);
 				MCTSScore = ArcadeMachine.runOneGame(game, recordLevelFile, false, sampleMCTSController, null, 15, 0);
 				MCTSAverageScore += MCTSScore[1];
 				doNothingAverageScore += doNothingScore[1];
@@ -242,6 +242,9 @@ public class EvolutionaryGameDesigner {
 			return -5;
 		}
 		float win_50;
+		MCTSAverageScore = MCTSAverageScore / runs;
+		doNothingAverageScore = doNothingAverageScore / runs;
+		
 		if (MCTSScore[0] > -1 && MCTSScore[2] < 50) {
 			win_50 = -1;
 		} else {
@@ -251,13 +254,14 @@ public class EvolutionaryGameDesigner {
 		if (win && lose) {
 			win_lose = 1;
 		}
-		if (Math.max(MCTSScore[1], doNothingScore[1]) != 0) {
-			RDScore = ((MCTSScore[1] - doNothingScore[1])/ Math.max(MCTSScore[1], doNothingScore[1]));
-		} else if (Math.min(MCTSScore[1], doNothingScore[1]) != 0)  {
-			RDScore = ((MCTSScore[1] - doNothingScore[1])/ Math.min(MCTSScore[1], doNothingScore[1]));
+		if (Math.max(MCTSAverageScore, doNothingAverageScore) != 0) {
+			RDScore = ((MCTSAverageScore - doNothingAverageScore)/ Math.max(MCTSAverageScore, doNothingAverageScore));
+		} else if (Math.min(MCTSAverageScore, doNothingAverageScore) != 0)  {
+			RDScore = ((MCTSAverageScore - doNothingAverageScore)/ Math.min(MCTSAverageScore, doNothingAverageScore));
 		} else {
 			RDScore = 0;
 		}
+		
 		
 		if (Math.max(MCTSScore[0], doNothingScore[0]) != 0) {
 			RDWins = ((MCTSScore[0] - doNothingScore[0])/ Math.max(MCTSScore[0], doNothingScore[0]));
@@ -284,5 +288,17 @@ public class EvolutionaryGameDesigner {
 		System.out.println("FITNESS = " + result);
 		return result;
 		
+	}
+	
+	public double RDtest(double a, double b) {
+		double RDScore;
+		if (Math.max(a, b) != 0) {
+			RDScore = ((a - b)/ Math.max(a, b));
+		} else if (Math.min(a, b) != 0)  {
+			RDScore = ((a - b)/ Math.min(a, b));
+		} else {
+			RDScore = 0;
+		}
+		return RDScore;
 	}
 }
