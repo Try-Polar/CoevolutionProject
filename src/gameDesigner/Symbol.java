@@ -1,6 +1,8 @@
 package gameDesigner;
 
-public class Symbol {
+import java.io.Serializable;
+
+public class Symbol implements Serializable {
 	
 	String name;
 	

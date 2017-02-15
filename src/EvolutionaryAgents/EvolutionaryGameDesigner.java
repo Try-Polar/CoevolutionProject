@@ -100,6 +100,7 @@ public class EvolutionaryGameDesigner {
 	public void makeSingleGame() {
 		initialisePopulation();
 		evaluationFunction(pop[0]);
+		gameDesigner.saveGameFromGenome(pop[0]);
 		writer.close();
 	}
 	
