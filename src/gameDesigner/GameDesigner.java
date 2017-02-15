@@ -10,7 +10,7 @@ import java.util.Random;
 public class GameDesigner {
 	
 	String path ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "earlyAttempts.txt";
-	String savePath ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "hallOfFame011.txt";
+	String savePath ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "hallOfFame015.txt";
 	//C:\Users\Elliot\Documents\GitHub\CoevolutionProject\examples\gridphysics
 	File f = new File(path);
 	File s = new File(savePath);
@@ -941,6 +941,7 @@ public void saveGameFromGenome(int[] genome) {
 
 		//While there are still symbols that need to be expanded
 		while (containsNonTerminals()) {
+			//System.out.println(i);
 			if (i > gameSymbols.size()-1) {
 				i = 0;
 			}
@@ -995,24 +996,7 @@ public void saveGameFromGenome(int[] genome) {
 				}
 				
 				//If symbol is an not optional add children otherwise decide if the the option will be used then continue as before
-				if(((NonTerminalSymbol)currentSymbol).optional == false){
-					//CHOICE SECTION										----------CHOICE SYMBOLS-----------
-					if (((NonTerminalSymbol)currentSymbol).choice == true) {
-						gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(genome[genomeTracker] % (((NonTerminalSymbol)currentSymbol).children.size())));
-						genomeTracker++;
-						if (genomeTracker > genome.length-1) {
-							genomeTracker = 0;
-						}
-						i++;
-					}
-					else {
-						for (int j=0; j<((NonTerminalSymbol)currentSymbol).children.size(); j++) {
-							gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(j));
-							i++;
-						}
-					}
-				}
-				else {
+				if(((NonTerminalSymbol)currentSymbol).optional){  
 					//OPTIONAL SECTION										---------OPTIONAL SYMBOLS-------
 					if (genome[genomeTracker] % 2 == 0) { 
 						for (int j=0; j<((NonTerminalSymbol)currentSymbol).children.size(); j++) {
@@ -1025,12 +1009,28 @@ public void saveGameFromGenome(int[] genome) {
 						genomeTracker = 0;
 					}
 				}
+				else if (((NonTerminalSymbol)currentSymbol).choice == true) {
+					//CHOICE SECTION										----------CHOICE SYMBOLS-----------
+					gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(genome[genomeTracker] % (((NonTerminalSymbol)currentSymbol).children.size())));
+					genomeTracker++;
+					if (genomeTracker > genome.length-1) {
+						genomeTracker = 0;
+					}
+					i++;
+				}
+				else {
+					for (int j=0; j<((NonTerminalSymbol)currentSymbol).children.size(); j++) {
+						System.out.println(((NonTerminalSymbol)currentSymbol).children.get(j).name);
+						gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(j));
+						i++;
+					}
+				}
 			}
 			else {
 				i++;
 			}
 		}
-
+		
 		for (int j=0; j<gameSymbols.size(); j++) {	
 			if (gameSymbols.get(j) instanceof InterchangableSymbol) { 	//	--------INTERCHANGABLE SYMBOLS-----------
 				if ((inLevelBlock) && (((InterchangableSymbol)gameSymbols.get(j)).name == "identifier")) {

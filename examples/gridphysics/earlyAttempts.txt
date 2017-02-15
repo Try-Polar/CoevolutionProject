@@ -1,22 +1,24 @@
 BasicGame
 	LevelMapping
-		g > avatar
-		e > var1
-		b > var2
-		l > var3
-		f > var4
-		v > var5
+		f > avatar
+		v > var1
+		j > var2
+		w > var3
+		n > var4
+		h > var5
 	SpriteSet
-		avatar > OngoingTurningAvatar
-		var1 > Passive
-		var2 > AlternateChaser stype1=var2 stype2=avatar
-		var3 > RandomNPC
-		var4 > Fleeing stype=var3
-		var5 > OrientedFlicker limit=13
+		avatar > ShootAvatar stype=avatar
+		var1 > AlternateChaser stype1=var2 stype2=avatar
+		var2 > RandomBomber stype=var1 total=14 prob=0.2 spawnorientation=RIGHT
+		var3 > Bomber stype=var3 total=1 spawnorientation=LEFT
+		var4 > Missile
+		var5 > Missile
 	InteractionSet
-		EOS EOS > bounceForward  
-		var3 avatar > wrapAround scoreChange=-3 
-		var2 var4 > bounceForward  
-		EOS var4 > reverseDirection scoreChange=-3 
+		EOS avatar > killIfHasMore resource=var1 limit=15  
+		EOS avatar > stepBack  
+		avatar avatar > spawnIfHasLess stype=avatar resource=var3 limit=9  
+		avatar var1 > killAll stype=var2 scoreChange=3 
+		avatar var4 > stepBack scoreChange=-3 
+		var1 var3 > bounceForward  
 	TerminationSet
-		StopCounter stype1=var3 stype2=var2 stype3=avatar limit=20 win=False
+		SpriteCounter stype=var1 limit=11 win=True

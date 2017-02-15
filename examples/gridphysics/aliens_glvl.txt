@@ -1,19 +1,15 @@
 LevelMapping
-    a > portalFast 
-    b > base 
-    c > avatar 
+    a > base 
+    b > portalSlow 
+    c > portalFast 
+    d > avatar 
 
 LevelDescription
-            
-            
-            
-      a     
- b b        
-    b       
-       a    
-  b      b  
-            
-         a  
+  a         
         b   
-           a
- bb      cb 
+  a    a    
+    a       
+c           
+ aa      c  
+            
+      d     

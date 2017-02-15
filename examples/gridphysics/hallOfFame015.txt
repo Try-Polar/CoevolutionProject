@@ -1,0 +1,23 @@
+BasicGame
+	LevelMapping
+		t > avatar
+		w > var1
+		n > var2
+		q > var3
+		v > var4
+		u > var5
+	SpriteSet
+		avatar > OngoingTurningAvatar
+		var1 > RandomNPC
+		var2 > AlternateChaser stype1=var2 stype2=avatar
+		var3 > OrientedFlicker limit=19
+		var4 > Bomber stype=var2 total=19 spawnorientation=DOWN
+		var5 > SpawnPoint stype=var3 total=1 prob=0.5 spawnorientation=DOWN
+	InteractionSet
+		var3 avatar > spawnIfHasLess stype=var1 resource=var3 limit=18 scoreChange=-2 
+		EOS var1 > killIfHasMore resource=avatar limit=10 scoreChange=3 
+		EOS var3 > spawnIfHasMore stype=var2 resource=var1 limit=19 scoreChange=-3 
+		var3 var2 > flipDirection  
+		avatar var3 > spawnBehind stype=var3 scoreChange=-3 
+	TerminationSet
+		SpriteCounter stype=var1 limit=9 win=False

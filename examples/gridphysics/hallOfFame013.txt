@@ -1,0 +1,20 @@
+BasicGame
+	LevelMapping
+		g > avatar
+		r > var1
+		n > var2
+	SpriteSet
+		avatar > OngoingAvatar
+		var1 > Portal stype=avatar
+		var2 > Missile
+	InteractionSet
+		avatar EOS > killAll stype=avatar scoreChange=1 
+		avatar EOS > align  
+		EOS var1 > killIfHasMore resource=avatar limit=19 scoreChange=-3 
+		EOS var1 > addHealthPointsToMax value=4 scoreChange=2 
+		var1 avatar > stepBack scoreChange=2 
+		EOS var1 > wrapAround  
+		avatar avatar > addHealthPointsToMax value=8 scoreChange=1 
+		EOS var1 > removeScore stype=avatar 
+	TerminationSet
+		

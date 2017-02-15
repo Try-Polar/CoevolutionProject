@@ -63,15 +63,16 @@ public class Test
                 "tercio", "thecitadel", "thesnowman",  "waitforbreakfast", "watergame",       //80-84
                 "waves", "whackamole", "wildgunman", "witnessprotection", "wrapsokoban",      //85-89
                 "zelda", "zenpuzzle", "earlyAttempts", "hallOfFame001", "hallOfFame002",	  //90-94
-                "hallOfFame003", "hallOfFame004", "hallOfFame005", "hallOfFame006", "hallOfFame008"};//95-99
-
+                "hallOfFame003", "hallOfFame004", "hallOfFame005", "hallOfFame006", "hallOfFame007",//95-99
+        		"hallOfFame008", "hallOfFame009", "hallOfFame010", "hallOfFame011","hallOfFame012",//100-104
+        		"hallOfFame013", "hallOfFame014"};//105-109 HoF13:0.5
 
         //Other settings
         boolean visuals = true;
         int seed = new Random().nextInt();
 
         //Game and level to play
-        int gameIdx = 0;
+        int gameIdx = 105;
         int levelIdx = 0; //level names from 0 to 4 (game_lvlN.txt).
         String game = gamesPath + games[gameIdx] + ".txt";
         String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
@@ -102,7 +103,7 @@ public class Test
 
         //if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
         	//ArcadeMachine.playOneGeneratedLevel(game, recordActionsFile, recordLevelFile, seed);
-        //	ArcadeMachine.runOneGeneratedLevel(game, true, doNothingController, recordActionsFile, recordLevelFile, 5, false);
+        //	ArcadeMachine.runOneGeneratedLevel(game, true, sampleMCTSController, recordActionsFile, recordLevelFile, 5, false);
         //}
         
         //6. This starts a game, in a generated level created by a specific level generator played by a selected agent
