@@ -39,7 +39,7 @@ public class GameDesigner {
 	NonTerminalSymbol charMapNewline = new NonTerminalSymbol("charMapNewline", false, false, false); //Will be repeated but is not defined as a repeatable symbol
 	NonTerminalSymbol spriteDefNewline = new NonTerminalSymbol("spriteDefNewline", false, false, false); //Will be repeated but is not defined as a repeatable symbol
 	NonTerminalSymbol interactionDefEol = new NonTerminalSymbol("interactionDefEol", false, false, false); //Will be repeated but is not defined as a repeatable symbol
-	NonTerminalSymbol terminationDefEol = new NonTerminalSymbol("terminationDefEol", true, false, false);
+	NonTerminalSymbol terminationDefEol = new NonTerminalSymbol("terminationDefEol", false, false, false); //Will be repeated but is not defined as a repeatable symbol
 	NonTerminalSymbol spaceSpriteType = new NonTerminalSymbol("spaceSpriteType", true, false, false);
 	NonTerminalSymbol spriteDefEol = new NonTerminalSymbol("spriteDefEol", true, false, false);
 	NonTerminalSymbol spaceOption = new NonTerminalSymbol("spaceOption", true, false, false);
@@ -322,6 +322,7 @@ public class GameDesigner {
 				terminationBlock.addChild(indent);
 				terminationBlock.addChild(terminationSet);
 				terminationBlock.addChild(eol);
+				terminationBlock.addChild(terminationDefEol);
 				terminationBlock.addChild(terminationDefEol);
 				//char-map
 				charMap.addChild(charVar);
@@ -938,6 +939,7 @@ public void saveGameFromGenome(int[] genome) {
 		int variableTracker = 0;
 		boolean inLevelBlock = false;
 		boolean inSpriteBlock = false;
+		int terminationTracker = 0;
 
 		//While there are still symbols that need to be expanded
 		while (containsNonTerminals()) {
@@ -1052,6 +1054,11 @@ public void saveGameFromGenome(int[] genome) {
 						genomeTracker = 0;
 					}
 				}
+				else if (((InterchangableSymbol)gameSymbols.get(j)).name == "terminationOption") {
+					
+					writer.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[terminationTracker]);
+					terminationTracker++;
+				}
 				else {	
 					
 					System.out.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[genome[genomeTracker] % ((InterchangableSymbol)gameSymbols.get(j)).classStrings.length]);
@@ -1107,7 +1114,8 @@ public void createGameFromGenome(int[] genome) {
 	int variableTracker = 0;
 	boolean inLevelBlock = false;
 	boolean inSpriteBlock = false;
-
+	int terminationTracker = 0;
+	
 	//While there are still symbols that need to be expanded
 	while (containsNonTerminals()) {
 		//System.out.println(i);
@@ -1220,6 +1228,11 @@ public void createGameFromGenome(int[] genome) {
 				if (genomeTracker > genome.length-1) {
 					genomeTracker = 0;
 				}
+			}
+			else if (((InterchangableSymbol)gameSymbols.get(j)).name == "terminationOption") {
+				
+				writer.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[terminationTracker]);
+				terminationTracker++;
 			}
 			else {	
 				

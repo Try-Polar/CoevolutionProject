@@ -1,0 +1,13 @@
+LevelMapping
+    a > avatar 
+    b > var1 
+    c > var3 
+
+LevelDescription
+ a     
+  b bb 
+     b 
+     bc
+ c     
+      c
+   cb  
