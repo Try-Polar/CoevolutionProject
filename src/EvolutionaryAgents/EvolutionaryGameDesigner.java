@@ -27,8 +27,7 @@ public class EvolutionaryGameDesigner {
     
     String constructiveLevelGenerator = "levelGenerators.constructiveLevelGenerator.LevelGenerator";
 	
-
-	int populationSize = 5;
+	int populationSize = 7;
 	int generations = 20;
 	int individualSize = 500;
 	float mutationProbability = 0.5f;

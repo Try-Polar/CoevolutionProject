@@ -63,10 +63,14 @@ public class Test
                 "tercio", "thecitadel", "thesnowman",  "waitforbreakfast", "watergame",       //80-84
                 "waves", "whackamole", "wildgunman", "witnessprotection", "wrapsokoban",      //85-89
                 "zelda", "zenpuzzle", "earlyAttempts", "hallOfFame001", "hallOfFame002",	  //90-94
+<<<<<<< HEAD
                 "hallOfFame003", "hallOfFame004", "hallOfFame005", "hallOfFame006", "hallOfFame007",//95-99
         		"hallOfFame008", "hallOfFame009", "hallOfFame010", "hallOfFame011", "hallOfFame012", //100-104 12:0.5
         		"hallOfFame013", "hallOfFame014", "hallOfFame015", "hallOfFame016"}; //105-109 13:0.5 14:21.33 15:? 16:0.499
         
+=======
+                "hallOfFame003", "hallOfFame004", "hallOfFame005", "hallOfFame006", "hallOfFame008"};//95-99
+>>>>>>> origin/Development
 
 
         //Other settings
