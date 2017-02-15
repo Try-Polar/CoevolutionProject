@@ -1,8 +1,9 @@
 LevelMapping
-    a > avatar 
+    a > var3 
+    b > avatar 
 
 LevelDescription
+aba 
+   a
     
     
-    
-  a 

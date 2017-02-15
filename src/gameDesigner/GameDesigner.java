@@ -10,7 +10,7 @@ import java.util.Random;
 public class GameDesigner {
 	
 	String path ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "earlyAttempts.txt";
-	String savePath ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "hallOfFame012.txt";
+	String savePath ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "hallOfFame016.txt";
 
 	//C:\Users\Elliot\Documents\GitHub\CoevolutionProject\examples\gridphysics
 	File f = new File(path);
@@ -40,7 +40,7 @@ public class GameDesigner {
 	NonTerminalSymbol charMapNewline = new NonTerminalSymbol("charMapNewline", false, false, false); //Will be repeated but is not defined as a repeatable symbol
 	NonTerminalSymbol spriteDefNewline = new NonTerminalSymbol("spriteDefNewline", false, false, false); //Will be repeated but is not defined as a repeatable symbol
 	NonTerminalSymbol interactionDefEol = new NonTerminalSymbol("interactionDefEol", false, false, false); //Will be repeated but is not defined as a repeatable symbol
-	NonTerminalSymbol terminationDefEol = new NonTerminalSymbol("terminationDefEol", true, false, false);
+	NonTerminalSymbol terminationDefEol = new NonTerminalSymbol("terminationDefEol", false, false, false); //Will be repeated but is not defined as a repeatable symbol
 	NonTerminalSymbol spaceSpriteType = new NonTerminalSymbol("spaceSpriteType", true, false, false);
 	NonTerminalSymbol spriteDefEol = new NonTerminalSymbol("spriteDefEol", true, false, false);
 	NonTerminalSymbol spaceOption = new NonTerminalSymbol("spaceOption", true, false, false);
@@ -323,6 +323,7 @@ public class GameDesigner {
 				terminationBlock.addChild(indent);
 				terminationBlock.addChild(terminationSet);
 				terminationBlock.addChild(eol);
+				terminationBlock.addChild(terminationDefEol);
 				terminationBlock.addChild(terminationDefEol);
 				//char-map
 				charMap.addChild(charVar);
@@ -939,9 +940,11 @@ public void saveGameFromGenome(int[] genome) {
 		int variableTracker = 0;
 		boolean inLevelBlock = false;
 		boolean inSpriteBlock = false;
+		int terminationTracker = 0;
 
 		//While there are still symbols that need to be expanded
 		while (containsNonTerminals()) {
+			//System.out.println(i);
 			if (i > gameSymbols.size()-1) {
 				i = 0;
 			}
@@ -996,24 +999,7 @@ public void saveGameFromGenome(int[] genome) {
 				}
 				
 				//If symbol is an not optional add children otherwise decide if the the option will be used then continue as before
-				if(((NonTerminalSymbol)currentSymbol).optional == false){
-					//CHOICE SECTION										----------CHOICE SYMBOLS-----------
-					if (((NonTerminalSymbol)currentSymbol).choice == true) {
-						gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(genome[genomeTracker] % (((NonTerminalSymbol)currentSymbol).children.size())));
-						genomeTracker++;
-						if (genomeTracker > genome.length-1) {
-							genomeTracker = 0;
-						}
-						i++;
-					}
-					else {
-						for (int j=0; j<((NonTerminalSymbol)currentSymbol).children.size(); j++) {
-							gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(j));
-							i++;
-						}
-					}
-				}
-				else {
+				if(((NonTerminalSymbol)currentSymbol).optional){  
 					//OPTIONAL SECTION										---------OPTIONAL SYMBOLS-------
 					if (genome[genomeTracker] % 2 == 0) { 
 						for (int j=0; j<((NonTerminalSymbol)currentSymbol).children.size(); j++) {
@@ -1026,12 +1012,28 @@ public void saveGameFromGenome(int[] genome) {
 						genomeTracker = 0;
 					}
 				}
+				else if (((NonTerminalSymbol)currentSymbol).choice == true) {
+					//CHOICE SECTION										----------CHOICE SYMBOLS-----------
+					gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(genome[genomeTracker] % (((NonTerminalSymbol)currentSymbol).children.size())));
+					genomeTracker++;
+					if (genomeTracker > genome.length-1) {
+						genomeTracker = 0;
+					}
+					i++;
+				}
+				else {
+					for (int j=0; j<((NonTerminalSymbol)currentSymbol).children.size(); j++) {
+						System.out.println(((NonTerminalSymbol)currentSymbol).children.get(j).name);
+						gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(j));
+						i++;
+					}
+				}
 			}
 			else {
 				i++;
 			}
 		}
-
+		
 		for (int j=0; j<gameSymbols.size(); j++) {	
 			if (gameSymbols.get(j) instanceof InterchangableSymbol) { 	//	--------INTERCHANGABLE SYMBOLS-----------
 				if ((inLevelBlock) && (((InterchangableSymbol)gameSymbols.get(j)).name == "identifier")) {
@@ -1052,6 +1054,11 @@ public void saveGameFromGenome(int[] genome) {
 					if (genomeTracker > genome.length-1) {
 						genomeTracker = 0;
 					}
+				}
+				else if (((InterchangableSymbol)gameSymbols.get(j)).name == "terminationOption") {
+					
+					writer.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[terminationTracker]);
+					terminationTracker++;
 				}
 				else {	
 					
@@ -1108,7 +1115,8 @@ public void createGameFromGenome(int[] genome) {
 	int variableTracker = 0;
 	boolean inLevelBlock = false;
 	boolean inSpriteBlock = false;
-
+	int terminationTracker = 0;
+	
 	//While there are still symbols that need to be expanded
 	while (containsNonTerminals()) {
 		//System.out.println(i);
@@ -1221,6 +1229,11 @@ public void createGameFromGenome(int[] genome) {
 				if (genomeTracker > genome.length-1) {
 					genomeTracker = 0;
 				}
+			}
+			else if (((InterchangableSymbol)gameSymbols.get(j)).name == "terminationOption") {
+				
+				writer.print(((InterchangableSymbol)gameSymbols.get(j)).classStrings[terminationTracker]);
+				terminationTracker++;
 			}
 			else {	
 				

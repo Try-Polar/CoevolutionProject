@@ -51,13 +51,13 @@ public class EvolutionaryGameDesigner {
 	public EvolutionaryGameDesigner() {
 		gameDesigner = new GameDesigner();
 		
-		/*f.getParentFile().mkdirs();
+		f.getParentFile().mkdirs();
 		try {
 		f.createNewFile();
 		writer = new PrintWriter(f);
 		} catch (IOException e) { 
 			e.printStackTrace();
-		}*/
+		}
 	}
 	
 	public void eaSimple() {
