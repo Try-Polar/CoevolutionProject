@@ -1,0 +1,43 @@
+RDScore -1.0
+0.0
+RDWins 0.0
+0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.0
+RDScore -1.0
+0.0
+RDWins 0.0
+0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.0
+RDScore -1.0
+0.0
+RDWins 0.0
+0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.0
+RDScore -1.0
+0.0
+RDWins 0.0
+0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.0
+RDScore 1.0
+3992.0
+RDWins 0.0
+0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.5
+RDScore -1.0
+0.0
+RDWins 0.0
+0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.0
+Best fitness is 0.5

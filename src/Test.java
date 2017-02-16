@@ -101,10 +101,10 @@ public class Test
         
         //5. This starts a game, in a generated level created by a specific level generator played by a human
 
-        if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
+        //if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
         	//ArcadeMachine.playOneGeneratedLevel(game, recordActionsFile, recordLevelFile, seed);
-        	ArcadeMachine.runOneGeneratedLevel(game, true, sampleMCTSController, recordActionsFile, recordLevelFile, 5, false);
-        }
+        //	ArcadeMachine.runOneGeneratedLevel(game, true, sampleMCTSController, recordActionsFile, recordLevelFile, 5, false);
+        //}
         
         //6. This starts a game, in a generated level created by a specific level generator played by a selected agent
         
