@@ -21,6 +21,7 @@ public class Test
         EvolutionaryGameDesigner evoGameDesigner = new EvolutionaryGameDesigner();
         evoGameDesigner.eaSimple();
         //evoGameDesigner.makeSingleGame();
+    	//test.loadGame();
     	
     	//Available controllers:
     	String sampleRandomController = "controllers.singlePlayer.sampleRandom.Agent";
