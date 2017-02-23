@@ -1,24 +1,19 @@
 BasicGame
 	LevelMapping
-		v > avatar
-		k > var1
-		u > var2
-		t > var3
-		n > var4
+		e > avatar
+		v > var1
+		z > var2
+		j > var3
 	SpriteSet
-		avatar > ShootAvatar stype=avatar
-		var1 > Chaser stype=avatar
-		var2 > Portal stype=avatar
-		var2 > OrientedFlicker limit=18
-		var2 > Door
+		avatar > VerticalAvatar
+		var1 > Passive
+		var2 > Passive
+		var3 > Flicker limit=7
 	InteractionSet
-		var4 avatar > reverseDirection  
-		var1 EOS > killAll stype=avatar 
-		var1 var4 > flipDirection 
-		var1 var1 > transformToRandomChild stype=var1 stype_other=avatar scoreChange=3
-		var2 EOS > transformToRandomChild stype=avatar 
-		var4 var4 > transformToRandomChild stype=avatar scoreChange=2 
-		var5 var4 > decreaseSpeedToAll value=9 stype=avatar 
+		avatar avatar > decreaseSpeedToAll value=11 stype=avatar scoreChange=-2 
+		var1 EOS > pullWithIt  
+		var2 EOS > transformToRandomChild stype=avatar stype_other=avatar  
+		EOS var1 > killIfHasMore resource=avatar limit=20  
 	TerminationSet
-		SpriteCounter stype=var4 limit=4 win=True
-		SpriteCounter stype=var4 limit=13 win=False
+		SpriteCounter stype=var1 limit=10 win=True
+		SpriteCounter stype=var2 limit=11 win=False

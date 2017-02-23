@@ -31,11 +31,12 @@ public class EvolutionaryGameDesigner {
     String constructiveLevelGenerator = "levelGenerators.constructiveLevelGenerator.LevelGenerator";
 	
 	int populationSize = 6;
-	int generations = 10;
+	int generations = 20;
 	int individualSize = 500;
+	int noOfTourns = populationSize/3;
 	float mutationProbability = 0.5f;
 	float crossoverProbability = 0.5f;
-	float indpb = 0.4f;
+	float indpb = 0.1f;
 	
 	double[] fitnesses =new double[populationSize];
 	int[][] pop = new int[populationSize][individualSize];
@@ -124,7 +125,7 @@ public class EvolutionaryGameDesigner {
 		
 		for (int gen=0; gen < generations; gen++) {
 			//Selection, Crossover, Mutation
-			for (int i=0; i<populationSize/3; i++) {
+			for (int i=0; i<noOfTourns; i++) {
 				popSymbols = symbolTournament(popSymbols);
 			}
 			
@@ -186,39 +187,54 @@ public class EvolutionaryGameDesigner {
 	private List<List<Symbol>> symbolTournament(List<List<Symbol>> popSymbols)
 	{
 		//System.out.println("Tournament");
-		int a,b,W,L;
+		int a,b,c,d, W1, W2, L1, L2;
 		//Select 2 members of the population
 		a = rnd.nextInt(populationSize);
 		do {
 			b = rnd.nextInt(populationSize);
 		} while (a == b);
+		do {
+			c = rnd.nextInt(populationSize);
+		} while (c == a || c == b);
+		do {
+			d = rnd.nextInt(populationSize);
+		} while (d == a || d == b || d == c);
 		
 		//System.out.println("Individuals Chosen");
 		//determine which is better through fitness
-		/*if (fitnesses[a] > fitnesses[b]) {
-			L = b;
-			W = a;
+		if (fitnesses[a] > fitnesses[b]) {
+			L1 = b;
+			W1 = a;
 		} else {
-			L = a;
-			W = b;
-		}*/
+			L1 = a;
+			W1 = b;
+		}
+		if (fitnesses[c] > fitnesses[d]) {
+			L2 = d;
+			W2 = c;
+		} else {
+			L2 = c;
+			W2 = d;
+		}
+
 		
 		//crossover
 		if (rnd.nextDouble() < crossoverProbability) {
-			List<List<Symbol>> crossovers = gameDesigner.onePointCrossover(popSymbols.get(a), popSymbols.get(b));
-			popSymbols.set(a, crossovers.get(0));
-			popSymbols.set(b, crossovers.get(1));
+			List<List<Symbol>> crossovers = gameDesigner.onePointCrossover(popSymbols.get(W1), popSymbols.get(W2));
+			popSymbols.set(W1, crossovers.get(0));
+			popSymbols.set(W2, crossovers.get(1));
 		}
+		
 		//System.out.println("crossover complete");
 		//mutation
 		if (rnd.nextDouble() < mutationProbability) {
-			popSymbols.set(a, gameDesigner.mutate(popSymbols.get(a), indpb));
-			popSymbols.set(b, gameDesigner.mutate(popSymbols.get(b), indpb));
+			popSymbols.set(L1, gameDesigner.mutate(popSymbols.get(L1), indpb));
+			popSymbols.set(L2, gameDesigner.mutate(popSymbols.get(L2), indpb));
 		}
 		//System.out.println("mutation complete");
 		return popSymbols;
 	}
-	
+		
 	private void tournament2() {
 		int a,b,W,L;
 		//Select 2 members of the population
