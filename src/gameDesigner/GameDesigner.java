@@ -1521,13 +1521,14 @@ private List<Symbol> expandSymbol(int i, List<Symbol> game)
 				//System.out.println("Choice");
 				//CHOICE SECTION										----------CHOICE SYMBOLS-----------
 				if (currentSymbol.name == "identifier") {
-					game.add(i, ((NonTerminalSymbol)currentSymbol).children.get(rnd.nextInt(255) % variablesUsed));
+					System.out.println("Variables Used " + variablesUsed);
+					game.add(i, ((NonTerminalSymbol)currentSymbol).children.get(rnd.nextInt(variablesUsed)));
 				}
 				else if (currentSymbol.name == "parameter") {
-					game.add(i, ((NonTerminalSymbol)currentSymbol).children.get(rnd.nextInt(255) % (variablesUsed + 1)));
+					game.add(i, ((NonTerminalSymbol)currentSymbol).children.get(rnd.nextInt(variablesUsed + 1)));
 				}		
 				else {
-					game.add(i, ((NonTerminalSymbol)currentSymbol).children.get(rnd.nextInt(255) % (((NonTerminalSymbol)currentSymbol).children.size())));
+					game.add(i, ((NonTerminalSymbol)currentSymbol).children.get(rnd.nextInt((((NonTerminalSymbol)currentSymbol).children.size()))));
 					i++;
 				}
 			}
