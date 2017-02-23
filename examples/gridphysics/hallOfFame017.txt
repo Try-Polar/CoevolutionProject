@@ -1,0 +1,20 @@
+BasicGame
+	LevelMapping
+		c > avatar
+		n > var1
+		q > var2
+		m > var3
+	SpriteSet
+		avatar > VerticalAvatar
+		var1 > Fleeing stype=avatar
+		var2 > Door
+		var3 > Immovable
+	InteractionSet
+		avatar avatar > flipDirection  
+		avatar var2 > killAll stype=avatar scoreChange=-3 
+		avatar var2 > turnAround scoreChange=1 
+		avatar avatar > killIfFromAbove scoreChange=1 
+		EOS var2 > spawnIfHasLess stype=avatar resource=avatar limit=18  
+	TerminationSet
+		
+		SpriteCounterMore stype=var1 limit=5 win=True

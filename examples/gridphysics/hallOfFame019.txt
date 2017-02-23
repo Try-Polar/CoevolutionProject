@@ -1,0 +1,21 @@
+BasicGame
+	LevelMapping
+		o > avatar
+		y > var1
+		e > var2
+	SpriteSet
+		avatar > HorizontalAvatar
+		var1 > OrientedFlicker limit=12
+		var2 > OrientedFlicker limit=14
+	InteractionSet
+		var1 avatar > transformToRandomChild stype=avatar  
+		avatar var1 > transformIfCounts stype=avatar stypeCount=avatar geq=10 leq=3  
+		EOS EOS > undoAll  
+		EOS var1 > removeScore stype=avatar 
+		avatar EOS > updateSpawnType stype=avatar spawnPoint=avatar  
+		var1 avatar > transformToRandomChild stype=avatar stype_other=avatar scoreChange=-2 
+		EOS var1 > setSpeedForAll value=20 stype=avatar  
+		EOS var1 > undoAll scoreChange=3 
+	TerminationSet
+		Timeout limit=1450 win=True
+		Timeout limit=1450 win=False

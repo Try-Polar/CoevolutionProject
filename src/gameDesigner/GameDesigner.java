@@ -14,8 +14,9 @@ import java.io.ObjectOutputStream;
 public class GameDesigner {
 	
 	String path ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "earlyAttempts.txt";
-	String savePath ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "hallOfFame020.txt";
-	String saveSymbols = "C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "src" + File.separator + "gameDesigner" + File.separator + "GamesAsSymbols" + File.separator + "hallOfFame020.ser";
+	String savePath ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "hallOfFame019.txt";
+	String saveSymbols = "C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "src" + File.separator + "gameDesigner" + File.separator + "GamesAsSymbols" + File.separator + "hallOfFame019.ser";
+
 	//C:\Users\Elliot\Documents\GitHub\CoevolutionProject\examples\gridphysics
 	File f = new File(path);
 	File s = new File(savePath);

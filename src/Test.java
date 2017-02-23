@@ -19,9 +19,7 @@ public class Test
     {
         //GameDesigner test = new GameDesigner();
         EvolutionaryGameDesigner evoGameDesigner = new EvolutionaryGameDesigner();
-        //evoGameDesigner.eaSimple();
-        evoGameDesigner.eaSymbolsSimple();
-        //evoGameDesigner.singleSymbolRun();
+        evoGameDesigner.eaSimple();
         //evoGameDesigner.makeSingleGame();
     	//test.loadGame();
     	
@@ -68,15 +66,14 @@ public class Test
                 "zelda", "zenpuzzle", "earlyAttempts", "hallOfFame001", "hallOfFame002",	  //90-94
                 "hallOfFame003", "hallOfFame004", "hallOfFame005", "hallOfFame006", "hallOfFame007",//95-99
         		"hallOfFame008", "hallOfFame009", "hallOfFame010", "hallOfFame011", "hallOfFame012", //100-104 12:0.5
-        		"hallOfFame013", "hallOfFame014", "hallOfFame015", "hallOfFame016", "hallOfFame017", //105-109 13:0.5 14:21.33 15:0.5 16:0.499 17:0.5
-        		"hallfOfFame018"}; //110-114 18:0.5
+        		"hallOfFame013", "hallOfFame014", "hallOfFame015", "hallOfFame016", "hallOfFame017"}; //105-109 13:0.5 14:21.33 15:? 16:0.499 17:0.5
 
         //Other settings
         boolean visuals = true;
         int seed = new Random().nextInt();
 
         //Game and level to play
-        int gameIdx = 108;
+        int gameIdx = 106;
         int levelIdx = 0; //level names from 0 to 4 (game_lvlN.txt).
         String game = gamesPath + games[gameIdx] + ".txt";
         String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
