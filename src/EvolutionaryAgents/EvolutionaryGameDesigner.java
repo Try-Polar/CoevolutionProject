@@ -31,7 +31,7 @@ public class EvolutionaryGameDesigner {
     String constructiveLevelGenerator = "levelGenerators.constructiveLevelGenerator.LevelGenerator";
 	
 	int populationSize = 6;
-	int generations = 10;
+	int generations = 25;
 	int individualSize = 500;
 	float mutationProbability = 0.5f;
 	float crossoverProbability = 0.5f;
