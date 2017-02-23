@@ -3,11 +3,14 @@ package EvolutionaryAgents;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 import java.lang.Math;
 
 import core.ArcadeMachine;
 import gameDesigner.GameDesigner;
+import gameDesigner.Symbol;
 
 
 public class EvolutionaryGameDesigner {
@@ -28,17 +31,16 @@ public class EvolutionaryGameDesigner {
     String constructiveLevelGenerator = "levelGenerators.constructiveLevelGenerator.LevelGenerator";
 	
 	int populationSize = 6;
-	int generations = 20;
+	int generations = 10;
 	int individualSize = 500;
 	float mutationProbability = 0.5f;
 	float crossoverProbability = 0.5f;
 	float indpb = 0.4f;
 	
-	int evals = 0;
-	
 	double[] fitnesses =new double[populationSize];
-	
 	int[][] pop = new int[populationSize][individualSize];
+	
+	int evals = 0;
 	
 	String gamesPath = "examples/gridphysics/";
 	String gameName = "earlyAttempts";
@@ -59,7 +61,7 @@ public class EvolutionaryGameDesigner {
 		}
 	}
 	
-	public void eaSimple() {
+	public void eaSimple() {		
 		initialisePopulation();
 		int[] hof = new int[individualSize];
 		double hofFitness = -100;
@@ -86,11 +88,58 @@ public class EvolutionaryGameDesigner {
 					hof = pop[ind];
 					hofFitness = fitnesses[ind];
 				}
-			}
-			
+			}			
 		}
 		
 		gameDesigner.saveGameFromGenome(hof);
+		writer.println("Best fitness is " + hofFitness);
+		System.out.println("Best fitness is " + hofFitness);
+		System.out.println("Finished after " + evals + " evaluations");
+		writer.close();
+	}
+	
+	public void eaSymbolsSimple() {
+		initialisePopulation();
+		List<Symbol> hof = new LinkedList<Symbol>();
+		double hofFitness = -100;
+		
+		List<List<Symbol>> popSymbols = new LinkedList<List<Symbol>>();
+		//Setup lists of symbols
+		for (int i=0; i<populationSize; i++)
+		{
+			//Prevents list being filled with the same game repeatedly
+			List<Symbol> newList = new LinkedList<Symbol>(gameDesigner.createGameFromGenome(pop[i]));
+			popSymbols.add(newList);
+		}
+		
+		//InitialEvaluation
+		for (int ind=0; ind < populationSize; ind++)	{
+			fitnesses[ind] = evaluationFunction(popSymbols.get(ind));
+			//System.out.println("Finished Eval");
+			if (fitnesses[ind] > hofFitness) {
+				hof = popSymbols.get(ind);
+				hofFitness = fitnesses[ind];
+			}
+		}
+		
+		for (int gen=0; gen < generations; gen++) {
+			//Selection, Crossover, Mutation
+			for (int i=0; i<populationSize/3; i++) {
+				popSymbols = symbolTournament(popSymbols);
+			}
+			
+			//Evaluation
+			for (int ind=0; ind < populationSize; ind++)	{
+				fitnesses[ind] = evaluationFunction(popSymbols.get(ind));
+				//System.out.println("Finished Eval");
+				if (fitnesses[ind] > hofFitness) {
+					hof = popSymbols.get(ind);
+					hofFitness = fitnesses[ind];
+				}
+			}
+		}
+		
+		gameDesigner.saveSymbolsToFile(hof);
 		writer.println("Best fitness is " + hofFitness);
 		System.out.println("Best fitness is " + hofFitness);
 		System.out.println("Finished after " + evals + " evaluations");
@@ -102,6 +151,72 @@ public class EvolutionaryGameDesigner {
 		evaluationFunction(pop[0]);
 		gameDesigner.saveGameFromGenome(pop[0]);
 		writer.close();
+	}
+	
+	public void singleSymbolRun()
+	{
+		initialisePopulation();
+		List<List<Symbol>> popSymbols = new LinkedList<List<Symbol>>();
+		//Setup lists of symbols
+		List<Symbol> newList = new LinkedList<Symbol>(gameDesigner.createGameFromGenome(pop[0]));
+		popSymbols.add(newList);
+		newList = new LinkedList<Symbol>(gameDesigner.createGameFromGenome(pop[1]));
+		popSymbols.add(newList);
+		
+		
+		//popSymbols.set(0, gameDesigner.mutate(popSymbols.get(0), indpb));
+		System.out.println("Size: " + popSymbols.size());
+		for (int i=0; i<popSymbols.size(); i++)
+		{
+			System.out.println("--------GAME " + i + "------------");
+			gameDesigner.writeSymbolsToFile(popSymbols.get(i));
+		}
+		
+		List<List<Symbol>> crossovers = gameDesigner.onePointCrossover(popSymbols.get(0), popSymbols.get(1));
+		popSymbols.set(0, crossovers.get(0));
+		popSymbols.set(1, crossovers.get(1));
+		
+		System.out.println("--------GAME 0------------");
+		gameDesigner.writeSymbolsToFile(popSymbols.get(0));
+		System.out.println("--------GAME 1------------");
+		gameDesigner.writeSymbolsToFile(popSymbols.get(1));
+		
+	}
+	
+	private List<List<Symbol>> symbolTournament(List<List<Symbol>> popSymbols)
+	{
+		//System.out.println("Tournament");
+		int a,b,W,L;
+		//Select 2 members of the population
+		a = rnd.nextInt(populationSize);
+		do {
+			b = rnd.nextInt(populationSize);
+		} while (a == b);
+		
+		//System.out.println("Individuals Chosen");
+		//determine which is better through fitness
+		/*if (fitnesses[a] > fitnesses[b]) {
+			L = b;
+			W = a;
+		} else {
+			L = a;
+			W = b;
+		}*/
+		
+		//crossover
+		if (rnd.nextDouble() < crossoverProbability) {
+			List<List<Symbol>> crossovers = gameDesigner.onePointCrossover(popSymbols.get(a), popSymbols.get(b));
+			popSymbols.set(a, crossovers.get(0));
+			popSymbols.set(b, crossovers.get(1));
+		}
+		//System.out.println("crossover complete");
+		//mutation
+		if (rnd.nextDouble() < mutationProbability) {
+			popSymbols.set(a, gameDesigner.mutate(popSymbols.get(a), indpb));
+			popSymbols.set(b, gameDesigner.mutate(popSymbols.get(b), indpb));
+		}
+		//System.out.println("mutation complete");
+		return popSymbols;
 	}
 	
 	private void tournament2() {
@@ -289,6 +404,106 @@ public class EvolutionaryGameDesigner {
 		System.out.println("FITNESS = " + result);
 		return result;
 		
+	}
+	
+	public double evaluationFunction(List<Symbol> individual)
+	{
+		//If game does not run return negative score for now if game runs return score of 0
+				//Strings will later be changed to variables
+				evals++;
+				double[] randomScore, oneStepScore, MCTSScore, doNothingScore;
+				MCTSScore = new double[3];
+				doNothingScore = new double[3];
+				int runs = 5;
+				
+				boolean win = false;
+				boolean lose = false;
+				int MCTSWins = 0;
+				int doNothingWins = 0;
+				double MCTSAverageScore = 0;
+				double doNothingAverageScore = 0;
+				double RDScore;
+				double RDWins;
+				
+				System.out.println("evaluation is begining");
+				gameDesigner.writeSymbolsToFile(individual);
+				try {
+					System.out.println("valid game########################## I think");
+					//ArcadeMachine.runOneGame("examples/gridphysics/earlyattempts.txt", "examples/gridphysics/earlyAttempts_lvl0.txt", true, sampleMCTSController, null, 15, 0);
+					if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
+			        	ArcadeMachine.runOneGeneratedLevel(game, false, sampleMCTSController, recordActionsFile, recordLevelFile, 5, false);
+			        }
+					//randomScore = ArcadeMachine.runOneGame(game, recordLevelFile, true, sampleRandomController, null, 15, 0);			
+					//oneStepScore = ArcadeMachine.runOneGame(game, recordLevelFile, true, sampleOneStepController, null, 15, 0);
+					for (int i=0; i < runs; i++) {
+						doNothingScore = ArcadeMachine.runOneGame(game, recordLevelFile, false, doNothingController, null, 15, 0);
+						MCTSScore = ArcadeMachine.runOneGame(game, recordLevelFile, false, sampleMCTSController, null, 15, 0);
+						MCTSAverageScore += MCTSScore[1];
+						doNothingAverageScore += doNothingScore[1];
+						if (MCTSScore[0] == 0) {
+							MCTSWins++;
+							win = true;
+						} else {
+							lose = true;
+						}
+						if (doNothingScore[0] == 0) {
+							doNothingWins++;
+							win = true;
+						} else {
+							lose = true;
+						}
+					}
+
+				} catch (Exception e) {
+					System.out.println("invalid game----------------------------------------------------------------------");
+					return -5;
+				}
+				float win_50;
+				MCTSAverageScore = MCTSAverageScore / runs;
+				doNothingAverageScore = doNothingAverageScore / runs;
+				
+				if (MCTSScore[0] > -1 && MCTSScore[2] < 50) {
+					win_50 = -1;
+				} else {
+					win_50 = 1;
+				}
+				int win_lose = 0;
+				if (win && lose) {
+					win_lose = 1;
+				}
+				if (Math.max(MCTSAverageScore, doNothingAverageScore) != 0) {
+					RDScore = ((MCTSAverageScore - doNothingAverageScore)/ Math.max(MCTSAverageScore, doNothingAverageScore));
+				} else if (Math.min(MCTSAverageScore, doNothingAverageScore) != 0)  {
+					RDScore = ((MCTSAverageScore - doNothingAverageScore)/ Math.min(MCTSAverageScore, doNothingAverageScore));
+				} else {
+					RDScore = 0;
+				}
+				
+				
+				if (Math.max(MCTSScore[0], doNothingScore[0]) != 0) {
+					RDWins = ((MCTSScore[0] - doNothingScore[0])/ Math.max(MCTSScore[0], doNothingScore[0]));
+				} else if (Math.min(MCTSScore[0], doNothingScore[0]) != 0) {
+					RDWins = ((MCTSScore[0] - doNothingScore[0])/ Math.min(MCTSScore[0], doNothingScore[0]));
+				} else {
+					RDWins = 0;
+				}
+				
+				System.out.println("RDScore " + RDScore);
+				System.out.println(Math.max(MCTSScore[1], doNothingScore[1]));
+				System.out.println("RDWins " + RDWins);
+				System.out.println(Math.max(MCTSScore[0], doNothingScore[0]));
+				System.out.println("win_50 " + win_50);
+				System.out.println("win_lose " + win_lose);
+				writer.println("RDScore " + RDScore);
+				writer.println(Math.max(MCTSScore[1], doNothingScore[1]));
+				writer.println("RDWins " + RDWins);
+				writer.println(Math.max(MCTSScore[0], doNothingScore[0]));
+				writer.println("win_50 " + win_50);
+				writer.println("win_lose " + win_lose);
+				double result = (RDScore + RDWins + win_50 + win_lose)/4;
+				writer.println("FITNESS = " + result);
+				System.out.println("FITNESS = " + result);
+				return result;
 	}
 	
 	public double RDtest(double a, double b) {
