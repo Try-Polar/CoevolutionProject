@@ -1,25 +1,24 @@
 BasicGame
 	LevelMapping
-		e > avatar
-		n > var1
-		u > var2
-		j > var3
-		c > var4
-		z > var5
+		y > avatar
+		q > var1
+		d > var2
+		p > var3
+		m > var4
 	SpriteSet
-		avatar > VerticalAvatar
-		var1 > Bomber stype=var1 total=19 spawnorientation=LEFT
-		var2 > RandomAltChaser stype1=var3 stype2=var1 prob=0.2
-		var3 > RandomMissile
-		var4 > Immovable
-		var5 > Portal stype=var3
+		avatar > OngoingTurningAvatar
+		var1 > OrientedFlicker limit=19
+		var2 > SpawnPoint stype=avatar total=17 prob=0.9 spawnorientation=DOWN
+		var3 > Passive
+		var4 > Chaser stype=avatar
 	InteractionSet
-		avatar avatar > spawnBehind stype=avatar scoreChange=-3 
-		avatar EOS > updateSpawnType stype=avatar spawnPoint=var2 scoreChange=1 
-		avatar var1 > decreaseSpeedToAll value=12 stype=avatar  
-		var3 EOS > removeScore stype=var1 
-		var3 EOS > killIfHasLess resource=var2 limit=9  
-		avatar var1 > decreaseSpeedToAll value=18 stype=var2  
+		var3 var3 > wrapAround  
+		var3 EOS > wrapAround scoreChange=2 
+		var3 avatar > killAll stype=var1  
+		avatar var3 > killIfOtherHasMore resource=avatar limit=18 scoreChange=1 
+		avatar var3 > updateSpawnType stype=var1 spawnPoint=var1  
+		var3 EOS > spawnIfHasLess stype=var1 resource=var1 limit=16 scoreChange=1 
+		var3 EOS > spawnBehind stype=avatar scoreChange=2 
 	TerminationSet
-		MultiSpriteCounterSubTypes stype1=var3 stype2=var3 stype3=var2 limit=20 win=True
-		SpriteCounterMore stype=var3 limit=11 win=False
+		SpriteCounterMore stype=var3 limit=16 win=True
+		Timeout limit=1060 win=False
