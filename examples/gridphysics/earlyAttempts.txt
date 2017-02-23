@@ -1,20 +1,15 @@
-BasicGame
-	LevelMapping
-		h > avatar
-		s > var1
-		z > var2
-		u > var3
-	SpriteSet
-		avatar > FlakAvatar stype=avatar
-		var1 > RandomAltChaser stype1=avatar stype2=avatar prob=0.1
-		var2 > RandomNPC
-		var3 > AlternateChaser stype1=avatar stype2=avatar
-	InteractionSet
-		EOS var2 > pullWithIt  
-		avatar avatar > align scoreChange=3 
-		avatar var2 > transformToRandomChild stype=avatar stype_other=avatar scoreChange=-2 
-		EOS EOS > wrapAround  
-		var2 avatar > spawnIfHasMore stype=avatar resource=avatar limit=18 scoreChange=3 
+		d > avatar
+		r > var1
+		e > var2
+	SpriteSet	InteractionSet
+		var1 var4 > spawnBehind stype=avatar 
+		var1 avatar > wrapAround scoreChange=1
+		var5 var1 > spawnIfHasMore stype=avatar resource=avatar limit=6 
+		var1 var1 > spawnIfHasLess stype=avatar resource=avatar limit=15 scoreChange=-3 
+		var1 EOS > killSprite scoreChange=2
+		var1 EOS > transformTo stype=avatar forceOrientation=UP scoreChange=-1
+		EOS var1 > addHealthPointsToMax value=1 scoreChange=2
+		var4 EOS > transformToRandomChild stype=avatar scoreChange=3
 	TerminationSet
-		SpriteCounterMore stype=avatar limit=11 win=True
-		Timeout limit=1510 win=False
+		SpriteCounterMore stype=var3 limit=7 win=True
+		Timeout limit=1310 win=False
