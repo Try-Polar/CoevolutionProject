@@ -1,21 +1,27 @@
 BasicGame
 	LevelMapping
-		r > avatar
-		w > var1
-		x > var2
-		n > var3
+		i > avatar
+		u > var1
+		o > var2
+		q > var3
+		t > var4
+		y > var5
 	SpriteSet
 		avatar > MovingAvatar
-		var1 > OrientedFlicker limit=11
-		var2 > AlternateChaser stype1=avatar stype2=avatar
-		var3 > Bomber stype=avatar total=4 spawnorientation=RIGHT
+		var1 > OrientedFlicker limit=16
+		var5 > Portal stype=avatar
+		var3 > Portal stype=avatar
+		var2 > Fleeing stype=var1
+		var1 > Bomber stype=avatar total=10 spawnorientation=RIGHT
 	InteractionSet
-		var1 var2 > align scoreChange=3 
-		var1 avatar > transformToRandomChild stype=avatar stype_other=avatar  
-		var1 EOS > transformTo stype=avatar forceOrientation=UP scoreChange=2 
-		var2 EOS > transformIfCounts stype=avatar stypeCount=avatar geq=10 leq=10  
-		var2 EOS > bounceForward scoreChange=-2 
-		var1 var2 > killSprite scoreChange=1 
+		var1 avatar > stepBack scoreChange=-3
+		EOS var4 > removeScore stype=var5
+		var1 var4 > killIfHasMore resource=avatar limit=19 scoreChange=-2
+		var2 var1 > transformTo stype=avatar forceOrientation=True 
+		var4 var5 > transformToRandomChild stype=avatar scoreChange=2
+		avatar var1 > killIfHasMore resource=avatar limit=18 
+		var3 avatar > reverseDirection 
+		var1 var2 > killIfFromAbove scoreChange=1
 	TerminationSet
-		SpriteCounter stype=var2 limit=6 win=True
-		SpriteCounter stype=var2 limit=6 win=False
+		StopCounter stype1=avatar stype2=avatar stype3=var1 limit=15 win=True
+		SpriteCounterMore stype=var3 limit=9 win=True

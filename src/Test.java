@@ -19,7 +19,9 @@ public class Test
     {
         //GameDesigner test = new GameDesigner();
         EvolutionaryGameDesigner evoGameDesigner = new EvolutionaryGameDesigner();
-        evoGameDesigner.eaSimple();
+        //evoGameDesigner.eaSimple();
+        //evoGameDesigner.eaSymbolsSimple();
+        evoGameDesigner.singleSymbolRun();
         //evoGameDesigner.makeSingleGame();
     	//test.loadGame();
     	
@@ -66,7 +68,8 @@ public class Test
                 "zelda", "zenpuzzle", "earlyAttempts", "hallOfFame001", "hallOfFame002",	  //90-94
                 "hallOfFame003", "hallOfFame004", "hallOfFame005", "hallOfFame006", "hallOfFame007",//95-99
         		"hallOfFame008", "hallOfFame009", "hallOfFame010", "hallOfFame011", "hallOfFame012", //100-104 12:0.5
-        		"hallOfFame013", "hallOfFame014", "hallOfFame015", "hallOfFame016", "hallOfFame017"}; //105-109 13:0.5 14:21.33 15:? 16:0.499 17:0.5
+        		"hallOfFame013", "hallOfFame014", "hallOfFame015", "hallOfFame016", "hallOfFame017", //105-109 13:0.5 14:21.33 15:? 16:0.499 17:0.5
+        		"hallOfFame018", "hallOfFame019", "hallOfFame020"}; //20:0.3749 
 
         //Other settings
         boolean visuals = true;

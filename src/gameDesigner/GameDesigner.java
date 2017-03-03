@@ -14,8 +14,8 @@ import java.io.ObjectOutputStream;
 public class GameDesigner {
 	
 	String path ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "earlyAttempts.txt";
-	String savePath ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "hallOfFame019.txt";
-	String saveSymbols = "C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "src" + File.separator + "gameDesigner" + File.separator + "GamesAsSymbols" + File.separator + "hallOfFame019.ser";
+	String savePath ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "hallOfFame022.txt";
+	String saveSymbols = "C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "src" + File.separator + "gameDesigner" + File.separator + "GamesAsSymbols" + File.separator + "hallOfFame022.ser";
 
 	//C:\Users\Elliot\Documents\GitHub\CoevolutionProject\examples\gridphysics
 	File f = new File(path);
@@ -61,9 +61,9 @@ public class GameDesigner {
 	NonTerminalSymbol spaceRepeat = new NonTerminalSymbol("spaceRepeat", true, false, false);
 	NonTerminalSymbol charOrSpaceRepeat = new NonTerminalSymbol("charOrSpaceRepeat", true, false, false);
 	//Optional symbols	
-	NonTerminalSymbol spriteDefOptionalBlock = new NonTerminalSymbol("spriteDefOptional", false, true, false);
-	NonTerminalSymbol spriteSimpleOptionalBlock = new NonTerminalSymbol("spriteSimpleOptional", false, true, false);
-	NonTerminalSymbol eolOptionalBlock = new NonTerminalSymbol("eolOptional", false, true, false);
+	//NonTerminalSymbol spriteDefOptionalBlock = new NonTerminalSymbol("spriteDefOptional", false, true, false);
+	//NonTerminalSymbol spriteSimpleOptionalBlock = new NonTerminalSymbol("spriteSimpleOptional", false, true, false);
+	//NonTerminalSymbol eolOptionalBlock = new NonTerminalSymbol("eolOptional", false, true, false);
 	//choice symbols (symbol where the string will be chosen by the algorithm
 	NonTerminalSymbol charOrSpace = new NonTerminalSymbol("charOrSpace", false, false, true);
 	NonTerminalSymbol spriteTypeOrEvaluable = new NonTerminalSymbol("spriteTypeOrEvaluable", false, false, true);
@@ -438,14 +438,14 @@ public class GameDesigner {
 
 				//Optionals
 				//spriteDefOptionalBlock
-				spriteDefOptionalBlock.addChild(eol);
+				/*spriteDefOptionalBlock.addChild(eol);
 				spriteDefOptionalBlock.addChild(indent);
 				spriteDefOptionalBlock.addChild(spriteDefEol);
 				//spriteSimpleOptionalBlock
 				spriteSimpleOptionalBlock.addChild(sprite_class);
 				//eolOptionalBlock
 				eolOptionalBlock.addChild(hash);
-				eolOptionalBlock.addChild(charOrSpaceRepeat);
+				eolOptionalBlock.addChild(charOrSpaceRepeat);*/
 				//scoreChange
 				scoreChange.addChild(scoreChangeString);
 				scoreChange.addChild(evaluableScoreInt);
@@ -720,7 +720,7 @@ public class GameDesigner {
 				transformTo.addChild(parameter);
 				transformTo.addChild(space);
 				transformTo.addChild(forceOrientation);
-				transformTo.addChild(evaluableDirection);
+				transformTo.addChild(evaluableBoolean);
 				transformTo.addChild(space);
 				transformTo.addChild(scoreChange);
 				transformIfCounts.addChild(transformIfCountsString);
@@ -1407,7 +1407,6 @@ public void saveSymbolsToFile(List<Symbol> gameSymbols)
 	
 public List<Symbol> mutate(List<Symbol> game, double indpb)
 {
-	//System.out.println("Begin Mutation");
 	int i = 0;
 	section currentSection = section.LEVEL;
 	while (i < game.size())
@@ -1509,7 +1508,7 @@ private List<Symbol> expandSymbol(int i, List<Symbol> game)
 			if(((NonTerminalSymbol)currentSymbol).optional){ 
 				//System.out.println("Optional");
 				//OPTIONAL SECTION										---------OPTIONAL SYMBOLS-------
-				if (rnd.nextInt(255) % 2 == 0) { 
+				if (rnd.nextInt(10) < 7) { 
 					for (int k=0; k<((NonTerminalSymbol)currentSymbol).children.size(); k++) {
 						game.add(i, ((NonTerminalSymbol)currentSymbol).children.get(k));
 						i++;
@@ -1521,7 +1520,7 @@ private List<Symbol> expandSymbol(int i, List<Symbol> game)
 				//System.out.println("Choice");
 				//CHOICE SECTION										----------CHOICE SYMBOLS-----------
 				if (currentSymbol.name == "identifier") {
-					System.out.println("Variables Used " + variablesUsed);
+					//System.out.println("Variables Used " + variablesUsed);
 					game.add(i, ((NonTerminalSymbol)currentSymbol).children.get(rnd.nextInt(variablesUsed)));
 				}
 				else if (currentSymbol.name == "parameter") {
@@ -1535,7 +1534,7 @@ private List<Symbol> expandSymbol(int i, List<Symbol> game)
 			else {
 				//System.out.println("Standard");
 				for (int k=0; k<((NonTerminalSymbol)currentSymbol).children.size(); k++) {
-					System.out.println(((NonTerminalSymbol)currentSymbol).children.get(k).name);
+					//System.out.println(((NonTerminalSymbol)currentSymbol).children.get(k).name);
 					game.add(i, ((NonTerminalSymbol)currentSymbol).children.get(k));
 					i++;
 				}
@@ -1563,7 +1562,7 @@ public List<List<Symbol>> onePointCrossover(List<Symbol> a, List<Symbol> b)
 	//Determine rough size of game not including Level block so that crossover points can have a better chance of being anywhere in the game (not including level block)
 	int[] aLineCount = gameLineCount(a);
 	int[] bLineCount = gameLineCount(b);
-	int aCrossoverPoint = rnd.nextInt(aLineCount[1] + aLineCount[2] + aLineCount[3]);
+	
 	int bCrossoverPoint = 0;
 	section aCrossoverSection = section.LEVEL;
 	section bCrossoverSection = section.LEVEL;
@@ -1574,48 +1573,102 @@ public List<List<Symbol>> onePointCrossover(List<Symbol> a, List<Symbol> b)
 	List<Symbol> b1 = new LinkedList<Symbol>();
 	List<Symbol> b2 = new LinkedList<Symbol>();
 	
+	//Pick crossover section and line number
+	int sectionInt = rnd.nextInt(3);
+	int aCrossoverPoint = 1;
+	switch(sectionInt)
+	{
+		case 0: aCrossoverSection = section.SPRITE;
+			aCrossoverPoint = rnd.nextInt(aLineCount[1]);
+			break;
+		case 1: aCrossoverSection = section.INTERACTION;
+			aCrossoverPoint = rnd.nextInt(aLineCount[2]);
+			break;
+		case 2: aCrossoverSection = section.TERMINATION;
+			aCrossoverPoint = rnd.nextInt(2); //Termination section must always be only 2 lines
+			break;
+		default: System.out.println("Error selecting section");		
+			break;
+	}
+	
+	section currentSection = section.LEVEL;
+	
 	//split and determine section of crossover
 	while(!split)
 	{
 		Symbol currentSymbol = a.get(i);
 		
-		if (lineCounter == aCrossoverPoint)
-		{
-			for (int j=0; j<i; j++)
-			{
-				a1.add(a.get(j));
-			}
-			for (int j=i; j<a.size(); j++)
-			{
-				a2.add(a.get(j));
-			}
-			split = true;
-		}
 		
-		if (aCrossoverSection != section.LEVEL)
-		{
+		
+		if (currentSection == aCrossoverSection)
+		{ //Split List
+			if (lineCounter == aCrossoverPoint)
+			{
+				for (int j=0; j<i; j++)
+				{
+					a1.add(a.get(j));
+				}
+				for (int j=i; j<a.size(); j++)
+				{
+					a2.add(a.get(j));
+				}
+				split = true;
+			}
+			
+			
 			if (currentSymbol == newline)
 			{
 				lineCounter++;
 			}
+		}
+		else
+		{
+			if (currentSymbol == spriteSet)
+			{
+				currentSection = section.SPRITE;
+			}
 			if (currentSymbol == interactionSet)
 			{
-				aCrossoverSection = section.INTERACTION;
+				currentSection = section.INTERACTION;
 			}
 			if (currentSymbol  == terminationSet)
 			{
-				aCrossoverSection = section.TERMINATION;
+				currentSection = section.TERMINATION;
 			}
 		}
 		
-		if (currentSymbol == spriteSet)
-		{
-			aCrossoverSection = section.SPRITE;
-		}
+		
+		
 		i++;
 	}
 	//keep track of which section initial crossover point is in
 	//choose crossover point in other game (make sure it is in same block as first)
+	
+	//Assign bCrossoverPoint
+	bCrossoverPoint = aCrossoverPoint;
+	switch(aCrossoverSection) {
+		case SPRITE: 
+			if (bCrossoverPoint + 1 > bLineCount[1])
+			{
+				bCrossoverPoint = bLineCount[1] - 1;
+			}
+			break;
+		case INTERACTION: 
+			if (bCrossoverPoint + 1 > bLineCount[2])
+			{
+				bCrossoverPoint = bLineCount[2] - 1;
+			}
+			break;
+		case TERMINATION: 
+			if (bCrossoverPoint + 1 > bLineCount[3])
+			{
+				bCrossoverPoint = bLineCount[3] - 1;
+			}
+			break;
+		default:
+			break;
+	}
+	
 	split = false;
 	i = 0;
 	lineCounter = 0;
@@ -1639,22 +1692,7 @@ public List<List<Symbol>> onePointCrossover(List<Symbol> a, List<Symbol> b)
 			}
 		}
 		else
-		{
-			if (!bCrossoverChosen)
-			{
-				switch(bCrossoverSection) {
-					case LEVEL: bCrossoverPoint = rnd.nextInt(bLineCount[0]); //Should never be needed but is here for completeness
-						break;
-					case SPRITE: bCrossoverPoint = rnd.nextInt(bLineCount[1]);
-						break;
-					case INTERACTION: bCrossoverPoint = rnd.nextInt(bLineCount[2]);
-						break;
-					case TERMINATION: bCrossoverPoint = rnd.nextInt(bLineCount[3]);
-						break;
-				}
-				bCrossoverChosen = true;
-			}
-			
+		{			
 			if (lineCounter == bCrossoverPoint)
 			{
 				for (int j=0; j<i; j++)

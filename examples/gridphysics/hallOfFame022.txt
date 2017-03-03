@@ -1,0 +1,22 @@
+BasicGame
+	LevelMapping
+		t > avatar
+		j > var1
+		w > var2
+		g > var3
+		x > var4
+	SpriteSet
+		avatar > OrientedAvatar
+		var1 > RandomBomber stype=avatar total=13 prob=0.9 spawnorientation=UP
+		var3 > Door
+		var2 > Portal stype=avatar
+
+	InteractionSet
+		var2 avatar > reverseDirection scoreChange=2
+		avatar var2 > killIfOtherHasMore resource=avatar limit=4  
+		EOS var3 > killIfOtherHasMore resource=var1 limit=20 scoreChange=3
+		var5 var5 > align scoreChange=3
+		var1 var3 > addHealthPointsToMax value=12 scoreChange=-2 
+		var1 EOS > killIfFromAbove scoreChange=1
+	TerminationSet
+		Timeout limit=510 win=False
