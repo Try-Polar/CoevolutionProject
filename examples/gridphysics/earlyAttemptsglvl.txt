@@ -1,10 +1,11 @@
 LevelMapping
-    a > var2 
-    b > var3 
-    c > avatar 
+    a > var1 
+    b > avatar 
+    c > var2 
+    d > var3 
 
 LevelDescription
-    
- a b
-   c
-    
+    a a 
+  bc    
+       a
+ d c  d 

@@ -30,13 +30,12 @@ public class EvolutionaryGameDesigner {
     
     String constructiveLevelGenerator = "levelGenerators.constructiveLevelGenerator.LevelGenerator";
 	
-	int populationSize = 12;
-	int generations = 35;
+	int populationSize = 6;
+	int generations = 15;
 	int individualSize = 500;
-	int noOfTourns = populationSize/3;
 	float mutationProbability = 0.5f;
 	float crossoverProbability = 0.5f;
-	float indpb = 0.1f;
+	float indpb = 0.05f;
 	
 	double[] fitnesses =new double[populationSize];
 	int[][] pop = new int[populationSize][individualSize];
@@ -219,6 +218,7 @@ public class EvolutionaryGameDesigner {
 		for (int i = 0; i < populationSize; i++)
 		{
 			popSymbols.set(i, gameDesigner.mutate(popSymbols.get(i), indpb));
+			popSymbols.set(i, gameDesigner.fixVars(popSymbols.get(i))); //Crossover often causes games to have variables that have never been declared, if any of these are found this will fix them
 		}
 		
 		return popSymbols;

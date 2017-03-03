@@ -1,22 +1,23 @@
 BasicGame
 	LevelMapping
-		t > avatar
-		j > var1
-		w > var2
-		g > var3
-		x > var4
+		o > avatar
+		h > var1
+		g > var2
+		b > var3
+		q > var4
 	SpriteSet
-		avatar > OrientedAvatar
-		var1 > RandomBomber stype=avatar total=13 prob=0.9 spawnorientation=UP
-		var3 > Door
-		var2 > Portal stype=avatar
-
+		avatar > ShootAvatar stype=avatar
+		var1 > BomberRandomMissile stypeMissile=avatar total=4 prob=0.7 spawnorientation=RIGHT
+		var2 > Passive
+		var3 > Fleeing stype=avatar
+		var4 > Flicker limit=19
 	InteractionSet
-		var2 avatar > reverseDirection scoreChange=2
-		avatar var2 > killIfOtherHasMore resource=avatar limit=4  
-		EOS var3 > killIfOtherHasMore resource=var1 limit=20 scoreChange=3
-		var5 var5 > align scoreChange=3
-		var1 var3 > addHealthPointsToMax value=12 scoreChange=-2 
-		var1 EOS > killIfFromAbove scoreChange=1
+		var3 avatar > attractGaze scoreChange=-3 
+		avatar avatar > decreaseSpeedToAll value=15 stype=var1  
+		var3 var3 > stepBack scoreChange=1 
+		EOS var1 > cloneSprite  
+		var2 EOS > pullWithIt scoreChange=3 
+		var1 var2 > transformTo stype=avatar forceOrientation=True scoreChange=1 
 	TerminationSet
-		Timeout limit=510 win=False
+		StopCounter stype1=avatar stype2=avatar stype3=avatar limit=5 win=True
+		SpriteCounter stype=var2 limit=16 win=False

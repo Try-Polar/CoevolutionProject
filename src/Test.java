@@ -20,8 +20,8 @@ public class Test
         //GameDesigner test = new GameDesigner();
         EvolutionaryGameDesigner evoGameDesigner = new EvolutionaryGameDesigner();
         //evoGameDesigner.eaSimple();
-        //evoGameDesigner.eaSymbolsSimple();
-        evoGameDesigner.singleSymbolRun();
+        evoGameDesigner.eaSymbolsSimple();
+        //evoGameDesigner.singleSymbolRun();
         //evoGameDesigner.makeSingleGame();
     	//test.loadGame();
     	

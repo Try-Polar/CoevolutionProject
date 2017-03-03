@@ -208,7 +208,7 @@ public class GameDesigner {
 	NonTerminalSymbol killIfHasMore = new NonTerminalSymbol("killIfHasMore", false, false, false);
 	NonTerminalSymbol killIfHasLess = new NonTerminalSymbol("killIfHasLess", false, false, false);
 	NonTerminalSymbol killIfFromAbove = new NonTerminalSymbol("killIfFromAbove", false, false, false);
-	NonTerminalSymbol killIfOtherHasMore = new NonTerminalSymbol("killIfOtherHasMore", false, false, false);
+	//NonTerminalSymbol killIfOtherHasMore = new NonTerminalSymbol("killIfOtherHasMore", false, false, false);
 	NonTerminalSymbol transformToSingleton = new NonTerminalSymbol("transformToSingleton", false, false, false);
 	NonTerminalSymbol spawnBehind = new NonTerminalSymbol("spawnBehind", false, false, false);
 	NonTerminalSymbol spawnIfHasMore = new NonTerminalSymbol("spawnIfHasMore", false, false, false);
@@ -508,7 +508,7 @@ public class GameDesigner {
 				interaction_method.addChild(killIfHasMore);
 				interaction_method.addChild(killIfHasLess);
 				interaction_method.addChild(killIfFromAbove);
-				interaction_method.addChild(killIfOtherHasMore);
+				//interaction_method.addChild(killIfOtherHasMore);
 				interaction_method.addChild(transformToSingleton);
 				interaction_method.addChild(spawnBehind);
 				interaction_method.addChild(spawnIfHasMore);
@@ -670,14 +670,14 @@ public class GameDesigner {
 				killIfHasLess.addChild(scoreChange);
 				killIfFromAbove.addChild(killIfFromAboveString);
 				killIfFromAbove.addChild(scoreChange);
-				killIfOtherHasMore.addChild(killIfOtherHasMoreString);
+				/*killIfOtherHasMore.addChild(killIfOtherHasMoreString);
 				killIfOtherHasMore.addChild(resourceName);
 				killIfOtherHasMore.addChild(parameter);
 				killIfOtherHasMore.addChild(space);
 				killIfOtherHasMore.addChild(limit);
 				killIfOtherHasMore.addChild(evaluableInt);
 				killIfOtherHasMore.addChild(space);
-				killIfOtherHasMore.addChild(scoreChange);
+				killIfOtherHasMore.addChild(scoreChange);*/
 				transformToSingleton.addChild(transformToRandomChildString);
 				transformToSingleton.addChild(stype);
 				transformToSingleton.addChild(parameter);
@@ -1727,6 +1727,37 @@ public List<List<Symbol>> onePointCrossover(List<Symbol> a, List<Symbol> b)
 	results.add(newA);
 	results.add(newB);
 	return results;
+}
+
+public List<Symbol> fixVars(List<Symbol> game)
+{
+	Symbol currentSymbol = game.get(0);
+	int j=0;
+	int variablesUsed = 0;
+	
+	while (currentSymbol != spriteSet)
+	{
+		//System.out.println("Counting Variables");
+		currentSymbol = game.get(j);
+		if (isIdentifier(currentSymbol))
+		{
+			variablesUsed++;
+		}
+		j++;
+	}
+	
+	while (j < game.size())
+	{
+		if (isIdentifier(currentSymbol))
+		{
+			if (Character.getNumericValue(currentSymbol.name.charAt(3)) > variablesUsed) //Not the most foolproof thing to use the 4th character evertime but name is always varX where x is 1-5 (9 vars would be too many so no need to worry about 2 digits)
+			{
+				game.set(j, identifier.children.get(rnd.nextInt(variablesUsed)));
+			}
+		}
+	}
+	
+	return game;
 }
 
 private int[] gameLineCount(List<Symbol> game)
