@@ -69,14 +69,19 @@ public class Test
                 "hallOfFame003", "hallOfFame004", "hallOfFame005", "hallOfFame006", "hallOfFame007",//95-99
         		"hallOfFame008", "hallOfFame009", "hallOfFame010", "hallOfFame011", "hallOfFame012", //100-104 12:0.5
         		"hallOfFame013", "hallOfFame014", "hallOfFame015", "hallOfFame016", "hallOfFame017", //105-109 13:0.5 14:21.33 15:? 16:0.499 17:0.5
+<<<<<<< HEAD
+        		"hallOfFame018", "hallOfFame019", "hallOfFame020", "hallOfFame021"}; //110-114 19:0.5 21:0.75
+        
+=======
         		"hallOfFame018", "hallOfFame019", "hallOfFame020"}; //20:0.3749 
+>>>>>>> origin/Development
 
         //Other settings
         boolean visuals = true;
         int seed = new Random().nextInt();
 
         //Game and level to play
-        int gameIdx = 106;
+        int gameIdx = 113;
         int levelIdx = 0; //level names from 0 to 4 (game_lvlN.txt).
         String game = gamesPath + games[gameIdx] + ".txt";
         String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
