@@ -728,7 +728,7 @@ public class GameDesigner {
 				transformIfCounts.addChild(parameter);
 				transformIfCounts.addChild(space);
 				transformIfCounts.addChild(stypeCount);
-				transformIfCounts.addChild(parameter);
+				transformIfCounts.addChild(evaluableInt);
 				transformIfCounts.addChild(space);
 				transformIfCounts.addChild(geq);
 				transformIfCounts.addChild(evaluableInt);
