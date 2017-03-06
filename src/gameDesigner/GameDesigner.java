@@ -300,6 +300,9 @@ public class GameDesigner {
 	//Termination class params
 	TerminalSymbol stype3 = new TerminalSymbol("stype3", "stype3=");
 	
+	//Special mandatory lines (these are used to keep things on screen, they are done like this so that mutation cannot break them)
+	TerminalSymbol avatarEosStepBack = new TerminalSymbol("avatarEosStepBack", "		avatar EOS > stepBack \n");
+	
 	
 	List<Symbol> gameSymbols = new LinkedList<Symbol>();
 	
@@ -341,6 +344,7 @@ public class GameDesigner {
 				interactionBlock.addChild(indent);
 				interactionBlock.addChild(interactionSet);
 				interactionBlock.addChild(eol);
+				interactionBlock.addChild(avatarEosStepBack);
 				interactionBlock.addChild(interactionDefEol);
 				//termination-block
 				terminationBlock.addChild(indent);
@@ -1740,7 +1744,7 @@ public List<Symbol> fixVars(List<Symbol> game)
 		//System.out.println("Counting Variables");
 		currentSymbol = game.get(j);
 		if (isIdentifier(currentSymbol))
-		{
+		{	
 			variablesUsed++;
 		}
 		j++;
@@ -1748,6 +1752,7 @@ public List<Symbol> fixVars(List<Symbol> game)
 	
 	while (j < game.size())
 	{
+		currentSymbol = game.get(j);
 		if (isIdentifier(currentSymbol))
 		{
 			if (Character.getNumericValue(currentSymbol.name.charAt(3)) > variablesUsed) //Not the most foolproof thing to use the 4th character evertime but name is always varX where x is 1-5 (9 vars would be too many so no need to worry about 2 digits)
@@ -1755,6 +1760,7 @@ public List<Symbol> fixVars(List<Symbol> game)
 				game.set(j, identifier.children.get(rnd.nextInt(variablesUsed)));
 			}
 		}
+		j++;
 	}
 	
 	return game;
