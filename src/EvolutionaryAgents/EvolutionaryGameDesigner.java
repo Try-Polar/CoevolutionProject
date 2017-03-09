@@ -163,13 +163,7 @@ public class EvolutionaryGameDesigner {
 		popSymbols.add(newList);
 		
 		
-		//popSymbols.set(0, gameDesigner.mutate(popSymbols.get(0), indpb));
-		System.out.println("Size: " + popSymbols.size());
-		for (int i=0; i<popSymbols.size(); i++)
-		{
-			System.out.println("--------GAME " + i + "------------");
-			gameDesigner.writeSymbolsToFile(popSymbols.get(i));
-		}
+		
 		
 		List<List<Symbol>> crossovers = gameDesigner.onePointCrossover(popSymbols.get(0), popSymbols.get(1));
 		popSymbols.set(0, crossovers.get(0));
@@ -180,6 +174,13 @@ public class EvolutionaryGameDesigner {
 		System.out.println("--------GAME 1------------");
 		gameDesigner.writeSymbolsToFile(popSymbols.get(1));
 		
+		popSymbols.set(0, gameDesigner.fixVars(popSymbols.get(0)));
+		popSymbols.set(1, gameDesigner.fixVars(popSymbols.get(1)));
+		
+		System.out.println("--------GAME 0------------");
+		gameDesigner.writeSymbolsToFile(popSymbols.get(0));
+		System.out.println("--------GAME 1------------");
+		gameDesigner.writeSymbolsToFile(popSymbols.get(1));
 	}
 	
 	private List<Symbol> symbolTournament(List<List<Symbol>> popSymbols)

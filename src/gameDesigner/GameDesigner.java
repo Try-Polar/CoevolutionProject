@@ -300,6 +300,9 @@ public class GameDesigner {
 	//Termination class params
 	TerminalSymbol stype3 = new TerminalSymbol("stype3", "stype3=");
 	
+	//Special mandatory lines (these are used to keep things on screen, they are done like this so that mutation cannot break them)
+	TerminalSymbol avatarEosStepBack = new TerminalSymbol("avatarEosStepBack", "		avatar EOS > stepBack \n");
+	
 	
 	List<Symbol> gameSymbols = new LinkedList<Symbol>();
 	
@@ -341,6 +344,7 @@ public class GameDesigner {
 				interactionBlock.addChild(indent);
 				interactionBlock.addChild(interactionSet);
 				interactionBlock.addChild(eol);
+				interactionBlock.addChild(avatarEosStepBack);
 				interactionBlock.addChild(interactionDefEol);
 				//termination-block
 				terminationBlock.addChild(indent);
@@ -1742,7 +1746,7 @@ public List<Symbol> fixVars(List<Symbol> game)
 		//System.out.println("Counting Variables");
 		currentSymbol = game.get(j);
 		if (isIdentifier(currentSymbol))
-		{
+		{	
 			variablesUsed++;
 		}
 		j++;
