@@ -1,21 +1,26 @@
 BasicGame
 	LevelMapping
-		m > avatar
-		m > var1
-		c > var2
-		m > var3
+		v > avatar
+		w > var1
+		m > var2
+		y > var3
+		e > var4
+		c > var5
 	SpriteSet
-		avatar > OrientedAvatar
-		var1 > RandomBomber stype=avatar total=7 prob=0.9 spawnorientation=DOWN
-		var2 > RandomAltChaser stype1=avatar stype2=avatar prob=0.2
+		avatar > VerticalAvatar
+		var1 > OrientedFlicker limit=5
+		var2 > OrientedFlicker limit=8
+		var3 > Flicker limit=7
+		var4 > AlternateChaser stype1=avatar stype2=avatar
+		var5 > RandomNPC
 	InteractionSet
 		avatar EOS > stepBack 
-		var1 var1 > spawnIfHasLess stype=avatar resource=avatar limit=17 scoreChange=2 
-		var1 var1 > transformToRandomChild stype=avatar scoreChange=-1 
-		var1 EOS > addHealthPointsToMax value=3  
-		var1 EOS > attractGaze  
-		var1 var1 > updateSpawnType stype=avatar spawnPoint=avatar scoreChange=-1 
-		avatar var1 > updateSpawnType stype=avatar spawnPoint=avatar scoreChange=-2 
+		var4 avatar > spawnBehind stype=var2 
+		var2 var5 > killIfHasLess resource=avatar limit=10  
+		var1 var2 > undoAll scoreChange=-2
+		var1 var4 > spawnIfHasLess stype=avatar resource=avatar limit=17 scoreChange=3
+		var3 var1 > killIfHasLess resource=avatar limit=4 scoreChange=-3
+		var5 var5 > killAll stype=avatar scoreChange=-2 
 	TerminationSet
-		SpriteCounter stype=var1 limit=12 win=True
-		SpriteCounter stype=var1 limit=17 win=False
+		StopCounter stype1=var5 stype2=avatar stype3=avatar limit=2 win=False
+		Timeout limit=830 win=False
