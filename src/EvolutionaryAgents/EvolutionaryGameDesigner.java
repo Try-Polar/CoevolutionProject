@@ -31,7 +31,7 @@ public class EvolutionaryGameDesigner {
     String constructiveLevelGenerator = "levelGenerators.constructiveLevelGenerator.LevelGenerator";
 	
 	int populationSize = 8;
-	int generations = 15;
+	int generations = 25;
 	int individualSize = 500;
 	float mutationProbability = 0.5f;
 	float crossoverProbability = 0.5f;
@@ -266,6 +266,7 @@ public class EvolutionaryGameDesigner {
 		{
 			if (rnd.nextDouble() < mutationProbability) {
 				popSymbols.set(i, gameDesigner.mutate(popSymbols.get(i), indpb));
+				popSymbols.set(i,  gameDesigner.fixVars(popSymbols.get(i)));
 			}
 		}
 		

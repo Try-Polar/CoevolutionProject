@@ -14,8 +14,8 @@ import java.io.ObjectOutputStream;
 public class GameDesigner {
 	
 	String path ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "earlyAttempts.txt";
-	String savePath ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "hallOfFame023.txt";
-	String saveSymbols = "C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "src" + File.separator + "gameDesigner" + File.separator + "GamesAsSymbols" + File.separator + "hallOfFame023.ser";
+	String savePath ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "hallOfFame025.txt";
+	String saveSymbols = "C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "src" + File.separator + "gameDesigner" + File.separator + "GamesAsSymbols" + File.separator + "hallOfFame025.ser";
 
 	//C:\Users\Elliot\Documents\GitHub\CoevolutionProject\examples\gridphysics
 	File f = new File(path);
@@ -1409,6 +1409,7 @@ public List<Symbol> mutate(List<Symbol> game, double indpb)
 {
 	int i = 0;
 	section currentSection = section.LEVEL;
+	boolean safeToMutate = false;
 	while (i < game.size())
 	{
 		//System.out.println("Begin loop");
@@ -1421,11 +1422,12 @@ public List<Symbol> mutate(List<Symbol> game, double indpb)
 		Symbol currentSymbol = game.get(i);
 		//if currentSymbol.parent != null
 		//Should all be terminal symbols but just in case checking that this is the case first
-		if (currentSymbol == spriteSet)
+		if (currentSymbol == interactionSet)
 		{
-			currentSection = section.SPRITE;
+			currentSection = section.INTERACTION;
+			safeToMutate = true;
 		}
-		if (currentSymbol instanceof TerminalSymbol && currentSection != section.LEVEL)
+		if (currentSymbol instanceof TerminalSymbol && safeToMutate) //currentSection != section.LEVEL)
 		{
 			if (((TerminalSymbol) currentSymbol).parent != null)
 			{
@@ -1748,6 +1750,7 @@ public List<Symbol> fixVars(List<Symbol> game)
 	
 	while (j < game.size())
 	{
+		currentSymbol = game.get(j);
 		if (isIdentifier(currentSymbol))
 		{
 			if (Character.getNumericValue(currentSymbol.name.charAt(3)) > variablesUsed) //Not the most foolproof thing to use the 4th character evertime but name is always varX where x is 1-5 (9 vars would be too many so no need to worry about 2 digits)
@@ -1755,6 +1758,7 @@ public List<Symbol> fixVars(List<Symbol> game)
 				game.set(j, identifier.children.get(rnd.nextInt(variablesUsed)));
 			}
 		}
+		j++;
 	}
 	
 	return game;
