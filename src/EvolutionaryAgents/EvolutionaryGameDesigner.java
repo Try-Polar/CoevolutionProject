@@ -268,6 +268,7 @@ public class EvolutionaryGameDesigner {
 			if (rnd.nextDouble() < mutationProbability) {
 				popSymbols.set(i, gameDesigner.mutate(popSymbols.get(i), indpb));
 				popSymbols.set(i, gameDesigner.fixVars(popSymbols.get(i)));
+
 			}
 		}
 		

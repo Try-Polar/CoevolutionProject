@@ -69,7 +69,8 @@ public class Test
                 "hallOfFame003", "hallOfFame004", "hallOfFame005", "hallOfFame006", "hallOfFame007",//95-99
         		"hallOfFame008", "hallOfFame009", "hallOfFame010", "hallOfFame011", "hallOfFame012", //100-104 12:0.5
         		"hallOfFame013", "hallOfFame014", "hallOfFame015", "hallOfFame016", "hallOfFame017", //105-109 13:0.5 14:21.33 15:? 16:0.499 17:0.5
-        		"hallOfFame018", "hallOfFame019", "hallOfFame020", "hallOfFame021"}; //110-114 19:0.5 20:0.3749 21:0.75
+        		"hallOfFame018", "hallOfFame019", "hallOfFame020", "hallOfFame021", "hallOfFame022", //110-114 19:0.5v20:0.3749 21:0.75 22:?
+        		"hallOfFame023"};//23:1(First finished with new method 
 
 
         //Other settings
