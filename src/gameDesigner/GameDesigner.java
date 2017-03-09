@@ -80,6 +80,7 @@ public class GameDesigner {
 	NonTerminalSymbol levelIdentifier = new NonTerminalSymbol("levelIdentifier", false, false, true);
 	NonTerminalSymbol spriteIdentifier = new NonTerminalSymbol("spriteIdentifier", false, false, true);
 	NonTerminalSymbol parameter = new NonTerminalSymbol("parameter", false, false, true);
+	NonTerminalSymbol interactor = new NonTerminalSymbol("interactor", false, false, true);
 	NonTerminalSymbol charVar = new NonTerminalSymbol("char", false, false, true);
 	NonTerminalSymbol evaluableBoolean = new NonTerminalSymbol("boolean", false, false ,true);
 	NonTerminalSymbol evaluableFloat = new NonTerminalSymbol("float", false, false, true);
@@ -91,6 +92,7 @@ public class GameDesigner {
 	
 	String[] identifiers = {"var1", "var2", "var3", "var4", "var5"};
 	String[] parameters = {"avatar", "var1", "var2", "var3", "var4", "var5"};
+	String[] interactors = {"avatar", "EOS", "var1", "var2", "var3", "var4", "var5"};
 	String[] chars = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
 	String[] evaluableBooleans = {"True", "False"};
 	String[] evaluableFloats = {"0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"}; //make for loop to expand
@@ -375,9 +377,9 @@ public class GameDesigner {
 				avatarSimple.addChild(greaterThan);
 				avatarSimple.addChild(avatar_class);				
 				//interaction-def
-				interactionDef.addChild(spriteType);
+				interactionDef.addChild(interactor);
 				interactionDef.addChild(space);
-				interactionDef.addChild(spriteType);
+				interactionDef.addChild(interactor);
 				interactionDef.addChild(greaterThan);
 				interactionDef.addChild(interaction_method);
 				interactionDef.addChild(space);
@@ -582,9 +584,6 @@ public class GameDesigner {
 				randomAltChaser.addChild(space);
 				randomAltChaser.addChild(stype2);
 				randomAltChaser.addChild(parameter);
-				randomAltChaser.addChild(space);
-				randomAltChaser.addChild(prob);
-				randomAltChaser.addChild(evaluableFloat);
 				spawnPoint.addChild(spawnPointString);
 				spawnPoint.addChild(stype);
 				spawnPoint.addChild(parameter);
@@ -892,7 +891,7 @@ public class GameDesigner {
 					levelIdentifier.addChild(currentSymbol);
 				}
 				for (int i=0; i<identifiers.length; i++) {
-					TerminalSymbol currentSymbol = new TerminalSymbol(identifiers[i], identifiers[i], spriteIdentifier);
+					TerminalSymbol currentSymbol = new TerminalSymbol(identifiers[i], identifiers[i]); //Don't want mutate to change this so setting parent to null
 					spriteIdentifier.addChild(currentSymbol);
 				}
 				//Parameter
@@ -900,6 +899,11 @@ public class GameDesigner {
 					parameter.addChild(avatar);
 					TerminalSymbol currentSymbol = new TerminalSymbol(parameters[i], parameters[i], parameter);
 					parameter.addChild(currentSymbol);
+				}
+				//Interactor
+				for (int i=0; i<interactors.length; i++) {
+					TerminalSymbol currentSymbol = new TerminalSymbol(interactors[i], interactors[i], interactor);
+					interactor.addChild(currentSymbol);
 				}
 				//CharVar
 				for (int i=0; i<chars.length; i++) {
@@ -1066,7 +1070,8 @@ public void saveGameFromGenome(int[] genome) {
 		int levelVariableTracker = 0;
 		int spriteVariableTracker = 0;
 		int terminationTracker = 0;
-
+		int charTracker = 0; //Chars do not need to be picked randomly (doing so could cause game to break if char is reused)
+		
 		//While there are still symbols that need to be expanded
 		while (containsNonTerminals(gameSymbols)) {
 			//System.out.println(i);
@@ -1170,6 +1175,10 @@ public void saveGameFromGenome(int[] genome) {
 						gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(terminationTracker));
 						terminationTracker++;
 					}
+					else if (currentSymbol.name == "char") {
+						gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(charTracker));
+						charTracker++;
+					}
 					else {
 						gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(genome[genomeTracker] % (((NonTerminalSymbol)currentSymbol).children.size())));
 						genomeTracker++;
@@ -1181,7 +1190,7 @@ public void saveGameFromGenome(int[] genome) {
 				}
 				else {
 					for (int j=0; j<((NonTerminalSymbol)currentSymbol).children.size(); j++) {
-						System.out.println(((NonTerminalSymbol)currentSymbol).children.get(j).name);
+						//System.out.println(((NonTerminalSymbol)currentSymbol).children.get(j).name);
 						gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(j));
 						i++;
 					}
@@ -1231,6 +1240,7 @@ public List<Symbol> createGameFromGenome(int[] genome) {
 	int levelVariableTracker = 0;
 	int spriteVariableTracker = 0;
 	int terminationTracker = 0;
+	int charTracker = 0; //Chars do not need to be picked randomly (doing so could cause game to break if char is reused)
 	
 	//While there are still symbols that need to be expanded
 	while (containsNonTerminals(gameSymbols)) {
@@ -1335,6 +1345,10 @@ public List<Symbol> createGameFromGenome(int[] genome) {
 					gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(terminationTracker));
 					terminationTracker++;
 				}
+				else if (currentSymbol.name == "char") {
+					gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(charTracker));
+					charTracker++;
+				}
 				else {
 					gameSymbols.add(i, ((NonTerminalSymbol)currentSymbol).children.get(genome[genomeTracker] % (((NonTerminalSymbol)currentSymbol).children.size())));
 					genomeTracker++;
@@ -1426,9 +1440,9 @@ public List<Symbol> mutate(List<Symbol> game, double indpb)
 		Symbol currentSymbol = game.get(i);
 		//if currentSymbol.parent != null
 		//Should all be terminal symbols but just in case checking that this is the case first
-		if (currentSymbol == interactionSet)
+		if (currentSymbol == spriteSet)
 		{
-			currentSection = section.INTERACTION;
+			currentSection = section.SPRITE;
 			safeToMutate = true;
 		}
 		if (currentSymbol instanceof TerminalSymbol && safeToMutate) //currentSection != section.LEVEL)
@@ -1757,7 +1771,7 @@ public List<Symbol> fixVars(List<Symbol> game)
 		currentSymbol = game.get(j);
 		if (isIdentifier(currentSymbol))
 		{
-			if (Character.getNumericValue(currentSymbol.name.charAt(3)) > variablesUsed) //Not the most foolproof thing to use the 4th character evertime but name is always varX where x is 1-5 (9 vars would be too many so no need to worry about 2 digits)
+			if (Character.getNumericValue(currentSymbol.name.charAt(3)) > variablesUsed) //Not the most foolproof thing to use the 4th character everytime but name is always varX where x is 1-5 (9 vars would be too many so no need to worry about 2 digits)
 			{
 				game.set(j, identifier.children.get(rnd.nextInt(variablesUsed)));
 			}
@@ -1821,7 +1835,7 @@ private int[] gameLineCount(List<Symbol> game)
 
 private boolean parameterOrEvaluable(Symbol symbol)
 {
-	if (symbol == levelIdentifier || symbol == spriteIdentifier || symbol == parameter || symbol == identifier || symbol == evaluableBoolean || symbol == evaluableFloat || symbol == evaluableInt || symbol == evaluableDirection || symbol == evaluableScoreInt || symbol == evaluableLargeInt)
+	if (symbol == levelIdentifier || symbol == spriteIdentifier || symbol == parameter || symbol == interactor || symbol == identifier || symbol == evaluableBoolean || symbol == evaluableFloat || symbol == evaluableInt || symbol == evaluableDirection || symbol == evaluableScoreInt || symbol == evaluableLargeInt)
 	{
 		return true;
 	}

@@ -165,14 +165,12 @@ public class EvolutionaryGameDesigner {
 		
 		
 		
-		List<List<Symbol>> crossovers = gameDesigner.onePointCrossover(popSymbols.get(0), popSymbols.get(1));
-		popSymbols.set(0, crossovers.get(0));
-		popSymbols.set(1, crossovers.get(1));
+		//List<List<Symbol>> crossovers = gameDesigner.onePointCrossover(popSymbols.get(0), popSymbols.get(1));
+		//popSymbols.set(0, crossovers.get(0));
+		//popSymbols.set(1, crossovers.get(1));
 		
-		System.out.println("--------GAME 0------------");
-		gameDesigner.writeSymbolsToFile(popSymbols.get(0));
-		System.out.println("--------GAME 1------------");
-		gameDesigner.writeSymbolsToFile(popSymbols.get(1));
+		popSymbols.set(0,  gameDesigner.mutate(popSymbols.get(0), 1));
+		popSymbols.set(1,  gameDesigner.mutate(popSymbols.get(1), 1));
 		
 		popSymbols.set(0, gameDesigner.fixVars(popSymbols.get(0)));
 		popSymbols.set(1, gameDesigner.fixVars(popSymbols.get(1)));
@@ -267,9 +265,8 @@ public class EvolutionaryGameDesigner {
 		{
 			if (rnd.nextDouble() < mutationProbability) {
 				popSymbols.set(i, gameDesigner.mutate(popSymbols.get(i), indpb));
-				popSymbols.set(i, gameDesigner.fixVars(popSymbols.get(i)));
-
 			}
+			popSymbols.set(i, gameDesigner.fixVars(popSymbols.get(i)));
 		}
 		
 		return popSymbols; 
