@@ -1,0 +1,15 @@
+LevelMapping
+    a > wall 
+    b > avatar 
+    c > inc2 
+    d > inc6 
+    e > chef 
+
+LevelDescription
+aaaaaaa
+ab a  a
+a  a  a
+ac d  a
+ae    a
+a     a
+aaaaaaa

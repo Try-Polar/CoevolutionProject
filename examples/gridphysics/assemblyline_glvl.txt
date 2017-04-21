@@ -1,0 +1,16 @@
+LevelMapping
+    a > wall 
+    b > vortex 
+    c > victory 
+    d > avatar 
+    e > portal 
+    f > assembly3 
+
+LevelDescription
+aaaaaaa
+a b c a
+ad    a
+a   e a
+afaaaaa
+ac    a
+aaaaaaa

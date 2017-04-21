@@ -1,0 +1,15 @@
+LevelMapping
+    a > wall 
+    b > cursed 
+    c > demon 
+    d > avatar 
+    e > box 
+
+LevelDescription
+aaaaaaa
+a b  ba
+aaac  a
+a   dea
+a     a
+a c   a
+aaaaaaa

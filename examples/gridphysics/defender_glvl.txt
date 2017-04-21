@@ -1,0 +1,14 @@
+LevelMapping
+    a > wall 
+    b > avatar 
+    c > portalAmmo 
+    d > city 
+
+LevelDescription
+aaaaaaa
+ab    a
+a aa  a
+a a  ca
+a a  da
+a a  ca
+aaaaaaa

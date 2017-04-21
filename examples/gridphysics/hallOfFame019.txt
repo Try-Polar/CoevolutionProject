@@ -1,0 +1,21 @@
+BasicGame
+	LevelMapping
+		i > avatar
+		r > var1
+		p > var2
+		q > var3
+		u > var4
+	SpriteSet
+		avatar > OrientedAvatar
+		var1 > Door
+		var2 > AlternateChaser stype1=avatar stype2=var1
+		var3 > Fleeing stype=avatar
+		var4 > OrientedFlicker limit=5
+	InteractionSet
+		avatar EOS > killSprite  
+		avatar var1 > setSpeedForAll value=10 stype=var1  
+		var3 avatar > flipDirection scoreChange=3 
+		var3 var3 > killIfOtherHasMore resource=var1 limit=5  
+	TerminationSet
+		SpriteCounterMore stype=var2 limit=5 win=True
+		Timeout limit=610 win=False

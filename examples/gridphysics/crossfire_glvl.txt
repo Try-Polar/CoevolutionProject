@@ -1,0 +1,14 @@
+LevelMapping
+    a > wall 
+    b > avatar 
+    c > goal 
+    d > turret 
+
+LevelDescription
+aaaaaaa
+a   b a
+ac  a a
+aaaaa a
+a d   a
+a     a
+aaaaaaa

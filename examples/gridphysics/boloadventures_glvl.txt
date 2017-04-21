@@ -1,0 +1,14 @@
+LevelMapping
+    a > lcleft 
+    b > goal 
+    c > avatar 
+    d > box 
+
+LevelDescription
+aaaaaaa
+a  a  a
+a  aa a
+a   b a
+a  c da
+ad    a
+aaaaaaa

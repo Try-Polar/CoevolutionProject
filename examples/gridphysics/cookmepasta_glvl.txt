@@ -1,0 +1,17 @@
+LevelMapping
+    a > wall 
+    b > wrongplace 
+    c > plateinplace 
+    d > lock 
+    e > tomato 
+    f > tuna 
+    g > avatar 
+
+LevelDescription
+aaaaaaa
+a   bca
+a de  a
+ab    a
+af g ca
+af    a
+aaaaaaa

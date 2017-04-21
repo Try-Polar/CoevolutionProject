@@ -1,0 +1,16 @@
+LevelMapping
+    a > wall 
+    b > redSwitch 
+    c > normalAvatar 
+    d > hole 
+    e > greenAvatar 
+    f > exit 
+
+LevelDescription
+aaaaaaa
+a     a
+a b  ca
+a  d  a
+a     a
+ae  bfa
+aaaaaaa

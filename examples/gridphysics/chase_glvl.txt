@@ -1,0 +1,13 @@
+LevelMapping
+    a > wall 
+    b > scared 
+    c > avatar 
+
+LevelDescription
+aaaaaaa
+a  a  a
+a  aa a
+a  ba a
+a   a a
+a    ca
+aaaaaaa

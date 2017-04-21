@@ -1,0 +1,17 @@
+LevelMapping
+    a > wall 
+    b > exit 
+    c > key 
+    d > lock 
+    e > firehole 
+    f > avatar 
+    g > boulderLefthole 
+
+LevelDescription
+aaaaaaa
+ab    a
+a  c  a
+a d  ea
+a    fa
+a  g  a
+aaaaaaa

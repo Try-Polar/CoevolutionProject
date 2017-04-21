@@ -11,6 +11,7 @@ public class Observation implements Comparable<Observation>
     /**
      * Category of this observation (static, resource, npc, etc.).
      */
+	//Seems to be 6 categories according to the documentation
     public int category;
 
     /**

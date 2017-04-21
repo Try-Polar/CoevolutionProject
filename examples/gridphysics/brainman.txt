@@ -32,6 +32,8 @@ BasicGame
         
         boulder avatar > bounceForward
         
+        avatar EOS > stepBack
+        
         key avatar > transformTo stype=keym
         keym avatar > attractGaze
         avatar key keym > stepBack

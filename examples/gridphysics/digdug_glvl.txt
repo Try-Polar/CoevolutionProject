@@ -1,0 +1,12 @@
+LevelMapping
+    a > avatar 
+    b > wall 
+    c > entrance 
+    d > gem 
+
+LevelDescription
+ a   
+   b 
+    c
+   b 
+  d  

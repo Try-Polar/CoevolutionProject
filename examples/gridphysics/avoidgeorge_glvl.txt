@@ -1,0 +1,14 @@
+LevelMapping
+    a > wall 
+    b > avatar 
+    c > george 
+    d > quiet 
+
+LevelDescription
+aaaaaaa
+a     a
+a b   a
+a  caaa
+a     a
+ad    a
+aaaaaaa

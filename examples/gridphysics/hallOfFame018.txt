@@ -1,0 +1,22 @@
+BasicGame
+	LevelMapping
+		g > avatar
+		a > var1
+		m > var2
+		x > var3
+		s > var4
+	SpriteSet
+		avatar > MovingAvatar
+		var1 > Missile
+		var2 > Passive
+		var3 > BomberRandomMissile stypeMissile=var1 total=12 prob=0.2 spawnorientation=RIGHT
+		var4 > RandomMissile
+	InteractionSet
+		avatar avatar > spawnBehind stype=avatar scoreChange=-1 
+		EOS var1 > addHealthPoints value=2  
+		avatar avatar > stepBack scoreChange=-3 
+		var1 avatar > align scoreChange=-1 
+		avatar var1 > wrapAround scoreChange=2 
+	TerminationSet
+		SpriteCounterMore stype=var3 limit=12 win=True
+		SpriteCounterMore stype=var2 limit=8 win=False

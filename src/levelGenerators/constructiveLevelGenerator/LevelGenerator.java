@@ -73,8 +73,8 @@ public class LevelGenerator extends AbstractLevelGenerator{
 		
 		shuffleDirectionPercentage = 0.2;
 		
-		minSize = 4;
-		maxSize = 18;
+		minSize = 5;
+		maxSize = 5;
 		levelSizeRandomPercentage = 0.75;
 		levelSizeMaxPercentage = 1.5;
 		maxCoverPercentage = 0.1;

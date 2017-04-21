@@ -1,0 +1,17 @@
+LevelMapping
+    a > wall 
+    b > left 
+    c > winnerPlayer 
+    d > winnerNPC 
+    e > randomCamel 
+    f > fastL 
+    g > fastR 
+
+LevelDescription
+aaaaaaa
+a    ba
+ac d ea
+a af  a
+acaaaaa
+a d g a
+aaaaaaa

@@ -1,0 +1,15 @@
+LevelMapping
+    a > wall 
+    b > hole 
+    c > normalBoulder 
+    d > goal 
+    e > avatar 
+
+LevelDescription
+aaaaaaa
+ab    a
+a  c  a
+a aaaaa
+a  d  a
+ace   a
+aaaaaaa

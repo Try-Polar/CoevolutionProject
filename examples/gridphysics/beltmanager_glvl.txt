@@ -1,0 +1,17 @@
+LevelMapping
+    a > wall 
+    b > passenger 
+    c > avatar 
+    d > death 
+    e > floor 
+    f > jointRight 
+    g > suitcase 
+
+LevelDescription
+aaaaaaa
+a     a
+abcdaaa
+a     a
+a    ea
+a  fg a
+aaaaaaa

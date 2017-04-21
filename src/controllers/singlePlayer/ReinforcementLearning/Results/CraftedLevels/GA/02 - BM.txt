@@ -1,0 +1,32 @@
+brainman,10.0
+brainman,30.0
+brainman,30.0
+brainman,30.0
+brainman,30.0
+brainman,10.0
+brainman,10.0
+brainman,10.0
+brainman,10.0
+brainman,10.0
+brainman,10.0
+brainman,10.0
+brainman,10.0
+brainman,10.0
+brainman,30.0
+brainman,10.0
+brainman,10.0
+brainman,10.0
+brainman,10.0
+brainman,10.0
+brainman,10.0
+brainman,10.0
+brainman,10.0
+brainman,10.0
+brainman,10.0
+brainman,10.0
+brainman,30.0
+brainman,10.0
+brainman,10.0
+brainman,10.0
+brainman average score,14.0
+averageScore = 14.0

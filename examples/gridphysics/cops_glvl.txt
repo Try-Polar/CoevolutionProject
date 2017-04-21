@@ -1,0 +1,15 @@
+LevelMapping
+    a > wall 
+    b > yellowthug 
+    c > jaildoor 
+    d > avatar 
+    e > boss 
+
+LevelDescription
+aaaaaaa
+a  b  a
+ac d  a
+a  eb a
+a aaaaa
+a     a
+aaaaaaa

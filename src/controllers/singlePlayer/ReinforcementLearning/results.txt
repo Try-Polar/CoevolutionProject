@@ -1,0 +1,32 @@
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge,6.0
+chipschallenge average score,6.0
+averageScore = 6.0

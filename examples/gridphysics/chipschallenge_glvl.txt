@@ -1,0 +1,16 @@
+LevelMapping
+    a > wall 
+    b > crate 
+    c > avatar 
+    d > chip 
+    e > water 
+    f > exit 
+
+LevelDescription
+aaaaaaa
+a a   a
+abaaa a
+a  cada
+a    ea
+af    a
+aaaaaaa

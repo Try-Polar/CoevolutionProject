@@ -1,0 +1,23 @@
+BasicGame
+	LevelMapping
+		o > avatar
+		h > var1
+		g > var2
+		b > var3
+		q > var4
+	SpriteSet
+		avatar > ShootAvatar stype=avatar
+		var1 > BomberRandomMissile stypeMissile=avatar total=4 prob=0.7 spawnorientation=RIGHT
+		var2 > Passive
+		var3 > Fleeing stype=avatar
+		var4 > Flicker limit=19
+	InteractionSet
+		var3 avatar > attractGaze scoreChange=-3 
+		avatar avatar > decreaseSpeedToAll value=15 stype=var1  
+		var3 var3 > stepBack scoreChange=1 
+		EOS var1 > cloneSprite  
+		var2 EOS > pullWithIt scoreChange=3 
+		var1 var2 > transformTo stype=avatar forceOrientation=True scoreChange=1 
+	TerminationSet
+		StopCounter stype1=avatar stype2=avatar stype3=avatar limit=5 win=True
+		SpriteCounter stype=var2 limit=16 win=False

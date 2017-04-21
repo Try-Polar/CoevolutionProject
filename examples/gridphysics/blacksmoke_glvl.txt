@@ -1,0 +1,17 @@
+LevelMapping
+    a > wall 
+    b > lock 
+    c > key 
+    d > box 
+    e > exit 
+    f > avatar 
+    g > death 
+
+LevelDescription
+aaaaaaa
+a  bcda
+a     a
+a e afa
+agaaa a
+a a   a
+aaaaaaa

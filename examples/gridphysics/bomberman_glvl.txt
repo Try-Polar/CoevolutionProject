@@ -1,0 +1,15 @@
+LevelMapping
+    a > wall 
+    b > bat 
+    c > bomberman 
+    d > goal 
+    e > wallBreak 
+
+LevelDescription
+aaaaaaa
+a   b a
+a     a
+ac    a
+aaa dea
+a     a
+aaaaaaa

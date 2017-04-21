@@ -1,0 +1,15 @@
+LevelMapping
+    a > wall 
+    b > leftCloud 
+    c > satellite 
+    d > avatar 
+    e > portalBase 
+
+LevelDescription
+aaaaaaa
+a     a
+a  b ca
+ad  aaa
+ae    a
+a     a
+aaaaaaa

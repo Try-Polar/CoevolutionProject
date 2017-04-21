@@ -1,0 +1,21 @@
+BasicGame
+	LevelMapping
+		o > avatar
+		b > var1
+		o > var2
+	SpriteSet
+		avatar > VerticalAvatar
+		var1 > Passive
+		var2 > Immovable
+	InteractionSet
+		avatar var1 > teleportToExit  
+		avatar var1 > subtractHealthPoints value=15 stype=avatar scoreChange=-2 
+		var1 var1 > killSprite  
+		var1 var1 > addHealthPointsToMax value=4  
+		EOS var1 > wrapAround scoreChange=2 
+		var1 var1 > removeScore stype=avatar 
+		var1 var1 > addHealthPoints value=2 scoreChange=-3 
+		var1 var1 > spawnIfHasLess stype=avatar resource=avatar limit=7  
+	TerminationSet
+		SpriteCounterMore stype=var1 limit=18 win=True
+		StopCounter stype1=avatar stype2=avatar stype3=avatar limit=12 win=False

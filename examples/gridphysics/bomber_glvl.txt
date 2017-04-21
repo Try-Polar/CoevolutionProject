@@ -1,0 +1,16 @@
+LevelMapping
+    a > wall 
+    b > goal 
+    c > lcdown 
+    d > box 
+    e > water 
+    f > avatar 
+
+LevelDescription
+aaaaaaa
+a     a
+a baaaa
+a  c  a
+a d e a
+a f   a
+aaaaaaa

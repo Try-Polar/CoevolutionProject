@@ -14,17 +14,20 @@ public class CompetitionParameters
     /**
      * Milliseconds allowed per controller action.
      */
-    public static int ACTION_TIME = 40;
+	//Original: 40
+    public static int ACTION_TIME = 80; //Chaning this during agents learning (hopefully it runs faster when its learned)
 
     /**
      * Milliseconds for controller disqualification, if it returns an action after this time.
      */
-    public static int ACTION_TIME_DISQ = 50;
+    //Original: 50
+    public static int ACTION_TIME_DISQ = 100; //Chaning this during agents learning (hopefully it runs faster when its learned)
 
     /**
      * Milliseconds allowed for controller initialization.
      */
-    public static int INITIALIZATION_TIME = 1000;
+    //Original: 1000
+    public static int INITIALIZATION_TIME = 100000000; //Upped (a lot) this too 
 
     /**
      * Milliseconds allowed for controller tear down.
@@ -66,7 +69,7 @@ public class CompetitionParameters
     /**
      * Max time a game can run
      */
-    public static int MAX_TIMESTEPS = 2000;
+    public static int MAX_TIMESTEPS = 1000; //Changing this to improve run times, original is 2000
 
     /**
      * Terminates the program when the playing window is closed

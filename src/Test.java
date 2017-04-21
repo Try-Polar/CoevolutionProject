@@ -1,5 +1,8 @@
 import gameDesigner.GameDesigner;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Random;
 
 import core.ArcadeMachine;
@@ -14,13 +17,30 @@ import EvolutionaryAgents.EvolutionaryGameDesigner;
  */
 public class Test
 {
+	
 
     public static void main(String[] args)
     {
         //GameDesigner test = new GameDesigner();
-        EvolutionaryGameDesigner evoGameDesigner = new EvolutionaryGameDesigner();
-        evoGameDesigner.eaSimple();
+        //EvolutionaryGameDesigner evoGameDesigner = new EvolutionaryGameDesigner();
+        //evoGameDesigner.eaSimple();
+        //evoGameDesigner.eaSymbolsSimple();
+        //evoGameDesigner.singleSymbolRun();
         //evoGameDesigner.makeSingleGame();
+    	//test.loadGame();
+    	
+    	String path ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "src" + File.separator + "controllers" + File.separator + "singlePlayer"+ File.separator + "ReinforcementLearning" + File.separator + "results.txt";
+    	//C:\Users\Elliot\Documents\GitHub\CoevolutionProject\examples\gridphysics
+    	File f = new File(path);
+    	PrintWriter writer = null;
+    	
+    	f.getParentFile().mkdirs();
+		try {
+			f.createNewFile();
+			writer = new PrintWriter(f);
+		} catch (IOException e) { 
+			e.printStackTrace();
+		}
     	
     	//Available controllers:
     	String sampleRandomController = "controllers.singlePlayer.sampleRandom.Agent";
@@ -32,6 +52,7 @@ public class Test
         String sampleGAController = "controllers.singlePlayer.sampleGA.Agent";
         String sampleOLETSController = "controllers.singlePlayer.olets.Agent";
         String repeatOLETS = "controllers.singlePlayer.repeatOLETS.Agent";
+        String reinforcementLearning = "controllers.singlePlayer.ReinforcementLearning.Agent";
 
         //Available Generators
         String randomLevelGenerator = "levelGenerators.randomLevelGenerator.LevelGenerator";
@@ -65,15 +86,20 @@ public class Test
                 "zelda", "zenpuzzle", "earlyAttempts", "hallOfFame001", "hallOfFame002",	  //90-94
                 "hallOfFame003", "hallOfFame004", "hallOfFame005", "hallOfFame006", "hallOfFame007",//95-99
         		"hallOfFame008", "hallOfFame009", "hallOfFame010", "hallOfFame011", "hallOfFame012", //100-104 12:0.5
-        		"hallOfFame013", "hallOfFame014", "hallOfFame015", "hallOfFame016"}; //105-109 13:0.5 14:21.33 15:? 16:0.499
+        		"hallOfFame013", "hallOfFame014", "hallOfFame015", "hallOfFame016", "hallOfFame017", //105-109 13:0.5 14:21.33 15:? 16:0.499 17:0.5
+        		"hallOfFame018", "hallOfFame019", "hallOfFame020", "hallOfFame021", "hallOfFame022", //110-114 19:0.5v20:0.3749 21:0.75 22:?
+        		"hallOfFame023", "hallOfFame024", "hallOfFame025", "hallOfFame026"};//115-119 23:1(First finished with new method) 24:0.5 25:? 26:0.5
+
 
         //Other settings
-        boolean visuals = true;
+        boolean visuals = false;
         int seed = new Random().nextInt();
+        
+        Random rnd = new Random();
 
         //Game and level to play
-        int gameIdx = 106;
-        int levelIdx = 0; //level names from 0 to 4 (game_lvlN.txt).
+        int gameIdx = 12;
+        int levelIdx = 5; //level names from 0 to 4 (game_lvlN.txt).
         String game = gamesPath + games[gameIdx] + ".txt";
         String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
 
@@ -101,16 +127,61 @@ public class Test
         
         //5. This starts a game, in a generated level created by a specific level generator played by a human
 
-        if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
-        	//ArcadeMachine.playOneGeneratedLevel(game, recordActionsFile, recordLevelFile, seed);
-        	ArcadeMachine.runOneGeneratedLevel(game, true, sampleMCTSController, recordActionsFile, recordLevelFile, 5, false);
-        }
+        //if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
+        //	ArcadeMachine.playOneGeneratedLevel(game, recordActionsFile, recordLevelFile, seed);
+        //}
         
         //6. This starts a game, in a generated level created by a specific level generator played by a selected agent
-        
         //if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
         //	ArcadeMachine.runOneGeneratedLevel(game, true, sampleMCTSController, recordActionsFile, recordLevelFile, 5, false);
-        //}
+		//}
+        
+        double score = 0;
+        double averageScore = 0;
+        double gameAverage = 0;
+        int runs = 0;
+        int gameRuns = 0;
+        for (int j=19; j < 20; j++)
+        {
+        	gameIdx = j;//rnd.nextInt(10); //Only practicing on games they made for now
+        	game = gamesPath + games[gameIdx] + ".txt";
+        	//recordLevelFile = generateLevelPath + games[gameIdx] + "_glvl.txt";
+        	level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
+        	gameAverage = 0;
+    		gameRuns = 0;
+        	for (int i=0; i < 30; i++)
+        	{		
+        		try
+        		{
+        			System.out.println("Game: " + game);
+        			System.out.println("Level: " + level1);
+        			//if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
+        				//score = ArcadeMachine.runOneGeneratedLevel(game, true, sampleGAController, recordActionsFile, recordLevelFile, 5, false);
+        			score = ArcadeMachine.runOneGame(game, level1, visuals, sampleMCTSController, recordActionsFile, seed, 0)[1];
+        			//ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
+        			averageScore += score;	
+        			gameAverage += score;
+        			runs++;
+            		gameRuns++;
+            		writer.println(games[gameIdx] + "," + score);
+        			//}
+        			//score = ArcadeMachine.runOneGame(game, level1, true, reinforcementLearning, recordActionsFile, 5, 0)[1];
+        			//averageScore += score;	
+    				//gameAverage += score;
+        			
+        			
+        		}
+        		catch (Exception e)
+        		{
+        			e.printStackTrace();
+        		}
+        	}
+        	gameAverage = gameAverage / gameRuns;
+        	writer.println(games[gameIdx] + " average score," + gameAverage);
+        }
+        writer.println("averageScore = " + averageScore / runs);
+        System.out.println("averageScore = " + averageScore / runs);
+        writer.close();
         
         //7. This plays N games, in the first L levels, M times each. Actions to file optional (set saveActions to true).
 //        int N = 82, L = 5, M = 1;

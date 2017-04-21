@@ -45,8 +45,8 @@ public class LevelGenerator extends AbstractLevelGenerator{
 	 */
 	public LevelGenerator(GameDescription game, ElapsedCpuTimer elapsedTimer){
 		random = new Random();
-		minSize = 4;
-		maxSize = 18;
+		minSize = 5;
+		maxSize = 5;
 
 		emptyPercentage = 0.9;
 	}

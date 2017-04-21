@@ -46,7 +46,7 @@ BasicGame key_handler=Pulse
         avatar wall box > stepBack
         avatar water > killSprite
 
-        goal avatar > killSprite
+        goal avatar > killSprite scoreChange=3
 
         bomb avatar  > transformTo stype=bombm
         bomb avatar box water > killSprite
