@@ -1,0 +1,21 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+	SpriteSet
+		avatar > VerticalAvatar
+		var1 > Portal stype=avatar
+		var2 > RandomMissile
+		var3 > Bomber stype=avatar total=20 spawnorientation=LEFT
+	InteractionSet
+		avatar EOS > stepBack 
+		var3 var4 > killIfHasMore resource=avatar limit=18 scoreChange=-3 
+		var4 avatar > bounceForward scoreChange=-3 
+		var3 avatar > teleportToExit  
+		var4 avatar > turnAround  
+		var3 var1 > transformToRandomChild stype=avatar stype_other=avatar scoreChange=-1 
+	TerminationSet
+		Timeout limit=465 win=True
+		SpriteCounterMore stype=var1 limit=11 win=False

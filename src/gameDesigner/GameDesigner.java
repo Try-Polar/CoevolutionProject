@@ -14,8 +14,8 @@ import java.io.ObjectOutputStream;
 public class GameDesigner {
 	
 	String path ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "earlyAttempts.txt";
-	String savePath ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + "hallOfFame025.txt";
-	String saveSymbols = "C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "src" + File.separator + "gameDesigner" + File.separator + "GamesAsSymbols" + File.separator + "hallOfFame025.ser";
+	String savePath ="C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "examples" + File.separator + "gridphysics" + File.separator + 										"hallOfFame110.txt";
+	String saveSymbols = "C:" + File.separator + "Users" + File.separator + "Elliot" + File.separator + "Documents" + File.separator + "GitHub" + File.separator + "CoevolutionProject" + File.separator + "src" + File.separator + "gameDesigner" + File.separator + "GamesAsSymbols" + File.separator + 	"hallOfFame110.ser";
 
 	//C:\Users\Elliot\Documents\GitHub\CoevolutionProject\examples\gridphysics
 	File f = new File(path);
@@ -95,12 +95,12 @@ public class GameDesigner {
 	String[] interactors = {"avatar", "EOS", "var1", "var2", "var3", "var4", "var5"};
 	String[] chars = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
 	String[] evaluableBooleans = {"True", "False"};
-	String[] evaluableFloats = {"0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"}; //make for loop to expand
-	String[] evaluableInts = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"}; //make for loop to expand
+	String[] evaluableFloats = {"0","0.1","0.2","0.3","0.4","0.5","0.6","0.7","0.8","0.9"}; //make for loop to expand
+	String[] evaluableInts = {"0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"}; //make for loop to expand
 	String[] terminationOptions = {"win=True", "win=False"};
 	String[] evaluableDirections = {"UP", "DOWN", "LEFT", "RIGHT"};
 	String[] evaluableScoreInts = {"-3", "-2", "-1", "1", "2", "3"};
-	String[] evaluableLargeInts = new String[150];
+	String[] evaluableLargeInts = new String[160];
 
 		/*InterchangableSymbol identifier = new InterchangableSymbol("identifier", identifiers);
 		InterchangableSymbol parameter = new InterchangableSymbol("parameter", parameters); //basically the same thing named differently so that parameters are treated differently to identifiers
@@ -315,8 +315,8 @@ public class GameDesigner {
 	}
 	
 	private void initiliseVGDLSymbols() { //May remove this entirely later, it was useful earlier until I changed things
-		for (int i=0; i < 150; i++) {
-			evaluableLargeInts[i] = Integer.toString(500 + (i * 10));
+		for (int i=0; i < 160; i++) {
+			evaluableLargeInts[i] = Integer.toString(200 + (i * 5));
 		}
 		addChildrenVGDLSymbols();		
 	}
@@ -750,7 +750,7 @@ public class GameDesigner {
 				updateSpawnType.addChild(parameter);
 				updateSpawnType.addChild(space);
 				updateSpawnType.addChild(spawnPointParam);
-				updateSpawnType.addChild(parameter);
+				updateSpawnType.addChild(identifier);
 				updateSpawnType.addChild(space);
 				updateSpawnType.addChild(scoreChange);
 				removeScore.addChild(removeScoreString);

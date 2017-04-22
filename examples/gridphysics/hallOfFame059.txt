@@ -1,0 +1,21 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+	SpriteSet
+		avatar > ShootAvatar stype=avatar
+		var1 > BomberRandomMissile stypeMissile=avatar total=15 prob=0.1 spawnorientation=LEFT
+		var2 > Chaser stype=avatar
+		var3 > Missile
+	InteractionSet
+		avatar EOS > stepBack 
+		var5 EOS > transformTo stype=avatar forceOrientation=True  
+		var3 EOS > pullWithIt  
+		var5 avatar > spawnIfHasMore stype=avatar resource=avatar limit=19  
+		var4 var5 > decreaseSpeedToAll value=13 stype=avatar scoreChange=-2 
+		var2 var3 > reverseDirection  
+	TerminationSet
+		SpriteCounter stype=var2 limit=1 win=True
+		SpriteCounterMore stype=var2 limit=9 win=False

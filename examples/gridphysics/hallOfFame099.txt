@@ -1,0 +1,21 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+	SpriteSet
+		avatar > FlakAvatar stype=avatar
+		var1 > Passive
+		var2 > RandomAltChaser stype1=avatar stype2=avatar
+		var3 > Door
+	InteractionSet
+		avatar EOS > stepBack 
+		avatar var2 > turnAround  
+		avatar var2 > increaseSpeedToAll value=7 stype=avatar scoreChange=2 
+		var4 var3 > stepBack scoreChange=-1 
+		var5 var3 > increaseSpeedToAll value=20 stype=avatar  
+		EOS var4 > pullWithIt  
+	TerminationSet
+		StopCounter stype1=avatar stype2=avatar stype3=avatar limit=14 win=True
+		Timeout limit=380 win=False

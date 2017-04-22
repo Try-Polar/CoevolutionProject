@@ -1,0 +1,22 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+	SpriteSet
+		avatar > FlakAvatar stype=avatar
+		var1 > Chaser stype=avatar
+		var2 > RandomMissile
+		var3 > Door
+	InteractionSet
+		avatar EOS > stepBack 
+		var4 var5 > addHealthPoints value=4  
+		EOS var3 > undoAll scoreChange=3 
+		var2 var2 > teleportToExit  
+		EOS var5 > transformToRandomChild stype=avatar  
+		var5 var3 > killSprite scoreChange=3 
+		avatar var5 > attractGaze  
+	TerminationSet
+		Timeout limit=215 win=True
+		Timeout limit=440 win=False

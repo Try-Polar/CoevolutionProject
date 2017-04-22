@@ -1,0 +1,22 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+	SpriteSet
+		avatar > OngoingTurningAvatar
+		var1 > Bomber stype=avatar total=5 spawnorientation=DOWN
+		var2 > Bomber stype=avatar total=3 spawnorientation=DOWN
+	InteractionSet
+		avatar EOS > stepBack 
+		avatar var2 > teleportToExit scoreChange=-3 
+		var2 var1 > pullWithIt  
+		avatar var2 > turnAround scoreChange=-3 
+		avatar var3 > transformToRandomChild stype=avatar scoreChange=2 
+		var4 var3 > spawnIfHasLess stype=avatar resource=avatar limit=18 scoreChange=-1 
+		var1 var4 > updateSpawnType stype=avatar spawnPoint=var1 scoreChange=-1 
+		var4 var4 > transformTo stype=avatar forceOrientation=False  
+		var5 EOS > spawnIfHasLess stype=avatar resource=avatar limit=17 scoreChange=1 
+	TerminationSet
+		SpriteCounterMore stype=var1 limit=3 win=True
+		Timeout limit=345 win=False

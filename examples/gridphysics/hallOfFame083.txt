@@ -1,0 +1,20 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+	SpriteSet
+		avatar > HorizontalAvatar
+		var1 > RandomMissile
+		var2 > Flicker limit=1
+		var2 > Portal stype=avatar
+	InteractionSet
+		avatar EOS > stepBack 
+		var2 var1 > addHealthPointsToMax value=17  
+		var2 var2 > decreaseSpeedToAll value=16 stype=avatar scoreChange=-2
+		var2 avatar > reverseDirection scoreChange=2
+		var2 avatar > pullWithIt scoreChange=-1 
+		var2 var1 > stepBack  
+	TerminationSet
+		Timeout limit=910 win=False
+		Timeout limit=600 win=False

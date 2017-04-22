@@ -1,0 +1,20 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+	SpriteSet
+		avatar > HorizontalAvatar
+		var1 > Immovable
+		var2 > Missile
+	InteractionSet
+		avatar EOS > stepBack 
+		EOS var2 > addHealthPointsToMax value=10 scoreChange=2 
+		EOS var2 > attractGaze scoreChange=3 
+		var2 EOS > turnAround  
+		var2 var1 > killAll stype=avatar  
+		avatar var2 > undoAll  
+		var1 avatar > addHealthPoints value=18 scoreChange=2 
+	TerminationSet
+		SpriteCounterMore stype=var1 limit=8 win=True
+		Timeout limit=435 win=False

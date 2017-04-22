@@ -1,0 +1,22 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+	SpriteSet
+		avatar > OngoingTurningAvatar
+		var1 > Door
+		var2 > RandomNPC
+		var3 > OrientedFlicker limit=7
+	InteractionSet
+		avatar EOS > stepBack 
+		var3 avatar > spawnIfHasMore stype=avatar resource=avatar limit=13 scoreChange=-3
+		var2 var3 > setSpeedForAll value=8 stype=avatar scoreChange=-3
+		var3 var2 > decreaseSpeedToAll value=12 stype=avatar scoreChange=3
+		var1 var2 > reverseDirection  
+		var1 var2 > spawnIfHasLess stype=var1 resource=var1 limit=2 scoreChange=-3
+		var1 var3 > decreaseSpeedToAll value=14 stype=avatar scoreChange=2
+	TerminationSet
+		SpriteCounterMore stype=var2 limit=4 win=False
+		Timeout limit=505 win=False

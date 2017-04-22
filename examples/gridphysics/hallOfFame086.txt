@@ -1,0 +1,22 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+	SpriteSet
+		avatar > ShootAvatar stype=avatar
+		var1 > Door
+		var2 > OrientedFlicker limit=11
+	InteractionSet
+		avatar EOS > stepBack 
+		EOS var2 > increaseSpeedToAll value=12 stype=avatar scoreChange=1 
+		var1 var2 > subtractHealthPoints value=0 stype=avatar scoreChange=-3
+		EOS var2 > cloneSprite  
+		var2 EOS > transformTo stype=avatar forceOrientation=False scoreChange=1
+		var1 avatar > subtractHealthPoints value=18 stype=avatar  
+		var1 var2 > transformToRandomChild stype=avatar stype_other=avatar  
+		var2 var2 > reverseDirection scoreChange=-3 
+		avatar var2 > addHealthPointsToMax value=4 scoreChange=1 
+	TerminationSet
+		Timeout limit=600 win=True
+		SpriteCounter stype=var2 limit=11 win=False

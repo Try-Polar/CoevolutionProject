@@ -1,0 +1,23 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+	SpriteSet
+		avatar > FlakAvatar stype=avatar
+		var1 > Flicker limit=16
+		var2 > OrientedFlicker limit=1
+		var3 > RandomAltChaser stype1=avatar stype2=avatar
+	InteractionSet
+		avatar EOS > stepBack 
+		var1 var5 > addHealthPointsToMax value=10 scoreChange=3 
+		avatar var2 > removeScore stype=avatar 
+		var1 var5 > increaseSpeedToAll value=11 stype=avatar scoreChange=-3 
+		var5 avatar > decreaseSpeedToAll value=18 stype=avatar scoreChange=3 
+		avatar var2 > stepBack  
+		var2 avatar > killSprite  
+		var3 var2 > removeScore stype=avatar 
+	TerminationSet
+		SpriteCounterMore stype=var1 limit=20 win=True
+		StopCounter stype1=avatar stype2=avatar stype3=avatar limit=18 win=False

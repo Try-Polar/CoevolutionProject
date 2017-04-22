@@ -1,0 +1,24 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+	SpriteSet
+		avatar > OrientedAvatar
+		var1 > Missile
+		var2 > Missile
+		var3 > Immovable
+		var4 > Flicker limit=15
+	InteractionSet
+		avatar EOS > stepBack 
+		avatar EOS > cloneSprite scoreChange=1 
+		var1 EOS > killIfHasMore resource=var1 limit=1 scoreChange=3 
+		var4 EOS > transformToRandomChild stype=var1  
+		avatar avatar > align scoreChange=2 
+		var3 avatar > reverseDirection  
+		var5 var5 > teleportToExit scoreChange=-2 
+	TerminationSet
+		Timeout limit=645 win=True
+		Timeout limit=725 win=False

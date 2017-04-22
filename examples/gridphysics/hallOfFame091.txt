@@ -1,0 +1,23 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+	SpriteSet
+		avatar > HorizontalAvatar
+		var1 > RandomNPC
+		var2 > Chaser stype=avatar
+		var3 > Immovable
+	InteractionSet
+		avatar EOS > stepBack 
+		var1 var5 > align scoreChange=3 
+		var4 var4 > teleportToExit scoreChange=-3 
+		var3 EOS > transformTo stype=avatar forceOrientation=True scoreChange=3 
+		EOS var4 > killIfFromAbove  
+		var3 EOS > addHealthPointsToMax value=9 scoreChange=-3 
+		avatar var5 > killIfHasMore resource=avatar limit=17  
+		var1 EOS > removeScore stype=avatar 
+	TerminationSet
+		SpriteCounter stype=var1 limit=17 win=True
+		Timeout limit=270 win=False

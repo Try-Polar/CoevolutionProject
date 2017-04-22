@@ -1,0 +1,26 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+		f > var5
+	SpriteSet
+		avatar > MovingAvatar
+		var1 > Fleeing stype=avatar
+		var2 > Door
+		var3 > Chaser stype=avatar
+		var4 > OrientedFlicker limit=10
+		var5 > Chaser stype=avatar
+	InteractionSet
+		avatar EOS > stepBack 
+		var1 avatar > killIfFromAbove  
+		var4 var2 > subtractHealthPoints value=9 stype=avatar 
+		EOS var5 > killAll stype=var2 scoreChange=3
+		var5 var1 > addHealthPoints value=15 scoreChange=-2
+		var3 EOS > decreaseSpeedToAll value=18 stype=var1 scoreChange=-3
+		var3 var3 > killAll stype=var2 
+	TerminationSet
+		Timeout limit=840 win=True
+		SpriteCounter stype=var1 limit=12 win=False

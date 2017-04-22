@@ -1,0 +1,25 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+		f > var5
+	SpriteSet
+		avatar > FlakAvatar stype=var2
+		var1 > Passive
+		var2 > Immovable
+		var3 > Fleeing stype=var2
+		var4 > RandomMissile
+		var5 > Passive
+	InteractionSet
+		avatar EOS > stepBack 
+		avatar var5 > teleportToExit scoreChange=1
+		var4 var2 > bounceForward 
+		var2 var3 > pullWithIt scoreChange=3
+		EOS var1 > transformToRandomChild stype=avatar 
+		EOS var1 > updateSpawnType stype=avatar spawnPoint=var3  
+	TerminationSet
+		Timeout limit=305 win=True
+		SpriteCounter stype=var3 limit=17 win=False

@@ -1,0 +1,24 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+		f > var5
+	SpriteSet
+		avatar > HorizontalAvatar
+		var1 > Door
+		var2 > Fleeing stype=avatar
+		var3 > RandomBomber stype=avatar total=4 prob=0 spawnorientation=DOWN
+		var4 > Spreader stype=avatar spreadprob=0.7
+		var5 > Door
+	InteractionSet
+		avatar EOS > stepBack 
+		var3 var3 > setSpeedForAll value=9 stype=var1  
+		var1 avatar > wrapAround  
+		var5 avatar > stepBack  
+		var3 var1 > increaseSpeedToAll value=20 stype=avatar  
+	TerminationSet
+		SpriteCounterMore stype=var1 limit=11 win=True
+		SpriteCounter stype=var1 limit=17 win=False

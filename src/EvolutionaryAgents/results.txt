@@ -1,0 +1,341 @@
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 1
+FITNESS = 0.0
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.9958506224066389
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.49896265560165975
+RDScore 0.9987309644670052
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.49968274111675126
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.5656706045865184
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.39141765114662963
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 1.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.5
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 1
+FITNESS = 0.0
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore -1.0
+RDWins 0.0
+win_50 -1.0
+win_lose 1
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 0
+FITNESS = -0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 1
+FITNESS = 0.5
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 1
+FITNESS = 0.5
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 1
+FITNESS = 0.5
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 1
+FITNESS = 0.5
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 1
+FITNESS = 0.5
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 1
+FITNESS = 0.5
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 1
+FITNESS = 0.5
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 1
+FITNESS = 0.5
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 1
+FITNESS = 0.5
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 1
+FITNESS = 0.5
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 1
+FITNESS = 0.5
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 1.0
+win_lose 0
+FITNESS = 0.25
+RDScore 0.0
+RDWins 0.0
+win_50 -1.0
+win_lose 1
+FITNESS = 0.0
+Best fitness is 0.5

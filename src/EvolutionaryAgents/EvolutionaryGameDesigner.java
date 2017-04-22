@@ -77,9 +77,8 @@ public class EvolutionaryGameDesigner {
 		
 		for (int gen=0; gen < generations; gen++) {
 			//Selection, Crossover, Mutation
-			for (int i=0; i<populationSize/3; i++) {
-				tournament2();
-			}
+			grammarSelection();
+			grammarMutationCrossover();
 			
 			//Evaluation
 			for (int ind=0; ind < populationSize; ind++)	{
@@ -132,7 +131,7 @@ public class EvolutionaryGameDesigner {
 				fitnesses[ind] = evaluationFunction(popSymbols.get(ind));
 				//System.out.println("Finished Eval");
 				if (fitnesses[ind] > hofFitness) {
-					hof = popSymbols.get(ind);
+					hof = new LinkedList<Symbol>(popSymbols.get(ind));
 					hofFitness = fitnesses[ind];
 				}
 			}
@@ -225,7 +224,6 @@ public class EvolutionaryGameDesigner {
 
 		
 		
-		//System.out.println("mutation complete");
 		return popSymbols.get(W3);
 	}
 	
@@ -271,8 +269,18 @@ public class EvolutionaryGameDesigner {
 		
 		return popSymbols; 
 	}
-		
-	private void tournament2() {
+
+	private void grammarSelection()
+	{
+		int[][] newPop = new int[populationSize][]; 
+		for (int i=0; i < populationSize; i++)
+		{
+			newPop[i] = tournament2();
+		}
+		pop = newPop;
+	}
+	
+	private int[] tournament2() {
 		int a,b,W,L;
 		//Select 2 members of the population
 		a = rnd.nextInt(populationSize);
@@ -289,17 +297,33 @@ public class EvolutionaryGameDesigner {
 			W = b;
 		}
 		
+		return pop[W];
+		
+		
+	}
+	
+	private void grammarMutationCrossover()
+	{
+		int a, b;
+		a = rnd.nextInt(populationSize);
+		do {
+			b = rnd.nextInt(populationSize);
+		} while (a == b);
+		
 		//crossover
 		for (int i=0; i<individualSize; i++) {
 			if (rnd.nextDouble() < crossoverProbability) {
-				pop[L][i] = pop[W][i];
+				int temp = pop[a][i];
+				pop[a][i] = pop[b][i];
+				pop[b][i] = temp;
 			}
 		}
-		
+				
 		//mutation
 		for (int i=0; i<individualSize;i++) {
 			if (rnd.nextDouble() < indpb) {
-				pop[L][i] = rnd.nextInt(255);
+				pop[a][i] = rnd.nextInt(255);
+				pop[b][i] = rnd.nextInt(255);
 			}
 		}
 	}
@@ -359,6 +383,8 @@ public class EvolutionaryGameDesigner {
 		}
 	}
 	
+	
+	
 	public double evaluationFunction(int[] individual) {
 		//If game does not run return negative score for now if game runs return score of 0
 		//Strings will later be changed to variables
@@ -376,33 +402,37 @@ public class EvolutionaryGameDesigner {
 		double doNothingAverageScore = 0;
 		double RDScore;
 		double RDWins;
+		float win_50 = 1;
 		
 		System.out.println("evaluation is begining");
 		gameDesigner.createGameFromGenome(individual);
 		try {
 			System.out.println("valid game########################## I think");
 			//ArcadeMachine.runOneGame("examples/gridphysics/earlyattempts.txt", "examples/gridphysics/earlyAttempts_lvl0.txt", true, sampleMCTSController, null, 15, 0);
-			if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
-	        	ArcadeMachine.runOneGeneratedLevel(game, false, sampleMCTSController, recordActionsFile, recordLevelFile, 5, false);
-	        }
 			//randomScore = ArcadeMachine.runOneGame(game, recordLevelFile, true, sampleRandomController, null, 15, 0);			
 			//oneStepScore = ArcadeMachine.runOneGame(game, recordLevelFile, true, sampleOneStepController, null, 15, 0);
 			for (int i=0; i < runs; i++) {
-				doNothingScore = ArcadeMachine.runOneGame(game, recordLevelFile, false, doNothingController, null, 15, 0);
-				MCTSScore = ArcadeMachine.runOneGame(game, recordLevelFile, false, sampleMCTSController, null, 15, 0);
+				if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
+					doNothingScore = ArcadeMachine.runOneGame(game, recordLevelFile, false, doNothingController, null, 15, 0);
+					MCTSScore = ArcadeMachine.runOneGame(game, recordLevelFile, false, sampleMCTSController, null, 15, 0);
+				}
 				MCTSAverageScore += MCTSScore[1];
 				doNothingAverageScore += doNothingScore[1];
-				if (MCTSScore[0] == 0) {
+				if (MCTSScore[0] == 1) {
 					MCTSWins++;
 					win = true;
 				} else {
 					lose = true;
 				}
-				if (doNothingScore[0] == 0) {
+				if (doNothingScore[0] == 1) {
 					doNothingWins++;
 					win = true;
 				} else {
 					lose = true;
+				}
+				
+				if (MCTSScore[0] == 1 && MCTSScore[2] < 50) {
+					win_50 = -1;
 				}
 			}
 
@@ -410,46 +440,41 @@ public class EvolutionaryGameDesigner {
 			System.out.println("invalid game----------------------------------------------------------------------");
 			return -5;
 		}
-		float win_50;
+		
 		MCTSAverageScore = MCTSAverageScore / runs;
 		doNothingAverageScore = doNothingAverageScore / runs;
 		
-		if (MCTSScore[0] > -1 && MCTSScore[2] < 50) {
-			win_50 = -1;
-		} else {
-			win_50 = 1;
-		}
+		
 		int win_lose = 0;
 		if (win && lose) {
 			win_lose = 1;
 		}
+		//Shift scores so that min is 0
+		if (MCTSAverageScore < 0 || doNothingAverageScore < 0)
+		{
+			double min = Math.abs(Math.min(MCTSAverageScore, doNothingAverageScore));
+			MCTSAverageScore += min;
+			doNothingAverageScore += min;
+		}
 		if (Math.max(MCTSAverageScore, doNothingAverageScore) != 0) {
 			RDScore = ((MCTSAverageScore - doNothingAverageScore)/ Math.max(MCTSAverageScore, doNothingAverageScore));
-		} else if (Math.min(MCTSAverageScore, doNothingAverageScore) != 0)  {
-			RDScore = ((MCTSAverageScore - doNothingAverageScore)/ Math.min(MCTSAverageScore, doNothingAverageScore));
 		} else {
 			RDScore = 0;
 		}
 		
 		
-		if (Math.max(MCTSScore[0], doNothingScore[0]) != 0) {
-			RDWins = ((MCTSScore[0] - doNothingScore[0])/ Math.max(MCTSScore[0], doNothingScore[0]));
-		} else if (Math.min(MCTSScore[0], doNothingScore[0]) != 0) {
-			RDWins = ((MCTSScore[0] - doNothingScore[0])/ Math.min(MCTSScore[0], doNothingScore[0]));
+		if (Math.max(MCTSWins, doNothingWins) != 0) {
+			RDWins = ((MCTSWins - doNothingWins)/ Math.max(MCTSWins, doNothingWins));
 		} else {
 			RDWins = 0;
 		}
 		
 		System.out.println("RDScore " + RDScore);
-		System.out.println(Math.max(MCTSScore[1], doNothingScore[1]));
 		System.out.println("RDWins " + RDWins);
-		System.out.println(Math.max(MCTSScore[0], doNothingScore[0]));
 		System.out.println("win_50 " + win_50);
 		System.out.println("win_lose " + win_lose);
 		writer.println("RDScore " + RDScore);
-		writer.println(Math.max(MCTSScore[1], doNothingScore[1]));
 		writer.println("RDWins " + RDWins);
-		writer.println(Math.max(MCTSScore[0], doNothingScore[0]));
 		writer.println("win_50 " + win_50);
 		writer.println("win_lose " + win_lose);
 		double result = (RDScore + RDWins + win_50 + win_lose)/4;
@@ -477,33 +502,37 @@ public class EvolutionaryGameDesigner {
 				double doNothingAverageScore = 0;
 				double RDScore;
 				double RDWins;
+				float win_50 = 1;
 				
 				System.out.println("evaluation is begining");
 				gameDesigner.writeSymbolsToFile(individual);
 				try {
 					System.out.println("valid game########################## I think");
 					//ArcadeMachine.runOneGame("examples/gridphysics/earlyattempts.txt", "examples/gridphysics/earlyAttempts_lvl0.txt", true, sampleMCTSController, null, 15, 0);
-					if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
-			        	ArcadeMachine.runOneGeneratedLevel(game, false, sampleMCTSController, recordActionsFile, recordLevelFile, 5, false);
-			        }
 					//randomScore = ArcadeMachine.runOneGame(game, recordLevelFile, true, sampleRandomController, null, 15, 0);			
 					//oneStepScore = ArcadeMachine.runOneGame(game, recordLevelFile, true, sampleOneStepController, null, 15, 0);
 					for (int i=0; i < runs; i++) {
-						doNothingScore = ArcadeMachine.runOneGame(game, recordLevelFile, false, doNothingController, null, 15, 0);
-						MCTSScore = ArcadeMachine.runOneGame(game, recordLevelFile, false, sampleMCTSController, null, 15, 0);
+						if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
+							doNothingScore = ArcadeMachine.runOneGame(game, recordLevelFile, false, doNothingController, null, 15, 0);
+							MCTSScore = ArcadeMachine.runOneGame(game, recordLevelFile, false, sampleMCTSController, null, 15, 0);
+						}
 						MCTSAverageScore += MCTSScore[1];
 						doNothingAverageScore += doNothingScore[1];
-						if (MCTSScore[0] == 0) {
+						if (MCTSScore[0] == 1) {
 							MCTSWins++;
 							win = true;
 						} else {
 							lose = true;
 						}
-						if (doNothingScore[0] == 0) {
+						if (doNothingScore[0] == 1) {
 							doNothingWins++;
 							win = true;
 						} else {
 							lose = true;
+						}
+						
+						if (MCTSScore[0] == 1 && MCTSScore[2] < 50) {
+							win_50 = -1;
 						}
 					}
 
@@ -511,46 +540,41 @@ public class EvolutionaryGameDesigner {
 					System.out.println("invalid game----------------------------------------------------------------------");
 					return -5;
 				}
-				float win_50;
+				
 				MCTSAverageScore = MCTSAverageScore / runs;
 				doNothingAverageScore = doNothingAverageScore / runs;
 				
-				if (MCTSScore[0] > -1 && MCTSScore[2] < 50) {
-					win_50 = -1;
-				} else {
-					win_50 = 1;
-				}
+				
 				int win_lose = 0;
 				if (win && lose) {
 					win_lose = 1;
 				}
+				//Shift scores so that min is 0
+				if (MCTSAverageScore < 0 || doNothingAverageScore < 0)
+				{
+					double min = Math.abs(Math.min(MCTSAverageScore, doNothingAverageScore));
+					MCTSAverageScore += min;
+					doNothingAverageScore += min;
+				}
 				if (Math.max(MCTSAverageScore, doNothingAverageScore) != 0) {
 					RDScore = ((MCTSAverageScore - doNothingAverageScore)/ Math.max(MCTSAverageScore, doNothingAverageScore));
-				} else if (Math.min(MCTSAverageScore, doNothingAverageScore) != 0)  {
-					RDScore = ((MCTSAverageScore - doNothingAverageScore)/ Math.min(MCTSAverageScore, doNothingAverageScore));
 				} else {
 					RDScore = 0;
 				}
 				
 				
-				if (Math.max(MCTSScore[0], doNothingScore[0]) != 0) {
-					RDWins = ((MCTSScore[0] - doNothingScore[0])/ Math.max(MCTSScore[0], doNothingScore[0]));
-				} else if (Math.min(MCTSScore[0], doNothingScore[0]) != 0) {
-					RDWins = ((MCTSScore[0] - doNothingScore[0])/ Math.min(MCTSScore[0], doNothingScore[0]));
+				if (Math.max(MCTSWins, doNothingWins) != 0) {
+					RDWins = ((MCTSWins - doNothingWins)/ Math.max(MCTSWins, doNothingWins));
 				} else {
 					RDWins = 0;
 				}
 				
 				System.out.println("RDScore " + RDScore);
-				System.out.println(Math.max(MCTSScore[1], doNothingScore[1]));
 				System.out.println("RDWins " + RDWins);
-				System.out.println(Math.max(MCTSScore[0], doNothingScore[0]));
 				System.out.println("win_50 " + win_50);
 				System.out.println("win_lose " + win_lose);
 				writer.println("RDScore " + RDScore);
-				writer.println(Math.max(MCTSScore[1], doNothingScore[1]));
 				writer.println("RDWins " + RDWins);
-				writer.println(Math.max(MCTSScore[0], doNothingScore[0]));
 				writer.println("win_50 " + win_50);
 				writer.println("win_lose " + win_lose);
 				double result = (RDScore + RDWins + win_50 + win_lose)/4;

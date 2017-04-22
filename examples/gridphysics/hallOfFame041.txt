@@ -1,0 +1,22 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+	SpriteSet
+		avatar > OngoingTurningAvatar
+		var1 > Immovable
+		var2 > Chaser stype=avatar
+		var3 > Passive
+		var4 > Missile
+	InteractionSet
+		avatar EOS > stepBack 
+		EOS var1 > turnAround scoreChange=2
+		var3 var3 > undoAll scoreChange=-1
+		var2 var3 > killIfFromAbove scoreChange=-3
+		var2 var3 > stepBack scoreChange=3
+	TerminationSet
+		SpriteCounterMore stype=var1 limit=15 win=False
+		Timeout limit=505 win=True

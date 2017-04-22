@@ -1,0 +1,18 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+	SpriteSet
+		avatar > VerticalAvatar
+		var1 > Bomber stype=avatar total=8 spawnorientation=UP
+		var2 > Immovable
+	InteractionSet
+		avatar EOS > stepBack 
+		avatar var5 > pullWithIt scoreChange=-2 
+		var2 var5 > spawnIfHasMore stype=avatar resource=avatar limit=2 scoreChange=3 
+		var3 var1 > align  
+		var2 var2 > turnAround  
+	TerminationSet
+		Timeout limit=370 win=True
+		SpriteCounterMore stype=var1 limit=13 win=False

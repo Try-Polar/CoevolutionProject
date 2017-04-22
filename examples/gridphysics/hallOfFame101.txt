@@ -1,0 +1,24 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+	SpriteSet
+		avatar > HorizontalAvatar
+		var1 > SpawnPoint stype=avatar total=12 prob=0.2 spawnorientation=UP
+		var2 > RandomBomber stype=var1 total=2 prob=0.8 spawnorientation=RIGHT
+		var3 > Chaser stype=var1
+		var4 > Spreader stype=avatar spreadprob=0.3
+	InteractionSet
+		avatar EOS > stepBack 
+		var5 var4 > transformToRandomChild stype=avatar stype_other=avatar scoreChange=1 
+		var3 var2 > killIfHasLess resource=avatar limit=5  
+		var5 var2 > transformToRandomChild stype=avatar stype_other=avatar scoreChange=-2 
+		var3 var1 > reverseDirection scoreChange=-1 
+		EOS EOS > wrapAround scoreChange=-3 
+		var3 avatar > transformTo stype=avatar forceOrientation=True scoreChange=-2 
+	TerminationSet
+		SpriteCounter stype=var3 limit=10 win=True
+		SpriteCounterMore stype=var3 limit=16 win=False

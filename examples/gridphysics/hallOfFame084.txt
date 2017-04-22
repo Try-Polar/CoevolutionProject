@@ -1,0 +1,26 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+	SpriteSet
+		avatar > OngoingTurningAvatar
+		var1 > RandomMissile
+		var2 > SpawnPoint stype=avatar total=6 prob=0.9 spawnorientation=RIGHT
+		var3 > Door
+		var2 > Fleeing stype=avatar
+		var2 > Portal stype=avatar
+	InteractionSet
+		avatar EOS > stepBack 
+		var2 var3 > decreaseSpeedToAll value=8 stype=avatar 
+		var3 var3 > removeScore stype=var1
+		var2 avatar > updateSpawnType stype=var2 spawnPoint=var1 scoreChange=1
+		var3 avatar > updateSpawnType stype=avatar spawnPoint=var1  
+		var3 var2 > reverseDirection scoreChange=-3
+		var1 var3 > updateSpawnType stype=avatar spawnPoint=var1 
+		var3 var3 > killAll stype=avatar scoreChange=-3
+		var1 var1 > transformToRandomChild stype=avatar stype_other=avatar scoreChange=3
+	TerminationSet
+		SpriteCounter stype=var3 limit=2 win=False
+		Timeout limit=560 win=False

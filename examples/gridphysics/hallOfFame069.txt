@@ -1,0 +1,25 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+		f > var5
+	SpriteSet
+		avatar > MovingAvatar
+		var1 > Chaser stype=avatar
+		var2 > Immovable
+		var3 > AlternateChaser stype1=avatar stype2=avatar
+		var4 > RandomMissile
+		var5 > OrientedFlicker limit=18
+	InteractionSet
+		avatar EOS > stepBack 
+		var2 avatar > turnAround  
+		var1 var2 > wrapAround scoreChange=2 
+		avatar avatar > undoAll scoreChange=3
+		var2 var2 > undoAll  
+		avatar EOS > teleportToExit scoreChange=-1
+	TerminationSet
+		Timeout limit=985 win=True
+		Timeout limit=880 win=False

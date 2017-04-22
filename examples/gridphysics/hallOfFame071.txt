@@ -1,0 +1,20 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+	SpriteSet
+		avatar > HorizontalAvatar
+		var1 > RandomMissile
+		var2 > Spreader stype=var1 spreadprob=0.6
+		var3 > Fleeing stype=avatar
+	InteractionSet
+		avatar EOS > stepBack 
+		EOS var2 > reverseDirection scoreChange=-2
+		EOS var1 > increaseSpeedToAll value=5 stype=var2 scoreChange=-2
+		avatar var1 > subtractHealthPoints value=14 stype=avatar scoreChange=-3
+		avatar var1 > removeScore stype=avatar 
+	TerminationSet
+		Timeout limit=235 win=False
+		StopCounter stype1=avatar stype2=avatar stype3=avatar limit=16 win=True

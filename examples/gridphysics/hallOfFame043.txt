@@ -1,0 +1,24 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+	SpriteSet
+		avatar > OngoingAvatar
+		var1 > RandomAltChaser stype1=avatar stype2=avatar
+		var2 > Chaser stype=avatar
+		var3 > Portal stype=avatar
+		var4 > Fleeing stype=avatar
+	InteractionSet
+		avatar EOS > stepBack 
+		var3 var2 > killSprite scoreChange=-3 
+		var4 var4 > spawnBehind stype=var1  
+		var4 var3 > reverseDirection scoreChange=2
+		avatar var4 > pullWithIt scoreChange=2 
+		var4 avatar > removeScore stype=avatar
+		var4 var2 > killSprite  
+	TerminationSet
+		SpriteCounter stype=var3 limit=8 win=False
+		Timeout limit=600 win=False

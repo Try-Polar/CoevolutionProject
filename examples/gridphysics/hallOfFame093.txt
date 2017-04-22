@@ -1,0 +1,25 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+		f > var5
+	SpriteSet
+		avatar > MovingAvatar
+		var1 > Flicker limit=2
+		var2 > Passive
+		var3 > OrientedFlicker limit=12
+		var4 > Missile
+		var5 > RandomMissile
+	InteractionSet
+		avatar EOS > stepBack 
+		var3 var2 > transformToRandomChild stype=avatar stype_other=avatar  
+		avatar EOS > setSpeedForAll value=9 stype=var1  
+		avatar var2 > undoAll  
+		var5 var4 > transformTo stype=avatar forceOrientation=False scoreChange=3 
+		var5 avatar > spawnIfHasLess stype=var1 resource=avatar limit=2  
+	TerminationSet
+		StopCounter stype1=var1 stype2=avatar stype3=var1 limit=5 win=True
+		StopCounter stype1=avatar stype2=avatar stype3=avatar limit=9 win=False

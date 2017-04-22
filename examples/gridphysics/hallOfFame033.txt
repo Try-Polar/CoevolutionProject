@@ -1,0 +1,24 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+		f > var5
+	SpriteSet
+		avatar > OngoingAvatar
+		var1 > Door
+		var2 > Door
+		var3 > OrientedFlicker limit=8
+		var4 > Door
+		var5 > Portal stype=avatar
+	InteractionSet
+		avatar EOS > stepBack 
+		var4 var4 > killIfHasMore resource=avatar limit=17 scoreChange=2
+		var3 var2 > addHealthPoints value=3  
+		var3 EOS > increaseSpeedToAll value=8 stype=var1 scoreChange=3 
+		avatar avatar > addHealthPoints value=10 scoreChange=2 
+	TerminationSet
+		Timeout limit=500 win=True
+		Timeout limit=360 win=False

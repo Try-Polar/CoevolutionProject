@@ -1,0 +1,22 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+	SpriteSet
+		avatar > OngoingAvatar
+		var1 > RandomAltChaser stype1=var1 stype2=avatar
+		var2 > Flicker limit=16
+		var3 > Immovable
+		var4 > Portal stype=avatar
+	InteractionSet
+		avatar EOS > stepBack 
+		var2 var2 > align 
+		var2 EOS > subtractHealthPoints value=14 stype=avatar scoreChange=3
+		var4 var2 > align scoreChange=2
+		var1 var4 > stepBack scoreChange=1 
+	TerminationSet
+		Timeout limit=450 win=True
+		SpriteCounter stype=var3 limit=2 win=False

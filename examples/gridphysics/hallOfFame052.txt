@@ -1,0 +1,18 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+	SpriteSet
+		avatar > MovingAvatar
+		var1 > Passive
+		var2 > Passive
+	InteractionSet
+		avatar EOS > stepBack 
+		var1 avatar > decreaseSpeedToAll value=11 stype=avatar scoreChange=2 
+		var1 var1 > transformTo stype=avatar forceOrientation=True scoreChange=3 
+		var2 var2 > align scoreChange=3
+		var2 var1 > killIfHasLess resource=avatar limit=14  
+	TerminationSet
+		StopCounter stype1=avatar stype2=avatar stype3=avatar limit=8 win=True
+		StopCounter stype1=avatar stype2=avatar stype3=avatar limit=1 win=False

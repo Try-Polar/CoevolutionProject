@@ -1,0 +1,20 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+	SpriteSet
+		avatar > MovingAvatar
+		var1 > Door
+		var2 > RandomAltChaser stype1=avatar stype2=avatar
+		var3 > Portal stype=avatar
+	InteractionSet
+		avatar EOS > stepBack 
+		avatar var3 > addHealthPointsToMax value=2 scoreChange=-2
+		var1 avatar > attractGaze scoreChange=3 
+		avatar var3 > transformToRandomChild stype=avatar  
+		var3 var1 > flipDirection scoreChange=3 
+	TerminationSet
+		StopCounter stype1=avatar stype2=avatar stype3=avatar limit=12 win=True
+		Timeout limit=230 win=False

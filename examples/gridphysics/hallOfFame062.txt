@@ -1,0 +1,25 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+	SpriteSet
+		avatar > MovingAvatar
+		var1 > Portal stype=avatar
+		var2 > Flicker limit=1
+		var3 > RandomAltChaser stype1=var1 stype2=avatar
+		var4 > RandomBomber stype=avatar total=14 prob=0.2 spawnorientation=RIGHT
+	InteractionSet
+		avatar EOS > stepBack 
+		var4 var5 > spawnBehind stype=avatar scoreChange=2 
+		var1 EOS > removeScore stype=var1 
+		EOS avatar > reverseDirection scoreChange=3 
+		avatar avatar > transformToRandomChild stype=avatar  
+		var1 var5 > align scoreChange=3 
+		var2 var1 > addHealthPoints value=12  
+		var1 avatar > decreaseSpeedToAll value=15 stype=avatar scoreChange=2 
+	TerminationSet
+		SpriteCounterMore stype=var1 limit=17 win=True
+		Timeout limit=555 win=False

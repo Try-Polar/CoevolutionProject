@@ -1,0 +1,24 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+		f > var5
+	SpriteSet
+		avatar > OrientedAvatar
+		var1 > Immovable
+		var2 > AlternateChaser stype1=avatar stype2=avatar
+		var3 > Flicker limit=15
+		var4 > SpawnPoint stype=var1 total=12 prob=0.7 spawnorientation=UP
+		var5 > Bomber stype=avatar total=7 spawnorientation=RIGHT
+	InteractionSet
+		avatar EOS > stepBack 
+		var4 var5 > bounceForward scoreChange=1 
+		avatar var1 > setSpeedForAll value=1 stype=avatar scoreChange=3
+		var3 var2 > stepBack  
+		var5 avatar > decreaseSpeedToAll value=7 stype=avatar scoreChange=1
+	TerminationSet
+		StopCounter stype1=avatar stype2=avatar stype3=avatar limit=10 win=True
+		SpriteCounterMore stype=var4 limit=20 win=False

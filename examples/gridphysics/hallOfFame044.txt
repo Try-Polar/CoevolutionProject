@@ -1,0 +1,18 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+	SpriteSet
+		avatar > VerticalAvatar
+		var1 > OrientedFlicker limit=15
+		var2 > RandomMissile
+	InteractionSet
+		avatar EOS > stepBack 
+		var2 avatar > wrapAround  
+		var1 var1 > stepBack  
+		EOS var1 > undoAll scoreChange=-2
+		var2 var1 > stepBack scoreChange=2 
+	TerminationSet
+		Timeout limit=610 win=False
+		Timeout limit=365 win=False

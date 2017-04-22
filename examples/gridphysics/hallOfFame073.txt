@@ -1,0 +1,22 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+	SpriteSet
+		avatar > HorizontalAvatar
+		var1 > Passive
+		var2 > Flicker limit=6
+		var3 > OrientedFlicker limit=20
+	InteractionSet
+		avatar EOS > stepBack 
+		var2 var2 > removeScore stype=avatar
+		var2 var3 > transformToRandomChild stype=avatar 
+		var3 avatar > reverseDirection  
+		var2 var2 > flipDirection scoreChange=-3
+		avatar avatar > increaseSpeedToAll value=20 stype=var1 scoreChange=1
+		var1 avatar > killIfHasMore resource=avatar limit=8  
+	TerminationSet
+		SpriteCounterMore stype=var3 limit=3 win=False
+		StopCounter stype1=avatar stype2=avatar stype3=avatar limit=8 win=False

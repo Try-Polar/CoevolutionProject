@@ -1,0 +1,24 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+	SpriteSet
+		avatar > ShootAvatar stype=var1
+		var1 > Flicker limit=3
+		var2 > OrientedFlicker limit=13
+		var3 > Immovable
+		var4 > Passive
+	InteractionSet
+		avatar EOS > stepBack 
+		avatar var3 > setSpeedForAll value=6 stype=avatar scoreChange=-1 
+		avatar var1 > stepBack 
+		var1 var4 > addHealthPoints value=19 
+		var1 var2 > killAll stype=avatar scoreChange=3
+		var2 EOS > bounceForward scoreChange=3 
+		var4 var1 > killIfHasLess resource=avatar limit=20 scoreChange=2 
+	TerminationSet
+		SpriteCounterMore stype=var2 limit=10 win=False
+		Timeout limit=970 win=True

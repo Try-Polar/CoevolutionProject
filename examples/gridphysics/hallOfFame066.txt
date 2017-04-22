@@ -1,0 +1,21 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+	SpriteSet
+		avatar > OngoingAvatar
+		var1 > Flicker limit=1
+		var2 > Missile
+		var3 > Fleeing stype=avatar
+	InteractionSet
+		avatar EOS > stepBack 
+		var3 var2 > killIfHasMore resource=avatar limit=15  
+		var2 var2 > cloneSprite scoreChange=-3
+		var2 var3 > undoAll scoreChange=2
+		var1 EOS > attractGaze  
+		var3 var2 > increaseSpeedToAll value=11 stype=avatar scoreChange=-3 
+	TerminationSet
+		SpriteCounter stype=var3 limit=3 win=True
+		SpriteCounter stype=var3 limit=14 win=True

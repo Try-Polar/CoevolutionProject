@@ -1,0 +1,26 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+		f > var5
+	SpriteSet
+		avatar > MovingAvatar
+		var1 > Door
+		var2 > Fleeing stype=avatar
+		var3 > RandomNPC
+		var4 > RandomNPC
+		var5 > Immovable
+	InteractionSet
+		avatar EOS > stepBack 
+		avatar var3 > stepBack scoreChange=-1
+		var1 var5 > wrapAround scoreChange=2
+		var3 var5 > addHealthPoints value=6 scoreChange=3
+		var3 avatar > bounceForward scoreChange=-1
+		var3 var2 > killAll stype=avatar 
+		var1 var5 > spawnIfHasMore stype=var1 resource=avatar limit=14 scoreChange=-1
+	TerminationSet
+		SpriteCounterMore stype=var4 limit=7 win=False
+		Timeout limit=680 win=False

@@ -1,0 +1,23 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+	SpriteSet
+		avatar > OngoingAvatar
+		var1 > SpawnPoint stype=avatar total=6 prob=0.6 spawnorientation=LEFT
+		var2 > BomberRandomMissile stypeMissile=avatar total=5 prob=0.7 spawnorientation=UP
+		var3 > RandomMissile
+	InteractionSet
+		avatar EOS > stepBack 
+		var5 avatar > align scoreChange=-1 
+		var5 var1 > transformToRandomChild stype=avatar  
+		var2 avatar > teleportToExit  
+		var4 var4 > updateSpawnType stype=avatar spawnPoint=var2 scoreChange=3 
+		var2 var5 > transformToRandomChild stype=avatar stype_other=avatar scoreChange=-3 
+		EOS EOS > killSprite  
+		avatar var5 > transformToRandomChild stype=avatar stype_other=avatar  
+	TerminationSet
+		StopCounter stype1=avatar stype2=avatar stype3=avatar limit=2 win=True
+		SpriteCounter stype=var2 limit=6 win=False

@@ -1,0 +1,23 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+	SpriteSet
+		avatar > OngoingTurningAvatar
+		var1 > Door
+		var2 > Passive
+		var3 > RandomNPC
+		var4 > Chaser stype=avatar
+	InteractionSet
+		avatar EOS > stepBack 
+		EOS var1 > subtractHealthPoints value=3 stype=avatar  
+		var2 var1 > setSpeedForAll value=19 stype=avatar scoreChange=2
+		var4 avatar > killIfHasMore resource=avatar limit=8 scoreChange=-1
+		var4 var4 > turnAround scoreChange=3 
+		var1 var1 > killIfFromAbove  
+	TerminationSet
+		Timeout limit=635 win=True
+		SpriteCounter stype=var1 limit=11 win=False

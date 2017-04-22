@@ -1,0 +1,26 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+		f > var5
+	SpriteSet
+		avatar > MovingAvatar
+		var1 > Passive
+		var2 > RandomNPC
+		var3 > Bomber stype=avatar total=11 spawnorientation=UP
+		var4 > BomberRandomMissile stypeMissile=var2 total=1 prob=0.8 spawnorientation=LEFT
+		var5 > Chaser stype=var2
+	InteractionSet
+		avatar EOS > stepBack 
+		var5 var4 > subtractHealthPoints value=5 stype=avatar  
+		avatar var1 > undoAll scoreChange=1
+		var4 var3 > killIfFromAbove scoreChange=2
+		var4 EOS > undoAll 
+		avatar var1 > teleportToExit scoreChange=-2 
+		avatar var3 > killIfFromAbove  
+	TerminationSet
+		SpriteCounterMore stype=var2 limit=2 win=False
+		Timeout limit=315 win=False

@@ -1,0 +1,25 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+	SpriteSet
+		avatar > VerticalAvatar
+		var1 > Missile
+		var2 > Flicker limit=12
+		var3 > Chaser stype=avatar
+		var4 > RandomMissile
+	InteractionSet
+		avatar EOS > stepBack 
+		avatar avatar > updateSpawnType stype=avatar spawnPoint=var1 
+		var4 EOS > killSprite scoreChange=-2
+		var2 var2 > killIfHasLess resource=avatar limit=18 scoreChange=3
+		var4 var3 > updateSpawnType stype=var1 spawnPoint=avatar  
+		avatar var1 > attractGaze scoreChange=1 
+		var1 var1 > setSpeedForAll value=12 stype=avatar  
+		var2 var1 > wrapAround 
+	TerminationSet
+		Timeout limit=340 win=True
+		SpriteCounter stype=var1 limit=10 win=False

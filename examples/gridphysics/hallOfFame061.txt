@@ -1,0 +1,22 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+	SpriteSet
+		avatar > MovingAvatar
+		var1 > Missile
+		var2 > Bomber stype=avatar total=12 spawnorientation=DOWN
+		var3 > Chaser stype=avatar
+		var4 > Chaser stype=avatar
+	InteractionSet
+		avatar EOS > stepBack 
+		avatar var1 > wrapAround scoreChange=-1 
+		var1 EOS > killIfHasMore resource=avatar limit=10 scoreChange=-3 
+		avatar EOS > decreaseSpeedToAll value=10 stype=avatar scoreChange=-1 
+		var3 var3 > turnAround scoreChange=3 
+	TerminationSet
+		SpriteCounter stype=var3 limit=8 win=True
+		SpriteCounter stype=var1 limit=9 win=False

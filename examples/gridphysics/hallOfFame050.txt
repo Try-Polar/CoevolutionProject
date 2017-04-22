@@ -1,0 +1,21 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+	SpriteSet
+		avatar > OngoingTurningAvatar
+		var1 > Door
+		var2 > Flicker limit=14
+		var3 > RandomAltChaser stype1=avatar stype2=avatar
+	InteractionSet
+		avatar EOS > stepBack 
+		var1 var3 > reverseDirection scoreChange=3
+		var3 var1 > spawnIfHasMore stype=avatar resource=avatar limit=13 
+		avatar var2 > addHealthPointsToMax value=9 scoreChange=3
+		EOS var3 > subtractHealthPoints value=1 stype=avatar scoreChange=-3
+		var2 var2 > subtractHealthPoints value=18 stype=var1 scoreChange=2
+	TerminationSet
+		Timeout limit=650 win=False
+		Timeout limit=895 win=False

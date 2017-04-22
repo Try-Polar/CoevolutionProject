@@ -1,0 +1,26 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+		f > var5
+	SpriteSet
+		avatar > OrientedAvatar
+		var1 > RandomMissile
+		var2 > Door
+		var3 > AlternateChaser stype1=avatar stype2=avatar
+		var4 > Flicker limit=19
+		var5 > OrientedFlicker limit=1
+	InteractionSet
+		avatar EOS > stepBack 
+		var3 var1 > killIfHasMore resource=avatar limit=6 scoreChange=3 
+		var3 EOS > killIfFromAbove scoreChange=1 
+		avatar var2 > killIfHasMore resource=avatar limit=3  
+		avatar var4 > teleportToExit  
+		avatar var4 > killAll stype=avatar  
+		var2 var2 > bounceForward  
+	TerminationSet
+		SpriteCounterMore stype=var1 limit=3 win=True
+		SpriteCounter stype=var4 limit=2 win=False

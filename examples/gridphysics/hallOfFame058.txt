@@ -1,0 +1,23 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+	SpriteSet
+		avatar > ShootAvatar stype=var1
+		var1 > RandomAltChaser stype1=var1 stype2=var1
+		var2 > RandomBomber stype=avatar total=16 prob=0.4 spawnorientation=LEFT
+		var3 > Bomber stype=avatar total=10 spawnorientation=LEFT
+		var4 > Chaser stype=avatar
+	InteractionSet
+		avatar EOS > stepBack 
+		var5 var5 > killSprite  
+		var3 var2 > setSpeedForAll value=16 stype=var1  
+		var1 var2 > spawnIfHasLess stype=avatar resource=var1 limit=20  
+		var4 var5 > addHealthPoints value=14 scoreChange=-2 
+		var2 var2 > killIfHasMore resource=avatar limit=5 scoreChange=2 
+	TerminationSet
+		SpriteCounterMore stype=var2 limit=15 win=True
+		SpriteCounterMore stype=var2 limit=8 win=False

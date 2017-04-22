@@ -1,0 +1,23 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+	SpriteSet
+		avatar > ShootAvatar stype=avatar
+		var1 > Portal stype=avatar
+		var2 > Immovable
+		var3 > OrientedFlicker limit=3
+	InteractionSet
+		avatar EOS > stepBack 
+		var4 EOS > transformTo stype=avatar forceOrientation=True  
+		var3 var5 > transformTo stype=avatar forceOrientation=False scoreChange=2 
+		avatar var4 > reverseDirection scoreChange=-3 
+		EOS var3 > killAll stype=avatar  
+		var2 var4 > subtractHealthPoints value=16 stype=avatar scoreChange=2 
+		var2 var2 > increaseSpeedToAll value=10 stype=avatar  
+		var3 var3 > turnAround scoreChange=1 
+	TerminationSet
+		StopCounter stype1=avatar stype2=avatar stype3=avatar limit=1 win=True
+		SpriteCounterMore stype=var2 limit=5 win=False

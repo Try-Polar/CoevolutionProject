@@ -1,0 +1,22 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+	SpriteSet
+		avatar > MissileAvatar
+		var1 > RandomAltChaser stype1=avatar stype2=avatar
+		var2 > OrientedFlicker limit=13
+		var3 > Missile
+		var4 > Missile
+	InteractionSet
+		avatar EOS > stepBack 
+		var3 var5 > transformToRandomChild stype=var1 stype_other=avatar  
+		var3 avatar > transformToRandomChild stype=avatar stype_other=var1 scoreChange=1 
+		avatar var2 > spawnBehind stype=var1 scoreChange=2 
+		EOS var2 > wrapAround scoreChange=-2 
+	TerminationSet
+		SpriteCounter stype=var3 limit=20 win=True
+		Timeout limit=955 win=False

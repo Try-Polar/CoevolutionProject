@@ -1,0 +1,26 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+	SpriteSet
+		avatar > HorizontalAvatar
+		var1 > Missile
+		var2 > RandomNPC
+		var3 > RandomAltChaser stype1=avatar stype2=avatar
+		var4 > OrientedFlicker limit=10
+	InteractionSet
+		avatar EOS > stepBack 
+		avatar avatar > addHealthPoints value=7 scoreChange=2 
+		var3 var1 > bounceForward scoreChange=-3 
+		var1 EOS > setSpeedForAll value=12 stype=var1 scoreChange=-3 
+		var2 var5 > updateSpawnType stype=avatar spawnPoint=var2 scoreChange=-3 
+		var1 var2 > attractGaze  
+		var3 avatar > turnAround  
+		var1 avatar > flipDirection  
+		var2 EOS > transformToRandomChild stype=var1 scoreChange=-1 
+	TerminationSet
+		SpriteCounter stype=var1 limit=4 win=True
+		Timeout limit=815 win=False

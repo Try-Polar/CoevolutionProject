@@ -1,0 +1,28 @@
+BasicGame
+	LevelMapping
+		a > avatar
+		b > var1
+		c > var2
+		d > var3
+		e > var4
+		f > var5
+	SpriteSet
+		avatar > OngoingAvatar
+		var1 > Door
+		var2 > Door
+		var3 > RandomNPC
+		var4 > Bomber stype=var1 total=7 spawnorientation=DOWN
+		var5 > RandomMissile
+	InteractionSet
+		avatar EOS > stepBack 
+		avatar var3 > killIfHasLess resource=avatar limit=20  
+		EOS var2 > undoAll 
+		var2 avatar > undoAll scoreChange=2 
+		var1 var1 > pullWithIt 
+		var2 var3 > reverseDirection 
+		var2 var3 > killIfHasLess resource=var2 limit=12 scoreChange=-2
+		var2 var4 > wrapAround scoreChange=3
+		EOS var1 > spawnIfHasMore stype=avatar resource=var1 limit=11 
+	TerminationSet
+		Timeout limit=840 win=True
+		SpriteCounterMore stype=var5 limit=5 win=False
