@@ -65,14 +65,16 @@ public class Test
                 "sokoban", "solarfox" ,"superman", "surround", "survivezombies",              //75-79
                 "tercio", "thecitadel", "thesnowman",  "waitforbreakfast", "watergame",       //80-84
                 "waves", "whackamole", "wildgunman", "witnessprotection", "wrapsokoban",      //85-89
-                "zelda", "zenpuzzle", "invalidTest", "earlyAttempts", "hallOfFame001", 		  //90-94
-                "hallOfFame003", "hallOfFame004", "hallOfFame005", "hallOfFame006", "hallOfFame007", //95-99
-        		"hallOfFame008", "hallOfFame009", "hallOfFame010", "hallOfFame011", "hallOfFame012", //100-104 12:0.5
-        		"hallOfFame013", "hallOfFame014", "hallOfFame015", "hallOfFame016", "hallOfFame017", //105-109 13:0.5 14:21.33 15:? 16:0.499 17:0.5
-        		"hallOfFame018", "hallOfFame019", "hallOfFame020", "hallOfFame021", "hallOfFame022", //110-114 19:0.5v20:0.3749 21:0.75 22:?
-        		"hallOfFame023", "hallOfFame025", "hallOfFame027", "hallOfFame029", "hallOfFame030"};//115-119 23:1(First finished with new method,25:1 27:1 29:0.75168350168
-        		//31:0.5 32:0.5 33:0.5 34:0.7477 35:0.5 36:0.5 37:0.5 38:0.6471 39:0.5 40:0.75348 41:0.74391 
+                "zelda", "zenpuzzle", "hallOfFame047", "hallOfFame067", "hallOfFame074",	  //90-94
+                "hallOfFame082", "hallOfFame048"};											  //95-99
         		
+        		//23:1(First finished with new method,25:1 27:1 29:0.75168350168
+				//31:0.5 32:0.5 33:0.5 34:0.7477 35:0.5 36:0.5 37:0.5 38:0.6471 39:0.5 40:0.75348 41:0.74391 
+        		
+        		//47:0.7487
+        		//67:0.7283
+        		//74:0.7083
+        		//72:0.6875
        
         		//SymbolList (32)
         		//42:0.66667 43:0.5 44:0.5 45:0.5 46:0.5 47:0.7487 48:0.5833 49:0.5 50:0.5 51:0.5 52:0.5 66:0.5 67:0.7283 68:0.5 69:0.5 70:0.25 71:0.5 72:0.6875 73:0.5 74:0.7083
@@ -87,7 +89,7 @@ public class Test
         int seed = new Random().nextInt();
 
         //Game and level to play
-        int gameIdx = 0;
+        int gameIdx = 94;
         int levelIdx = 0; //level names from 0 to 4 (game_lvlN.txt).
         String game = gamesPath + games[gameIdx] + ".txt";
         String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
@@ -99,7 +101,7 @@ public class Test
         //ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
         
         // 2. This plays a game in a level by the controller.
-        ArcadeMachine.runOneGame(game, level1, visuals, sampleMCTSController, recordActionsFile, seed, 0);
+        //ArcadeMachine.runOneGame(game, level1, visuals, sampleMCTSController, recordActionsFile, seed, 0);
         
         // 3. This replays a game from an action file previously recorded
         //String readActionsFile = recordActionsFile;
@@ -118,14 +120,14 @@ public class Test
 
         //if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
         	//ArcadeMachine.playOneGeneratedLevel(game, recordActionsFile, recordLevelFile, seed);
-        //	ArcadeMachine.runOneGeneratedLevel(game, true, sampleMCTSController, recordActionsFile, recordLevelFile, 5, false);
         //}
         
         //6. This starts a game, in a generated level created by a specific level generator played by a selected agent
         
-        //if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
-        //	ArcadeMachine.runOneGeneratedLevel(game, true, sampleMCTSController, recordActionsFile, recordLevelFile, 5, false);
-        //}
+        if(ArcadeMachine.generateOneLevel(game, constructiveLevelGenerator, recordLevelFile)){
+        //	ArcadeMachine.runOneGeneratedLevel(game, true, sampleGAController, recordActionsFile, recordLevelFile, 5, false);
+        	ArcadeMachine.runOneGame(game, recordLevelFile, visuals, sampleMCTSController, null, 15, 0);
+        }
         
         //7. This plays N games, in the first L levels, M times each. Actions to file optional (set saveActions to true).
 //        int N = 82, L = 5, M = 1;

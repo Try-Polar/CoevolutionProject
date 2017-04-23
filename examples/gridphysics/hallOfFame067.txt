@@ -6,11 +6,11 @@ BasicGame
 		d > var3
 		e > var4
 	SpriteSet
-		avatar > ShootAvatar stype=var1
-		var1 > Flicker limit=3
-		var2 > OrientedFlicker limit=13
-		var3 > Immovable
-		var4 > Passive
+		avatar > ShootAvatar stype=var1 img=oryx/swordman1
+		var1 > Flicker limit=3 img=oryx/slash1
+		var2 > OrientedFlicker limit=13 img=oryx/bat1
+		var3 > Immovable img=oryx/wall3
+		var4 > Passive  img=oryx/doorclosed1
 	InteractionSet
 		avatar EOS > stepBack 
 		avatar var3 > setSpeedForAll value=6 stype=avatar scoreChange=-1 

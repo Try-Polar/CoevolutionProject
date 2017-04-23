@@ -6,19 +6,19 @@ BasicGame
 		d > var3
 	SpriteSet
 		avatar > OngoingTurningAvatar
-		var1 > OrientedFlicker limit=5
-		var2 > AlternateChaser stype1=avatar stype2=var1
-		var3 > Immovable
-		var1 > RandomAltChaser stype1=var1 stype2=avatar
-		var2 > Missile
+		var1 > OrientedFlicker limit=5 
+		var2 > AlternateChaser stype1=avatar stype2=var1 
+		var3 > Immovable 
+		var1 > RandomAltChaser stype1=var1 stype2=avatar 
+		var2 > Missile 
 	InteractionSet
 		avatar EOS > stepBack 
 		var2 var3 > pullWithIt 
 		EOS var3 > killIfHasMore resource=avatar limit=9 scoreChange=-3 
 		var3 EOS > transformToRandomChild stype=avatar stype_other=avatar  
 		avatar var3 > align 
-		avatar avatar > bounceForward scoreChange=-1
 		var1 var3 > updateSpawnType stype=avatar spawnPoint=var1 scoreChange=1
+		avatar avatar > bounceForward scoreChange=-1
 		var2 var2 > subtractHealthPoints value=6 stype=avatar scoreChange=-1
 		var1 var3 > addHealthPointsToMax value=20  
 	TerminationSet

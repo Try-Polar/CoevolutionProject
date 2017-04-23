@@ -7,12 +7,12 @@ BasicGame
 		e > var4
 		f > var5
 	SpriteSet
-		avatar > MovingAvatar
-		var1 > Fleeing stype=avatar
-		var2 > Door
-		var3 > Chaser stype=avatar
+		avatar > MovingAvatar img=oryx/spaceship1
+		var1 > Fleeing stype=avatar img=oryx/alien1
+		var2 > Door img=oryx/planet
+		var3 > Chaser stype=avatar img=oryx/alien3
 		var4 > OrientedFlicker limit=10
-		var5 > Chaser stype=avatar
+		var5 > Chaser stype=avatar img=oryx/angel1
 	InteractionSet
 		avatar EOS > stepBack 
 		var1 avatar > killIfFromAbove  
